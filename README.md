@@ -10,5 +10,5 @@ The package gives you basic access to the data structures offered by the befdata
 install.packages("devtools")
 # install rbefdata package from github
 library(devtools)
-install_github(username = "cpfaff", repo = "rbefdata", subdir = "rbefdata")
+install_github(username = "befdata", repo = "rbefdata", subdir = "rbefdata")
 ```
