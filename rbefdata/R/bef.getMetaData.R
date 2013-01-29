@@ -7,8 +7,8 @@
 #' @import XML
 #' @export
 #' 
-#' @param dataset_id id of dataset in BEFdata portal. 
-#' @param full_url direct link to its eml file. 
+#' @param dataset_id id of the dataset in the BEFdata portal. 
+#' @param full_url direct link to the eml file. 
 
 bef.getMetaData = function(dataset_id, full_url) {
   if (missing(full_url)) {
