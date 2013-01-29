@@ -35,7 +35,7 @@ bef.getdata <- function(dataset_id, user_credential, full_url, curl=getCurlHandl
   }
 
   csv = getURLContent(full_url, curl = curl, ...)
-  if(grepl(csv, pattern = "^\\s*<html")) stop("Dataset not found or not accessible. Please check your credential and make sure you have access right for it.")
+  if(grepl(csv, pattern = "^\\s*<html")) stop("Dataset not found or not accessible. Please check your credentials and make sure you have access right for it.")
   con = textConnection(csv)
   on.exit(close(con))
   csv = read.csv(con)
