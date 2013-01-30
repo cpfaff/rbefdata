@@ -1,13 +1,13 @@
-#' Fetch a CSV dataset from the BEFdata portal
+#' Fetch primary data in csv format from a BEFdata portal
 #'
-#' This function fetches a dataset from the BEFdata portal. By default it will 
+#' This function fetches data from a dataset object of a BEFdata portal. By default it will 
 #' fetch the CSV file of a dataset. You need to provide the function with a 
 #' dataset id which you can find in the URL of the file on the BEFdata portal
 #' and your user credentials to ensure you have the rights to download the 
 #' data. You can find your user credentials in your user profile of the BEFdata portal. 
 #' You can save the data into a variable like in the example below.
 #'
-#' @param dataset_id id of a dataset in the BEFdata portal. 
+#' @param dataset_id id of a dataset in a BEFdata portal. 
 #' @param user_credential your login credential
 #' @param full_url use as direct download link instead the id. you can find it 
 #'   in the dataset show page.
