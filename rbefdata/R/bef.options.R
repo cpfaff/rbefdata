@@ -1,8 +1,6 @@
 #' Set or query BEFdata portal URL address
 #' 
-#' This function is used to query and set the BEFdata portal URL address. It is not supposed to 
-#' be changed, unless you are using Beijing portal or other portals using the code from the BEFdata 
-#' project.
+#' This function is used to query and set the BEFdata portal URL address. 
 #' 
 #' @param \dots similar to \code{\link{options}}. see examples below.
 #' @examples 
