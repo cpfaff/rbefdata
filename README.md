@@ -23,9 +23,7 @@ If you prefer to install from the cran package archive you can simply issue the 
 install.packages("rbefdata") 
 ``` 
 
-#### License  
-
-License
+### License  
 
 RBefdata is released under the MIT License (MIT):
 
