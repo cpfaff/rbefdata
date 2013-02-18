@@ -7,6 +7,8 @@ The package gives you basic access to the data structures offered by the befdata
 
 #### From Github
 
+You can install the latest version from Github via the following commands.
+
 ```r
 # install devtools package if you don't have it.
 install.packages("devtools")
