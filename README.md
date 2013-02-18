@@ -17,9 +17,14 @@ library(devtools)
 install_github(username = "befdata", repo = "rbefdata", subdir = "rbefdata")
 ``` 
 
+You should be aware that this installation gets you the bleeding edge version
+which might not run as expected because it is in unstable state.
+
+
 #### Via Cran 
 
-If you prefer to install from the cran package archive you can simply issue the command 
+If you prefer to install from the cran package archive you can simply issue the
+command. Cran will always stay up to date with the latest stable version.
 
 ```  
 install.packages("rbefdata") 
