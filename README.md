@@ -5,9 +5,15 @@ This R package gives you basic access to the data structures offered by the BEFd
 
 ### Install
 
-rbefdata is now on CRAN. You can ignore all the rest, unless you really want to use the latest beta version.
+#### From Cran 
 
-You can install a stable version using install.packages("rbefdata") or your preferred R GUI.
+If you prefer to install from the Cran package archive you can simply issue the
+command below. Cran will always stay up to date with the latest stable version
+of RBEFdata.
+
+```  
+install.packages("rbefdata") 
+``` 
 
 
 #### From Github
@@ -26,15 +32,6 @@ You should be aware that this installation gets you the bleeding edge version of
 RBEFdata which might not run as expected because it is in unstable state. If you
 prefer a stable package you should use the versions provided over Cran.
 
-#### From Cran 
-
-If you prefer to install from the Cran package archive you can simply issue the
-command below. Cran will always stay up to date with the latest stable version
-of RBEFdata.
-
-```  
-install.packages("rbefdata") 
-``` 
 
 ### License  
 
