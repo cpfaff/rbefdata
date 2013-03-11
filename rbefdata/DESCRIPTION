@@ -1,6 +1,6 @@
 Package: rbefdata
 Maintainer: Claas-Thido Pfaff <ctpfaff@arcor.de>
-Author: BEFdata development team
+Author: Claas-Thido Pfaff, Karin Nadrowski <nadrowski@uni-leipzig.de>
 Version: 0.1
 License: MIT
 Title: BEFdata R package
