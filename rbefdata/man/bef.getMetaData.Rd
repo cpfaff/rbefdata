@@ -5,9 +5,10 @@
   bef.getMetaData(dataset_id, full_url)
 }
 \arguments{
-  \item{dataset_id}{id of dataset in BEFdata portal.}
+  \item{dataset_id}{id of the dataset in the BEFdata
+  portal.}
 
-  \item{full_url}{direct link to its eml file.}
+  \item{full_url}{direct link to the eml file.}
 }
 \description{
   This function fetches metedata of a dataset from the

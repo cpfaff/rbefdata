@@ -10,9 +10,7 @@
 }
 \description{
   This function is used to query and set the BEFdata portal
-  URL address. It is not supposed to be changed, unless you
-  are using Beijing portal or other portals using the code
-  from the BEFdata project.
+  URL address.
 }
 \examples{
 # query BEFdata portal's URL
