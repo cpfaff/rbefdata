@@ -37,7 +37,8 @@
   which you can store into a variable as shown in the
   examples below. The object also offers additional
   information by attributes. You can querry the information
-  via attributes function as shown in the examples below.
+  via the attributes function as shown in the examples
+  below.
 }
 \examples{
 \dontrun{

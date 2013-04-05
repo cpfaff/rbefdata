@@ -1,5 +1,6 @@
 export(bef.getdata)
 export(bef.getMetaData)
+export(bef.getproposal)
 export(bef.options)
 import(RCurl)
 import(XML)

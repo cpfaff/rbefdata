@@ -18,3 +18,4 @@ Collate:
     'rbefdata-package.R'
     'bef.getdata.R'
     'bef.getMetaData.R'
+    'bef.getproposal.R'
