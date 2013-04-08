@@ -11,7 +11,7 @@
   \item{full_url}{direct link to the eml file.}
 }
 \description{
-  This function fetches metedata of a dataset from the
+  This function fetches the metadata of a dataset from the
   BEFdata portal. You need to provide the id of the
   dataset, or the direct link to its eml file.
 }

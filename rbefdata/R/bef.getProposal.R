@@ -25,7 +25,7 @@
 #' @import RCurl
 #' @export 
 
-bef.getproposal <- function(proposal_id, user_credentials, curl=getCurlHandle(), ...) {
+bef.getProposal <- function(proposal_id, user_credentials, curl=getCurlHandle(), ...) {
   if (proposal_id) {
     full_proposal_url = sprintf("%s/paperproposals/%d.csv?user_credentials=%s", 
                                 bef.options('url'), proposal_id, user_credentials)

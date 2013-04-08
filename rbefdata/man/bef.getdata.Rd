@@ -1,44 +1,41 @@
 \name{bef.getdata}
 \alias{bef.getdata}
-\title{Fetch primary data in csv format from a BEFdata portal}
+\title{This function is a wrapper to the getter functions of the befdata R package.}
 \usage{
-  bef.getdata(dataset_id, user_credentials, full_url,
+  bef.getdata(dataset_id = NULL, proposal_id = NULL,
+    full_url = NULL, user_credentials = NULL,
     curl = getCurlHandle(), ...)
 }
 \arguments{
-  \item{dataset_id}{is the id of a dataset in a BEFdata
-  portal.}
+  \item{dataset_id}{This is the id of a dataset in a
+  BEFdata portal.}
 
-  \item{user_credentials}{your login credentials}
+  \item{user_credentials}{This are the login credentials
+  required to verify the user has the proper rights to
+  download the data.}
 
-  \item{full_url}{as direct download link instead of the
-  id. you can find it on the dataset show page.}
+  \item{full_url}{This functions as direct download link
+  and can be used instead of the ids. you can find the url
+  on the dataset download page for a dataset and on the
+  proposal page for a proposal copy it simply from the
+  browser.}
 
-  \item{curl}{If using in a loop, call getCurlHandle()
-  first and pass the returned value in here (avoids
-  unnecessary footprint)}
+  \item{curl}{If the function is used in a loop, call
+  getCurlHandle() first and pass the returned value in here
+  (avoids unnecessary footprint).}
 
-  \item{\dots}{other arguments passed to
+  \item{\dots}{This are other arguments passed to
   \code{\link[RCurl]{getURLContent}}}
 }
 \value{
-  a dataframe. Error is thrown when dataset is not found or
-  you don't have the proper access right for it.
+  a dataframe. An error is thrown when the dataset is not
+  found or you don't have the proper access right to
+  perform the action.
 }
 \description{
-  This function fetches data from of a BEFdata portal
-  dataset. By default it will fetch the CSV file of a
-  dataset. You need to provide the function with a dataset
-  id which you can find in the URL of the file on the
-  BEFdata portal and your user credentials. You can find
-  the credentials inside your profile on the BEFdata
-  portal. The credentials ensure you have the rights to
-  download the data. The function returns a dataset object
-  which you can store into a variable as shown in the
-  examples below. The object also offers additional
-  information by attributes. You can querry the information
-  via the attributes function as shown in the examples
-  below.
+  It depends on the parameters you provide to the function
+  it will fetch the complete data for a paperproposal,
+  single datasets or only the metadata for a dataset.
 }
 \examples{
 \dontrun{

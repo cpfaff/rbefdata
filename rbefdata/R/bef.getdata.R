@@ -1,23 +1,21 @@
-#' Fetch primary data in csv format from a BEFdata portal
+#' This function is a wrapper to the getter functions of the befdata R package. 
 #'
-#' This function fetches data from of a BEFdata portal dataset. By default it will 
-#' fetch the CSV file of a dataset. You need to provide the function with a 
-#' dataset id which you can find in the URL of the file on the BEFdata portal
-#' and your user credentials. You can find the credentials inside your profile 
-#' on the BEFdata portal. The credentials ensure you have the rights to download the 
-#' data. The function returns a dataset object which you can store into a variable as
-#' shown in the examples below. The object also offers additional information by attributes.
-#' You can querry the information via the attributes function as shown in the examples below. 
+#' It depends on the parameters you provide to the function it will fetch the 
+#' complete data for a paperproposal, single datasets or only the metadata for 
+#' a dataset.
 #'
-#' @param dataset_id is the id of a dataset in a BEFdata portal. 
-#' @param user_credentials your login credentials
-#' @param full_url as direct download link instead of the id. you can find it 
-#'   on the dataset show page.
-#' @param curl If using in a loop, call getCurlHandle() first and pass 
-#'    the returned value in here (avoids unnecessary footprint)
-#' @param \dots other arguments passed to \code{\link[RCurl]{getURLContent}}
+#' @param dataset_id This is the id of a dataset in a BEFdata portal. 
+#' @param user_credentials This are the login credentials required to verify 
+#'        the user has the proper rights to download the data.
+#' @param full_url This functions as direct download link and can be used instead of 
+#'        the ids. you can find the url on the dataset download page for a dataset and
+#'        on the proposal page for a proposal copy it simply from the browser.
+#' @param curl If the function is used in a loop, call getCurlHandle() first and pass 
+#'        the returned value in here (avoids unnecessary footprint).
+#' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #' 
-#' @return a dataframe. Error is thrown when dataset is not found or you don't have the proper access right for it.
+#' @return a dataframe. An error is thrown when the dataset is not found or you don't have 
+#'         the proper access right to perform the action.
 #' 
 #' @examples \dontrun{
 #'  dat1 = bef.getdata(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
@@ -28,40 +26,14 @@
 #' @import RCurl
 #' @export 
 
-bef.getdata <- function(dataset_id, user_credentials, full_url, curl=getCurlHandle(), ...) {
-  if (missing(full_url)) { 
-    
-    eml_metadata = bef.getMetaData(dataset_id=dataset_id)
-       
-    if (missing(user_credential)) 
-      full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true", 
-                         bef.options('url'), dataset_id)
-    else
-      full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true&user_credentials=%s", 
-                         bef.options('url'), dataset_id, user_credentials)
-       
-  } else {
-    
-    split_full_url = strsplit(full_url, split="/")
-    get_datasets_index = grep("datasets", unlist(split_full_url[1]))
-    eml_metadata = bef.getMetaData(dataset_id=as.numeric(split_full_url[[1]][get_datasets_index+1]))
-      
+bef.getdata <- function(dataset_id=NULL, proposal_id=NULL, full_url=NULL, user_credentials=NULL, curl=getCurlHandle(), ...) { 
+  if (!is.null(dataset_id) | !is.null(full_url)) {  
+    dataset=bef.getDataset(dataset_id=dataset_id, full_url=full_url, user_credentials=user_credentials, curl=getCurlHandle(), ...)
+    return(dataset)
   }
-
-  csv = getURLContent(full_url, curl = curl, ...) 
-  
-  if(grepl(csv, pattern = "^\\s*<html")) stop("Dataset not found or not accessible. Please check your credentials and make sure you have access right for it.")
-  con = textConnection(csv)
-  on.exit(close(con))
-  csv = read.csv(con)
-  
-  attr(csv, "title") = eml_metadata$title
-  attr(csv, "authors") = eml_metadata$authors
-  attr(csv, "abstract") = eml_metadata$abstract
-  attr(csv, "taxonicextent") = eml_metadata$taxonicextent
-  attr(csv, "spatial_information") = eml_metadata$spatial
-  attr(csv, "temporal_information") = eml_metadata$temporal 
-  attr(csv, "sampling") = eml_metadata$temporal 
-  attr(csv, "analyze") = eml_metadata$analyze
-  return(csv)
+ 
+  if (!is.null(proposal_id) | !is.null(full_url)) {  
+    proposal=bef.getProposal(proposal_id=proposal_id, full_url=full_url, user_credentials=user_credentials, curl=getCurlHandle(), ...)
+    return(proposal)
+  } 
 }
