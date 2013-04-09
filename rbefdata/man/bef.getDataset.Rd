@@ -1,29 +1,31 @@
 \name{bef.getDataset}
 \alias{bef.getDataset}
-\title{Fetch primary data in csv format from a BEFdata portal}
+\title{Fetch primary data in csv format from a BEFdata portal dataset.}
 \usage{
   bef.getDataset(dataset_id, user_credentials, full_url,
     curl = getCurlHandle(), ...)
 }
 \arguments{
-  \item{dataset_id}{is the id of a dataset in a BEFdata
-  portal.}
+  \item{dataset_id}{This is the id of a dataset on a
+  BEFdata portal.}
 
-  \item{user_credentials}{your login credentials}
+  \item{user_credentials}{This are your login credentials.}
 
-  \item{full_url}{as direct download link instead of the
-  id. you can find it on the dataset show page.}
+  \item{full_url}{This functions as direct download link
+  instead of the id.  You can find it on the dataset show
+  page.}
 
-  \item{curl}{If using in a loop, call getCurlHandle()
-  first and pass the returned value in here (avoids
-  unnecessary footprint)}
+  \item{curl}{If using the function in a loop, call
+  getCurlHandle() first and pass the returned value in here
+  (avoids unnecessary footprint).}
 
-  \item{\dots}{other arguments passed to
+  \item{\dots}{This are other arguments passed to
   \code{\link[RCurl]{getURLContent}}}
 }
 \value{
-  a dataframe. Error is thrown when dataset is not found or
-  you don't have the proper access right for it.
+  The function returns a dataframe. An error is thrown when
+  dataset is not found or you don't have the proper access
+  right for it.
 }
 \description{
   This function fetches data from of a BEFdata portal
@@ -37,15 +39,15 @@
   which you can store into a variable as shown in the
   examples below. The object also offers additional
   information by attributes. You can querry the information
-  via the attributes function as shown in the examples
+  via the attributes() function as shown in the examples
   below.
 }
 \examples{
 \dontrun{
- dat1 = bef.getdata(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
- attributes(dat1)
- dat2 = bef.getdata(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
- attributes(dat2)$authors
+ datset1 = bef.getDataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+ attributes(datset1)
+ dataset2 = bef.getDataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+ attributes(dataset2)$author
  }
 }
 

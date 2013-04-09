@@ -1,8 +1,8 @@
-\name{bef.getMetaData}
-\alias{bef.getMetaData}
+\name{bef.getMetadata}
+\alias{bef.getMetadata}
 \title{Get the metadata of a dataset from the BEFdata portal}
 \usage{
-  bef.getMetaData(dataset_id, full_url)
+  bef.getMetadata(dataset_id, full_url)
 }
 \arguments{
   \item{dataset_id}{id of the dataset in the BEFdata

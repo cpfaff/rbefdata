@@ -10,7 +10,7 @@
 #' @param dataset_id id of the dataset in the BEFdata portal. 
 #' @param full_url direct link to the eml file. 
 
-bef.getMetaData = function(dataset_id, full_url) {
+bef.getMetadata = function(dataset_id, full_url) {
   if (missing(full_url)) {
      full_url = sprintf("%s/datasets/%d.eml", bef.options('url'), dataset_id)
   }

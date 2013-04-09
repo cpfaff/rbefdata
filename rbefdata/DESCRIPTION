@@ -17,6 +17,7 @@ Collate:
     'zzz.R'
     'rbefdata-package.R'
     'bef.getdata.R'
-    'bef.getMetaData.R'
     'bef.getDataset.R'
     'bef.getProposal.R'
+    'bef.getMetadata.R'
+    'bef.pushdata.R'

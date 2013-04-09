@@ -1,4 +1,4 @@
-#' Fetch primary data in csv format from a BEFdata portal
+#' Fetch primary data in csv format from a BEFdata portal dataset.
 #'
 #' This function fetches data from of a BEFdata portal dataset. By default it will 
 #' fetch the CSV file of a dataset. You need to provide the function with a 
@@ -7,23 +7,24 @@
 #' on the BEFdata portal. The credentials ensure you have the rights to download the 
 #' data. The function returns a dataset object which you can store into a variable as
 #' shown in the examples below. The object also offers additional information by attributes.
-#' You can querry the information via the attributes function as shown in the examples below. 
+#' You can querry the information via the attributes() function as shown in the examples below. 
 #'
-#' @param dataset_id is the id of a dataset in a BEFdata portal. 
-#' @param user_credentials your login credentials
-#' @param full_url as direct download link instead of the id. you can find it 
-#'   on the dataset show page.
-#' @param curl If using in a loop, call getCurlHandle() first and pass 
-#'    the returned value in here (avoids unnecessary footprint)
-#' @param \dots other arguments passed to \code{\link[RCurl]{getURLContent}}
+#' @param dataset_id This is the id of a dataset on a BEFdata portal. 
+#' @param user_credentials This are your login credentials.
+#' @param full_url This functions as direct download link instead of the id. 
+#'        You can find it on the dataset show page.
+#' @param curl If using the function in a loop, call getCurlHandle() first and pass 
+#'    the returned value in here (avoids unnecessary footprint).
+#' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #' 
-#' @return a dataframe. Error is thrown when dataset is not found or you don't have the proper access right for it.
+#' @return The function returns a dataframe. An error is thrown when dataset is not found 
+#'         or you don't have the proper access right for it.
 #' 
 #' @examples \dontrun{
-#'  dat1 = bef.getdata(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'  attributes(dat1)
-#'  dat2 = bef.getdata(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
-#'  attributes(dat2)$authors
+#'  datset1 = bef.getDataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+#'  attributes(datset1)
+#'  dataset2 = bef.getDataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+#'  attributes(dataset2)$author
 #'  }
 #' @import RCurl
 #' @export 
@@ -31,7 +32,7 @@
 bef.getDataset <- function(dataset_id, user_credentials, full_url, curl=getCurlHandle(), ...) {
   if (missing(full_url)) { 
     
-    eml_metadata = bef.getMetaData(dataset_id=dataset_id)
+    eml_metadata = bef.getMetadata(dataset_id=dataset_id)
        
     if (missing(user_credentials)) 
       full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true", 
@@ -42,9 +43,9 @@ bef.getDataset <- function(dataset_id, user_credentials, full_url, curl=getCurlH
        
   } else {
     
-    split_full_url = strsplit(full_url, split="/")
-    get_datasets_index = grep("datasets", unlist(split_full_url[1]))
-    eml_metadata = bef.getMetaData(dataset_id=as.numeric(split_full_url[[1]][get_datasets_index+1]))
+    split_full_url = unlist(strsplit(full_url, split="/"))
+    get_datasets_index = grep("datasets", unlist(split_full_url))
+    eml_metadata = bef.getMetadata(dataset_id=as.numeric(split_full_url[get_datasets_index+1]))
       
   }
 
