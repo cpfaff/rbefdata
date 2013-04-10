@@ -1,24 +1,26 @@
 The BEFdata R-package
 =======================
 
-This R package gives you basic access to the data structures offered by the BEFdata portal.
+This R package gives you basic access to the data structures offered by a
+[BEFdata](https://github.com/befdata/befdata) portal.
+
 
 ### Install
 
-#### From Cran 
+#### From Cran
 
 If you prefer to install from the Cran package archive you can simply issue the
 command below. Cran will always stay up to date with the latest stable version
 of RBEFdata.
 
-```  
-install.packages("rbefdata") 
-``` 
+```
+install.packages("rbefdata")
+```
 
 
 #### From Github
 
-You can install the latest version from Github via the following commands.
+You can also install the latest version from Github via the following commands.
 
 ```r
 # install devtools package if you don't have it.
@@ -26,14 +28,15 @@ install.packages("devtools")
 # install rbefdata package from github
 library(devtools)
 install_github(username = "befdata", repo = "rbefdata", subdir = "rbefdata")
-``` 
+```
 
-You should be aware that this installation gets you the bleeding edge version of
-RBEFdata which might not run as expected because it is in unstable state. If you
-prefer a stable package you should use the versions provided over Cran.
+You should be aware that this installation gets you a bleeding edge version
+of RBEFdata. It can not be ensured to be in a stable state and you might have
+problems running it. If you prefer a stable package you should use the versions
+provided over Cran.
 
 
-### License  
+### License
 
 RBefdata is released under the MIT License (MIT):
 
