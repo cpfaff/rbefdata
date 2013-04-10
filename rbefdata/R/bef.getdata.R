@@ -29,12 +29,12 @@
 bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials) {
   if (!missing(full_url)) {
     # check which content to fetch
-    if(grepl(full_url, pattern = "datasets")) 
+    if(grepl(full_url, pattern = "*/datasets/*")) 
       {     
         dataset=bef.getDataset(full_url=full_url)  
         return(dataset)
       } 
-    if(grepl(full_url, pattern="paperproposals"))
+    if(grepl(full_url, pattern="*/paperproposals/*"))
       {
         proposal=bef.getProposal(full_url=full_url)   
         return(proposal)
