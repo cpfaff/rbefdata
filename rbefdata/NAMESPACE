@@ -1,4 +1,4 @@
-export(bef.getDataset)
+export(bef.combineObjects)
 export(bef.getMetadata)
 export(bef.getProposal)
 export(bef.getdata)
