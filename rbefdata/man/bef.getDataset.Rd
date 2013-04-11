@@ -2,8 +2,8 @@
 \alias{bef.getDataset}
 \title{Fetch primary data in csv format from a BEFdata portal dataset.}
 \usage{
-  bef.getDataset(dataset_id, user_credentials, full_url,
-    curl = getCurlHandle(), ...)
+  bef.getDataset(dataset_id, full_url, user_credentials,
+    category_split = T, curl = getCurlHandle(), ...)
 }
 \arguments{
   \item{dataset_id}{This is the id of a dataset on a

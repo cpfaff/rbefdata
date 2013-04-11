@@ -21,3 +21,4 @@ Collate:
     'bef.getProposal.R'
     'bef.getMetadata.R'
     'bef.pushdata.R'
+    'bef.helper.R'

@@ -1,15 +1,15 @@
 #' Get the metadata of a dataset from the BEFdata portal
-#' 
-#' This function fetches the metadata associated with dataset on BEFdata portal. 
+#'
+#' This function fetches the metadata associated with dataset on BEFdata portal.
 #' You need to provide the id of the dataset, or the direct link to the Ecological
 #' Metadata Language file. You can find the url on the dataset page.
 #'
-#' @param dataset_id The id of the dataset in the BEFdata portal. 
-#' @param full_url Functions as direct download link for the eml file. 
-#' 
+#' @param dataset_id The id of the dataset in the BEFdata portal.
+#' @param full_url Functions as direct download link for the eml file.
+#'
 #' @import XML
 #' @export
-#' 
+#'
 
 bef.getMetadata = function(dataset_id, full_url) {
   if (missing(full_url)) {
@@ -21,7 +21,7 @@ bef.getMetadata = function(dataset_id, full_url) {
   lst$title = xmlValue(getNodeSet(eml, "//title")[[1]])
   # authors
   lst$authors = data.frame(
-    xmlToDataFrame(getNodeSet(eml, "//creator/individualName")), 
+    xmlToDataFrame(getNodeSet(eml, "//creator/individualName")),
     emails = xpathSApply(eml, "//creator/electronicMailAddress", xmlValue))
   # abstract
   lst$abstract = xpathSApply(eml, "//abstract", xmlValue)

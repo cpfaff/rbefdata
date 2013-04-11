@@ -2,7 +2,7 @@
 #'
 #' This function fetches data associated with a BEFdata portal dataset. By
 #' default it will fetch the CSV file of a dataset. You need to provide the
-#' function with a dataset id which you can find in the URL of the dataset  
+#' function with a dataset id which you can find in the URL of the dataset
 #' on the BEFdata portal and your user credentials. You can find the credentials
 #' inside your profile on the BEFdata portal. The credentials ensure you have
 #' the rights to download the data. The function returns a dataset object which
@@ -10,13 +10,13 @@
 #' offers additional information by attributes. You can querry the information
 #' via the attributes() function as shown in the examples below.
 #'
-#' @param dataset_id This is the id of a dataset on a BEFdata portal. 
-#' @param user_credentials This are your login credentials. 
-#' @param full_url This functions as direct download link which you can use 
-#'        instead of the id. You can find it on the dataset page or the 
-#'        dataset download page. 
-#' @param curl If the function is used inside a loop, call getCurlHandle() first 
-#'        and pass the returned value in here. This avoids an unnecessary footprint. 
+#' @param dataset_id This is the id of a dataset on a BEFdata portal.
+#' @param user_credentials This are your login credentials.
+#' @param full_url This functions as direct download link which you can use
+#'        instead of the id. You can find it on the dataset page or the
+#'        dataset download page.
+#' @param curl If the function is used inside a loop, call getCurlHandle() first
+#'        and pass the returned value in here. This avoids an unnecessary footprint.
 #' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
 #' @return The function returns a dataframe. An error is thrown when dataset is
@@ -24,74 +24,47 @@
 #'
 #' @examples \dontrun{
 #'              datset1 = bef.getDataset(dataset_id=8,
-#'              user_credentials="Yy2APsD87JiDbF9YBnU") 
+#'              user_credentials="Yy2APsD87JiDbF9YBnU")
 #'
 #'              attributes(datset1) dataset2 = bef.getDataset(full_url =
 #'              'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?sepera
-#'              te_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU') 
+#'              te_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
 #'
-#'              attributes(dataset2)$author 
-#'           } 
-#' @import RCurl 
+#'              attributes(dataset2)$author
+#'           }
+#' @import RCurl
 #' @export
 
-bef.combineObjects <- function(dataset_object, dataset_url, metadata_object, metadata_url) 
-  {  
-    if(!missing(metadata_url)) 
-      { 
-        metadata = bef.getMetadata(full_url=metadata_url)  
-        dataset = dataset_object
-      } 
-    
-    if(!missing(dataset_url)) 
-      { 
-        dataset = bef.getDataset(full_url=dataset_url) 
-        metadata = metadata_objet 
-      } 
+bef.getDataset <- function(dataset_id, full_url, user_credentials, category_split=T, curl=getCurlHandle(), ...)
+  {
 
-    if(!missing(dataset_object) && !missing(metadata_object))
-      { 
-        dataset = dataset_object 
-        metadata = metadata_object
-      } 
-
-    attr(dataset, "title") = metadata$title
-    attr(dataset, "authors") = metadata$authors
-    attr(dataset, "abstract") = metadata$abstract
-    attr(dataset, "taxonicextent") = metadata$taxonicextent
-    attr(dataset, "spatial_information") = metadata$spatial
-    attr(dataset, "temporal_information") = metadata$temporal 
-    attr(dataset, "sampling") = metadata$temporal 
-    attr(dataset, "analyze") = metadata$analyze
-
-    return(dataset)
-  }
-
-bef.prepareUrl <- function (full_url, category_split=T) 
-  { 
-    # url options 
-    include_via = "?" 
-    append_via = "&" 
-
-    # no options set in url
-    if(!grepl(full_url, pattern=include_via))
-      {
-       a=2 
-      }
-
-    if(category_split) 
-      grep
-    }
-
-bef.getDataset <- function(dataset_id, full_url, user_credentials, category_split=T, curl=getCurlHandle(), ...) 
-  { 
-
-    if (!missing(full_url)) 
+    if (!missing(full_url))
       {
         split_full_url = unlist(strsplit(full_url, split="/"))
         get_dataset_index = grep("datasets", unlist(split_full_url))
         metadata = bef.getMetadata(dataset_id=as.numeric(split_full_url[get_dataset_index+1]))
       } else {
+
+        if (length(dataset_id)>1)
+          {
+            dataset_list=list()
+            for(i in 1:length(dataset_id))
+              {
+                if (missing(user_credentials))
+                  {
+                    full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true", bef.options('url'), dataset_id[i])
+                  } else {
+                    full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true&user_credentials=%s", bef.options('url'), dataset_id[i], user_credentials)
+                  }
+                dataset = bef.getDataset(full_url=full_url)
+                metadata = bef.getMetadata(dataset_id=dataset_id[i])
+                dataset = bef.combineObjects(dataset_object=dataset, metadata_object=metadata)
+                dataset_list[i] = list(dataset)
+                names(dataset_list)[i] = paste("dataset_id", dataset_id[i], sep="_")
+              }
+            return(dataset_list)
+          }
+
         metadata = bef.getMetadata(dataset_id=dataset_id)
         if (missing(user_credentials))
           {
@@ -101,18 +74,18 @@ bef.getDataset <- function(dataset_id, full_url, user_credentials, category_spli
           }
       }
 
-    url_content = getURLContent(full_url, curl = curl, ...) 
-  
-    if(grepl(url_content, pattern = "^\\s*<html")) 
-      { 
-        stop("Dataset not found or not accessible. Please check your credentials and make sure you have access right for it.") 
-      } 
+    url_content = getURLContent(full_url, curl = curl, ...)
+
+    if(grepl(url_content, pattern = "^\\s*<html"))
+      {
+        stop("Dataset not found or not accessible. Please check your credentials and make sure you have access right for it.")
+      }
 
     connection = textConnection(url_content)
     on.exit(close(connection))
-    dataset = read.csv(connection) 
+    dataset = read.csv(connection)
 
     dataset = bef.combineObjects(dataset_object=dataset, metadata_object=metadata)
-  
+
     return(dataset)
   }
