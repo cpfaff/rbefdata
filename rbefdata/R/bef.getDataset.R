@@ -46,7 +46,7 @@ bef.getDataset <- function(dataset_id, full_url, user_credentials, category_spli
       } else {
 
         if (length(dataset_id)>1)
-          sort(dataset_id)
+          dataset_id=sort(dataset_id)
           {
             dataset_list=list()
             for(i in 1:length(dataset_id))
