@@ -2,6 +2,7 @@
 #' Internally.
 #'
 #' @import RCurl
+#' @import XML
 #' @export
 
 bef.combineObjects <- function(dataset_object, dataset_url, metadata_object, metadata_url)
@@ -35,3 +36,28 @@ bef.combineObjects <- function(dataset_object, dataset_url, metadata_object, met
 
     return(dataset)
   }
+
+
+bef.searchTematres <- function(Lookup_Keyword)
+   {
+      Service_Task="search"
+      Service_Argument=Lookup_Keyword
+      Service_URL=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",Service_Task,"&arg=",Service_Argument, sep="")
+
+      Search_Fetch_XML=getURL(Service_URL)
+      Search_Parse_XML=xmlTreeParse(Search_Fetch_XML, getDTD=F)
+      Search_Get_XML_Root <<- xmlRoot(Search_Parse_XML)
+
+      #Here check for results
+      if (length(grep("^result$",names(Search_Get_XML_Root))) == 1){
+         Search_Get_Results=Search_Get_XML_Root[[1]]
+         Search_Get_Results_Names=""
+
+         for (i in 1:xmlSize(Search_Get_Results)){
+            Search_Get_Results_Names[i]=xmlSApply(Search_Get_XML_Root[[1]][[i]][[2]], xmlValue)
+         }
+
+         return(Search_Get_Results_Names)
+      }else{}#stop("No Terms available for your search")}
+
+   }
