@@ -9,14 +9,13 @@
 }
 \description{
   This function fetches keywords from a BEFdata portal. It
-  also enables the task of fetching all datasets assiciated
+  also enables the task of fetching all datasets associated
   with one, or a list of keywords. It delegates the task of
-  fething multiple datasets to bef.getDataset which returns
-  a dataframe for one dataset and a list element if there
-  are multiple datasets available. An error is thrown when
-  dataset is not found or you don't have the proper access
-  right for it. l datasets associated with one, or a list
-  of keywords.
+  fetching multiple datasets to bef.getDataset which
+  returns a data frame for one dataset and a list element
+  if there are multiple datasets available. An error is
+  thrown when dataset is not found or you don't have the
+  proper access right for it.
 }
 \examples{
 \dontrun{
