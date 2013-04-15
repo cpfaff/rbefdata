@@ -37,27 +37,85 @@ bef.combineObjects <- function(dataset_object, dataset_url, metadata_object, met
     return(dataset)
   }
 
+bef.searchTematres <- function(lookup_keyword)
+  {
+    service_task="search"
+    service_argument=lookup_keyword
+    service_url=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",service_task,"&arg=",service_argument, sep="")
 
-bef.searchTematres <- function(Lookup_Keyword)
-   {
-      Service_Task="search"
-      Service_Argument=Lookup_Keyword
-      Service_URL=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",Service_Task,"&arg=",Service_Argument, sep="")
+    search_fetch_xml=getURL(service_url)
+    search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
+    search_get_xml_root <<- xmlRoot(search_parse_xml)
 
-      Search_Fetch_XML=getURL(Service_URL)
-      Search_Parse_XML=xmlTreeParse(Search_Fetch_XML, getDTD=F)
-      Search_Get_XML_Root <<- xmlRoot(Search_Parse_XML)
+    if (length(grep("^result$",names(search_get_xml_root))) == 1)
+      {
+        search_get_results=search_get_xml_root[[1]]
+        search_get_results_names=""
 
-      #Here check for results
-      if (length(grep("^result$",names(Search_Get_XML_Root))) == 1){
-         Search_Get_Results=Search_Get_XML_Root[[1]]
-         Search_Get_Results_Names=""
+        for (i in 1:xmlSize(search_get_results))
+          {
+            search_get_results_names[i]=xmlSApply(search_get_xml_root[[1]][[i]][[2]], xmlValue)
+          }
 
-         for (i in 1:xmlSize(Search_Get_Results)){
-            Search_Get_Results_Names[i]=xmlSApply(Search_Get_XML_Root[[1]][[i]][[2]], xmlValue)
-         }
+        return(search_get_results_names)
 
-         return(Search_Get_Results_Names)
-      }else{}#stop("No Terms available for your search")}
+      }else{
+        stop("The server says: No terms available for your search")
+      }
+  }
 
-   }
+bef.searchTematresUpper <- function(lookup_keyword)
+  {
+
+    service_task="search"
+    service_argument=lookup_keyword
+    service_url=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",service_task,"&arg=",service_argument, sep="")
+
+    search_fetch_xml=getURL(service_url)
+    search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
+    search_get_xml_root=xmlRoot(search_parse_xml)
+
+    if (length(grep("^result$",names(search_get_xml_root))) == 1)
+      {
+        search_get_results=search_get_xml_root[[1]]
+        search_get_results_names=""
+
+
+        for (i in 1:xmlSize(search_get_results)){
+          search_get_results_names[i]=xmlSApply(search_get_xml_root[[1]][[i]][[2]], xmlValue)
+        }
+
+
+        if(length(grep(paste("^",service_argument,"$",sep=""),search_get_results_names,value=F)) == 1)
+          {
+
+            variable_index=which(search_get_results_names == lookup_keyword)
+            get_id=xmlValue(search_get_xml_root[[1]][[variable_index]][[1]])
+
+            service_task="fetchUp"
+            service_argument=get_id
+
+            fetch_upward_keywords=getURL(paste("http://www1.vcrlter.virginia.edu/data/vocab/tematres/luq//services.php?task=fetchUp&arg=",get_id,sep=""))
+
+            process_upward_keywords=xmlTreeParse(fetch_upward_keywords, getDTD=F)
+            upward_root=xmlRoot(process_upward_keywords)
+
+            upward_root_results=upward_root[[1]]
+
+            upward_root_results_length=xmlSize(upward_root[[1]])
+            upward_root_results_varnames=""
+
+              for (j in 1:upward_root_results_length){
+                upward_root_results_varnames[j]=xmlValue(upward_root_results[[j]][[2]][[1]])
+              }
+
+              return(upward_root_results_varnames)
+
+          }
+        }else{
+          stop("No Terms available for your search")
+      }
+  }
+
+
+
