@@ -21,6 +21,6 @@
 bef.getKeywords = function()
    {
       keywords_json=fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
-      keywords_summary=unlist(lapply(keyword_data, function(x) (x$name)))
+      keywords_summary=unlist(lapply(keywords_json, function(x) (x$name)))
       return(keywords_summary)
    }
