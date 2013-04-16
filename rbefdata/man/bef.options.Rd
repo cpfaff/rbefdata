@@ -1,6 +1,6 @@
 \name{bef.options}
 \alias{bef.options}
-\title{Set or query BEFdata portal URL address and the Tematres thesaurus URL.}
+\title{Set or query otions related to the BEFdata R package.}
 \usage{
   bef.options(...)
 }
@@ -10,14 +10,14 @@
 }
 \description{
   This function is used to query and set R BEFdata package
-  specific options.
+  specific options like the URL to the BEFdata portal and
+  the URL to the tematres thesaurus.
 }
 \examples{
-# query BEFdata portal URL
+# BEFdata URL
 bef.options('url')
-# set the URL
 bef.options(url='http://www.example.com')
-#Tematres url
+#Tematres URL
 bef.options('temtres_url')
 bef.options(tematres_url="http://www.example.com")
 }

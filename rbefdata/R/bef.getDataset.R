@@ -40,7 +40,7 @@
 #' @import RCurl
 #' @export
 
-bef.getDataset <- function(dataset_id, full_url, user_credentials, category_split=T, curl=getCurlHandle(), ...)
+bef.getDataset <- function(dataset_id, full_url, user_credentials, curl=getCurlHandle(), ...)
   {
 
     if (!missing(full_url))

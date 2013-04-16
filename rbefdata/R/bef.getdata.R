@@ -7,6 +7,7 @@
 #'
 #' @param dataset_id This is the id of a dataset on a BEFdata portal. You find the id
 #'        in the url of the dataset or on the download page of the dataset.
+#' @param proposal_id This is the id of a paperproposal
 #' @param user_credentials This are the login credentials required to verify
 #'        the user identity. They ensure, you have the rights to download the data.
 #' @param full_url This option works as direct download link. It can be used instead of

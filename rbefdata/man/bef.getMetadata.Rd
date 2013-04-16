@@ -13,8 +13,8 @@
 }
 \description{
   This function fetches the metadata associated with
-  dataset on BEFdata portal. You need to provide the id of
-  the dataset, or the direct link to the Ecological
+  dataset on a BEFdata portal. You need to provide the id
+  of the dataset, or the direct link to the Ecological
   Metadata Language file. You can find the url on the
   dataset page.
 }

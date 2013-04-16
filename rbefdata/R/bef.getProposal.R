@@ -12,10 +12,12 @@
 #'
 #' The function returns a list object which you can store to a variable as
 #' shown in the examples below.
-
+#'
 #' @param proposal_id This is the id of a paper proposal. You can download all datasets in
 #'        one turn given the proposal_id and your user credentials.
 #' @param user_credentials This are your login credentials
+#' @param full_url This functions as a download link and you can use is instead of the
+#'        proposal_id.
 #' @param curl If using in a loop, call getCurlHandle() first and pass
 #'        the returned value in here (avoids unnecessary footprint)
 #' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
