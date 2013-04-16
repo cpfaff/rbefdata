@@ -1,14 +1,14 @@
-#' Set or query BEFdata portal URL address and the Tematres thesaurus URL.
+#' Set or query otions related to the BEFdata R package.
 #'
-#' This function is used to query and set R BEFdata package specific options.
+#' This function is used to query and set R BEFdata package specific options like
+#' the URL to the BEFdata portal and the URL to the tematres thesaurus.
 #'
 #' @param \dots similar to \code{\link{options}}. see examples below.
 #' @examples
-#' # query BEFdata portal URL
+#' # BEFdata URL
 #' bef.options('url')
-#' # set the URL
 #' bef.options(url='http://www.example.com')
-#' #Tematres url
+#' #Tematres URL
 #' bef.options('temtres_url')
 #' bef.options(tematres_url="http://www.example.com")
 #'
@@ -27,12 +27,9 @@ bef.options = function(...) {
       if (is.list(lst[[1]]))
         lst = lst[[1]]
       if (length(lst) > 0) {
-
         .bef.opts[names(lst)] = lst
-
         .bef.opts["url"] = sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
         .bef.opts["url"] = sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
-
         .bef.env$.bef.opts = .bef.opts
       }
       invisible(omf)
