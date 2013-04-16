@@ -117,7 +117,6 @@ bef.searchTematresUpper <- function(lookup_keyword)
       }
   }
 
-
 bef.searchTematresLower = function(lookup_keyword)
   {
     service_task="search"
