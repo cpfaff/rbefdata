@@ -41,7 +41,7 @@ bef.searchTematres <- function(lookup_keyword)
   {
     service_task="search"
     service_argument=lookup_keyword
-    service_url=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",service_task,"&arg=",service_argument, sep="")
+    service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument)
 
     search_fetch_xml=getURL(service_url)
     search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
@@ -66,10 +66,9 @@ bef.searchTematres <- function(lookup_keyword)
 
 bef.searchTematresUpper <- function(lookup_keyword)
   {
-
     service_task="search"
     service_argument=lookup_keyword
-    service_url=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",service_task,"&arg=",service_argument, sep="")
+    service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument)
 
     search_fetch_xml=getURL(service_url)
     search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
@@ -80,11 +79,9 @@ bef.searchTematresUpper <- function(lookup_keyword)
         search_get_results=search_get_xml_root[[1]]
         search_get_results_names=""
 
-
         for (i in 1:xmlSize(search_get_results)){
           search_get_results_names[i]=xmlSApply(search_get_xml_root[[1]][[i]][[2]], xmlValue)
         }
-
 
         if(length(grep(paste("^",service_argument,"$",sep=""),search_get_results_names,value=F)) == 1)
           {
@@ -95,7 +92,7 @@ bef.searchTematresUpper <- function(lookup_keyword)
             service_task="fetchUp"
             service_argument=get_id
 
-            fetch_upward_keywords=getURL(paste("http://www1.vcrlter.virginia.edu/data/vocab/tematres/luq//services.php?task=fetchUp&arg=",get_id,sep=""))
+            fetch_upward_keywords=getURL(sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument))
 
             process_upward_keywords=xmlTreeParse(fetch_upward_keywords, getDTD=F)
             upward_root=xmlRoot(process_upward_keywords)
@@ -121,7 +118,7 @@ bef.searchTematresLower = function(lookup_keyword)
   {
     service_task="search"
     service_argument=lookup_keyword
-    service_url=paste("http://vocab.lternet.edu/vocab/luq/services.php?task=",service_task,"&arg=",service_argument, sep="")
+    service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument)
 
     search_fetch_xml=getURL(service_url)
     search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
@@ -145,7 +142,7 @@ bef.searchTematresLower = function(lookup_keyword)
     service_task="fetchDown"
     service_argument=get_id
 
-    fetch_upward_keywords=getURL(paste("http://www1.vcrlter.virginia.edu/data/vocab/tematres/luq//services.php?task=",service_task,"&arg=",get_id,sep=""))
+    fetch_upward_keywords=getURL(sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument))
 
     process_upward_keywords=xmlTreeParse(fetch_upward_keywords, getDTD=F)
 

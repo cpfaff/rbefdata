@@ -28,8 +28,16 @@ bef.options = function(...) {
         lst = lst[[1]]
       if (length(lst) > 0) {
         .bef.opts[names(lst)] = lst
-        .bef.opts["url"] = sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
-        .bef.opts["url"] = sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
+        if (!is.null(lst$url)) {
+          .bef.opts["url"] = sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
+          .bef.opts["url"] = sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
+        }
+        if (!is.null(lst$tematres_url)) {
+          .bef.opts["tematres_service_url"] = sub(.bef.opts["tematres_url"], pattern = "index.php/?$", replacement = "services.php")
+        }
+        if (!is.null(lst$tematres_service_url)) {
+          .bef.opts["tematres_url"] = sub(.bef.opts["tematres_url"], pattern = "services.php/?$", replacement = "index.php")
+        }
         .bef.env$.bef.opts = .bef.opts
       }
       invisible(omf)
