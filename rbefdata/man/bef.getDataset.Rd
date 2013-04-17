@@ -49,13 +49,8 @@
 \examples{
 \dontrun{
              datset1 = bef.getDataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
-
-             attributes(datset1) dataset2 = bef.getDataset(full_url =
-             'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?sepera
-             te_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
-
+             attributes(datset1) dataset2 = bef.getDataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
              attributes(dataset2)$author
-
              multi = bef.getDataset(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
           }
 }
