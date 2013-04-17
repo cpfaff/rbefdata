@@ -45,7 +45,7 @@ bef.searchTematres <- function(lookup_keyword)
 
     search_fetch_xml=getURL(service_url)
     search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
-    search_get_xml_root <<- xmlRoot(search_parse_xml)
+    search_get_xml_root = xmlRoot(search_parse_xml)
 
     if (length(grep("^result$",names(search_get_xml_root))) == 1)
       {
@@ -125,7 +125,7 @@ bef.searchTematresLower = function(lookup_keyword)
 
     search_fetch_xml=getURL(service_url)
     search_parse_xml=xmlTreeParse(search_fetch_xml, getDTD=F)
-    search_get_xml_root <<- xmlRoot(search_parse_xml)
+    search_get_xml_root = xmlRoot(search_parse_xml)
 
     if (length(grep("^result$",names(search_get_xml_root))) == 1)
       {

@@ -1,7 +1,7 @@
 Package: rbefdata
 Maintainer: Claas-Thido Pfaff <ctpfaff@arcor.de>
 Author: Claas-Thido Pfaff, Karin Nadrowski <nadrowski@uni-leipzig.de>
-Version: 0.1
+Version: 0.2
 License: MIT
 Title: BEFdata R package
 Description: Basic R package to access the data structures offered by the
