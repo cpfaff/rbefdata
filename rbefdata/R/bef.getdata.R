@@ -31,31 +31,26 @@
 
 bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials) {
   if (!missing(full_url)) {
-
     # check which content to fetch
-    if(grepl(full_url, pattern = "*/datasets/*"))
-      {
-        dataset=bef.getDataset(full_url=full_url)
+    if (grepl(full_url, pattern = "*/datasets/*")) {
+        dataset = bef.getDataset(full_url=full_url)
         return(dataset)
-      }
-    if(grepl(full_url, pattern="*/paperproposals/*"))
-      {
-        proposal=bef.getProposal(full_url=full_url)
+    }
+    if (grepl(full_url, pattern="*/paperproposals/*")) {
+        proposal = bef.getProposal(full_url=full_url)
         return(proposal)
-      }
+    }
   }
 
   # fetch via dataset_id
-  if (!missing(dataset_id))
-    {
-      dataset=bef.getDataset(dataset_id=dataset_id, user_credentials=user_credentials)
+  if (!missing(dataset_id)) {
+      dataset = bef.getDataset(dataset_id=dataset_id, user_credentials=user_credentials)
       return(dataset)
-    }
+  }
 
   # fetch via proposal_id
-  if (!missing(proposal_id))
-    {
-      proposal=bef.getProposal(proposal_id=proposal_id, user_credentials=user_credentials)
+  if (!missing(proposal_id)) {
+      proposal = bef.getProposal(proposal_id=proposal_id, user_credentials=user_credentials)
       return(proposal)
-    }
+  }
 }

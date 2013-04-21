@@ -37,26 +37,23 @@
 
 bef.getDataset <- function(dataset_id, full_url, user_credentials, curl=getCurlHandle(), ...)
   {
-
-    if (!missing(full_url))
-      {
+    if (!missing(full_url)) {
         split_full_url = unlist(strsplit(full_url, split="/"))
         get_dataset_index = grep("datasets", unlist(split_full_url))
         metadata = bef.getMetadata(dataset_id=as.numeric(split_full_url[get_dataset_index+1]))
-      } else {
-
-        if (length(dataset_id)>1)
-          dataset_id=sort(dataset_id)
+      }
+    else {
+        if (length(dataset_id) > 1)
+          dataset_id = sort(dataset_id)
           {
-            dataset_list=list()
-            for(i in 1:length(dataset_id))
-              {
-                if (missing(user_credentials))
-                  {
+            dataset_list = list()
+            for (i in 1:length(dataset_id)) {
+                if (missing(user_credentials)) {
                     full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true", bef.options('url'), dataset_id[i])
-                  } else {
+                } 
+                else {
                     full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true&user_credentials=%s", bef.options('url'), dataset_id[i], user_credentials)
-                  }
+                }
                 dataset = bef.getDataset(full_url=full_url)
                 metadata = bef.getMetadata(dataset_id=dataset_id[i])
                 dataset = bef.combineObjects(dataset_object=dataset, metadata_object=metadata)
@@ -67,20 +64,19 @@ bef.getDataset <- function(dataset_id, full_url, user_credentials, curl=getCurlH
           }
 
         metadata = bef.getMetadata(dataset_id=dataset_id)
-        if (missing(user_credentials))
-          {
+        if (missing(user_credentials)) {
             full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true", bef.options('url'), dataset_id)
-          } else {
+        }
+        else {
             full_url = sprintf("%s/datasets/%d/download.csv?seperate_category_columns=true&user_credentials=%s", bef.options('url'), dataset_id, user_credentials)
-          }
+        }
       }
 
     url_content = getURLContent(full_url, curl = curl, ...)
-
-    if(grepl(url_content, pattern = "^\\s*<html"))
-      {
+    status_code = getCurlInfo(curl)$response.code
+    if(status_code != 200) {
         stop("Dataset not found or not accessible. Please check your credentials and make sure you have access right for it.")
-      }
+    }
 
     connection = textConnection(url_content)
     on.exit(close(connection))

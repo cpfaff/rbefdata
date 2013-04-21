@@ -37,7 +37,7 @@ bef.getMetadata = function(dataset_id, full_url) {
   names(lst$temporal) = c("begin", "end")
   # sampling & analyze
   tmp = xpathSApply(eml, "//samplingDescription/para", xmlValue, simplify=F)
-  if(length(tmp) != 0) {
+  if (length(tmp) != 0) {
     names(tmp) = c("sampling", "analyze")
     lst = c(lst, tmp)
   }
