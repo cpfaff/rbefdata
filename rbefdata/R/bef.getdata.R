@@ -29,7 +29,7 @@
 #' @import RCurl
 #' @export
 
-bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials) {
+bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials=bef.options("user_credentials")) {
   if (!missing(full_url)) {
     # check which content to fetch
     if (grepl(full_url, pattern = "*/datasets/*")) {

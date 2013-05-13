@@ -5,41 +5,48 @@
 #' Metadata Language file. You can find the url on the dataset page.
 #'
 #' @param dataset_id The id of the dataset in the BEFdata portal.
-#' @param full_url Functions as direct download link for the eml file.
+#' @param full_url functions as direct download link for the eml file.
+#' @param file path to a local eml file
 #'
 #' @import XML
 #' @export
 #'
 
-bef.getMetadata = function(dataset_id, full_url) {
-  if (missing(full_url)) {
-     full_url = sprintf("%s/datasets/%d.eml", bef.options('url'), dataset_id)
-  }
+bef.getMetadata = function(dataset_id, full_url = dataset_url(dataset_id, "eml"), file) {
+  if (!missing(file)) full_url = file
   eml = xmlParse(full_url)
-  lst = list()
-  # title
-  lst$title = xmlValue(getNodeSet(eml, "//title")[[1]])
-  # authors
-  lst$authors = data.frame(
-    xmlToDataFrame(getNodeSet(eml, "//creator/individualName")),
-    emails = xpathSApply(eml, "//creator/electronicMailAddress", xmlValue))
-  # abstract
-  lst$abstract = xpathSApply(eml, "//abstract", xmlValue)
-  # taxonic extent
-  lst$taxonicextent = xpathSApply(eml, "//generalTaxonomicCoverage", xmlValue)
-  # geographicCoverage
-  lst$spatial$description = xpathSApply(eml, "//geographicDescription", xmlValue)
-  # geographicCoordinates
-  lst$spatial$corrdinates = xpathSApply(eml, "//boundingCoordinates/*", xmlValue)
-  names(lst$spatial$corrdinates) = c('west', 'east', 'north','south')
-  # temporal extent
-  lst$temporal = xpathSApply(eml, "//rangeOfDates/*/*", function(x) gsub(xmlValue(x), pattern = "\\s", replacement = ""))
-  names(lst$temporal) = c("begin", "end")
-  # sampling & analyze
-  tmp = xpathSApply(eml, "//samplingDescription/para", xmlValue, simplify=F)
-  if (length(tmp) != 0) {
-    names(tmp) = c("sampling", "analyze")
-    lst = c(lst, tmp)
+
+  template = list(
+    title = "//dataset/title",
+    abstract = "//dataset/abstract/para",
+    taxonomicextent = "//dataset//generalTaxonomicCoverage",
+    sampling = "//dataset//samplingDescription/para",
+    spatial_information = list(
+      description = "//geographicCoverage/geographicDescription",
+      coordinates = c(west = "//geographicCoverage/boundingCoordinates/westBoundingCoordinate",
+                    east = "//geographicCoverage/boundingCoordinates/eastBoundingCoordinate",
+                    north = "//geographicCoverage/boundingCoordinates/northBoundingCoordinate",
+                    south = "//geographicCoverage/boundingCoordinates/southBoundingCoordinate")),
+    temporal_information = c(begin = "//temporalCoverage//beginDate", end = "//temporalCoverage//endDate"),
+    authors = list(
+      firstname = "//creator/individualName/givenName",
+      lastname = "//creator/individualName/surName",
+      email = "//creator/electronicMailAddress"))
+  out = rapply(template, function(x) xmlNodesValue(path=x, doc=eml), how="replace")
+  out$authors = as.data.frame(out$authors, stringsAsFactors=F)
+
+  attributeList = getNodeSet(eml, path="//attributeList/attribute")
+  column_template = list(header = "./attributeLabel", description = "./attributeDefinition", unit = ".//unit")
+  columns = lapply(column_template, function(c) {
+    sapply(attributeList, function(d) {
+      xmlNodesValue(doc=d, path=c)
+    })
+  })
+  columns = as.data.frame(columns, stringsAsFactors=F)
+  if (nrow(columns)) {
+    columns$unit = as.character(columns$unit)
+    columns$unit[is.na(columns$unit) | columns$unit == "dimensionless"] = ""
+    out$columns = columns
   }
-  return(lst)
+  return(out)
 }

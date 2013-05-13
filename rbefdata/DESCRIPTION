@@ -1,11 +1,13 @@
 Package: rbefdata
 Title: BEFdata R package
 Version: 0.2
-Author: Claas-Thido Pfaff <ctpfaff@arcor.de>, Karin Nadrowski <nadrowski@uni-leipzig.de>
+Author: Claas-Thido Pfaff <ctpfaff@arcor.de>, Karin Nadrowski
+    <nadrowski@uni-leipzig.de>
 Maintainer: Claas-Thido Pfaff <ctpfaff@arcor.de>
-Authors@R: c(person("Claas-Thido", "Pfaff", email="ctpfaff@arcor.de", role=c("cre","aut")),
-    person("Karin", "Nadrowski", email="nadrowski@uni-leipzig.de", role="aut"),
-    person("Xingxing", "Man", email="manxingxing@gmail.com", role="ctb"))
+Authors@R: c(person("Claas-Thido", "Pfaff", email="ctpfaff@arcor.de",
+    role=c("cre","aut")), person("Karin", "Nadrowski",
+    email="nadrowski@uni-leipzig.de", role="aut"), person("Xingxing", "Man",
+    email="manxingxing@gmail.com", role="aut"))
 Description: Basic R package to access the data structures offered by the
     BEFdata portal.
 Suggests:
@@ -31,3 +33,4 @@ Collate:
     'bef.searchTematres.R'
     'bef.searchTematresLower.R'
     'bef.searchTematresUpper.R'
+    'helper.R'

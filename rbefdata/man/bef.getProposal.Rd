@@ -2,7 +2,9 @@
 \alias{bef.getProposal}
 \title{Fetch primary data in CSV format from a BEFdata portal paperproposal}
 \usage{
-  bef.getProposal(proposal_id, user_credentials, full_url,
+  bef.getProposal(proposal_id,
+    user_credentials = bef.options("user_credentials"),
+    full_url = paperproposal_url(proposal_id, user_credentials = user_credentials),
     curl = getCurlHandle(), ...)
 }
 \arguments{

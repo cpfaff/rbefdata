@@ -3,7 +3,7 @@
 \title{This is a wrapper for the getter functions of the BEFdata R package.}
 \usage{
   bef.getdata(dataset_id, proposal_id, full_url,
-    user_credentials)
+    user_credentials = bef.options("user_credentials"))
 }
 \arguments{
   \item{dataset_id}{This is the id of a dataset on a

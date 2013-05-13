@@ -2,14 +2,17 @@
 \alias{bef.getMetadata}
 \title{Get the metadata of a dataset from the BEFdata portal}
 \usage{
-  bef.getMetadata(dataset_id, full_url)
+  bef.getMetadata(dataset_id,
+    full_url = dataset_url(dataset_id, "eml"), file)
 }
 \arguments{
   \item{dataset_id}{The id of the dataset in the BEFdata
   portal.}
 
-  \item{full_url}{Functions as direct download link for the
+  \item{full_url}{functions as direct download link for the
   eml file.}
+
+  \item{file}{path to a local eml file}
 }
 \description{
   This function fetches the metadata associated with
