@@ -36,7 +36,7 @@ bef.options = function(...) {
           .bef.opts["tematres_service_url"] = sub(.bef.opts["tematres_url"], pattern = "index.php/?$", replacement = "services.php")
         }
         if (!is.null(lst$tematres_service_url)) {
-          .bef.opts["tematres_url"] = sub(.bef.opts["tematres_url"], pattern = "services.php/?$", replacement = "index.php")
+          .bef.opts["tematres_url"] = sub(.bef.opts["tematres_service_url"], pattern = "services.php/?$", replacement = "index.php")
         }
         .bef.env$.bef.opts = .bef.opts
       }
