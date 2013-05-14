@@ -7,7 +7,7 @@
 #' @import XML
 #' @export
 
-bef.searchTematres <- function(lookup_keyword) {
+bef.search.tematres.keywords <- function(lookup_keyword) {
   service_task = "search"
   service_argument = lookup_keyword
   service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument)
