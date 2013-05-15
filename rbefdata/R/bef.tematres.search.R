@@ -12,20 +12,20 @@
 #' @import XML
 #' @export
 
-bef.search.tematres <- function(lookup_keyword, search_task="search") {
+bef.tematres.search <- function(lookup_keyword, search_task="search") {
   if (search_task=="search")
     {
-      results=bef.search.tematres.keywords(lookup_keyword=lookup_keyword)
+      results=bef.tematres.search.keywords(lookup_keyword=lookup_keyword)
       return(results)
     }
   if (search_task=="broader")
     {
-      results=bef.search.tematres.broader_keywords(lookup_keyword=lookup_keyword)
+      results=bef.tematres.search.broader_keywords(lookup_keyword=lookup_keyword)
       return(results)
     }
   if (search_task=="narrower")
     {
-      results=bef.search.tematres.narrower_keywords(lookup_keyword=lookup_keyword)
+      results=bef.tematres.search.narrower_keywords(lookup_keyword=lookup_keyword)
       return(results)
     }
 }

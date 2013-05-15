@@ -7,7 +7,7 @@
 #' @import XML
 #' @export
 
-bef.search.tematres.broader_keywords <- function(lookup_keyword)
+bef.tematres.search.broader_keywords <- function(lookup_keyword)
   {
     service_task="search"
     service_argument=lookup_keyword
