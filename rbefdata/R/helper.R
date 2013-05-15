@@ -7,6 +7,7 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml"), ...) {
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), id, seg, query_string)
+  url = gsub("\\s", "", url)
   return(url)
 }
 
@@ -16,6 +17,7 @@ paperproposal_url <- function(proposal_id, ...) {
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/paperproposals/%d.csv%s", bef.options('url'), proposal_id, query_string)
+  url = gsub("\\s", "", url)
   return(url)
 }
 

@@ -27,7 +27,7 @@ bef.options = function(...) {
       if (is.list(lst[[1]]))
         lst = lst[[1]]
       if (length(lst) > 0) {
-        .bef.opts[names(lst)] = lst
+        .bef.opts[names(lst)] = lapply(lst, gsub, pattern = "\\s", replacement="")
         if (!is.null(lst$url)) {
           .bef.opts["url"] = sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
           .bef.opts["url"] = sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
