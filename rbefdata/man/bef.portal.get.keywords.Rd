@@ -1,8 +1,8 @@
-\name{bef.getKeywords}
-\alias{bef.getKeywords}
+\name{bef.portal.get.keywords}
+\alias{bef.portal.get.keywords}
 \title{Fetch keywords from a BEFdata portal.}
 \usage{
-  bef.getKeywords()
+  bef.portal.get.keywords()
 }
 \value{
   The function returns a character vector of keywords.

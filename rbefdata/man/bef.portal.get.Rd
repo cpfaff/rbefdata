@@ -1,9 +1,10 @@
-\name{bef.getdata}
-\alias{bef.getdata}
+\name{bef.portal.get}
+\alias{bef.portal.get}
 \title{This is a wrapper for the getter functions of the BEFdata R package.}
 \usage{
-  bef.getdata(dataset_id, proposal_id, full_url,
-    user_credentials = bef.options("user_credentials"))
+  bef.portal.get(dataset_id, proposal_id, full_url,
+    user_credentials = bef.options("user_credentials"),
+    keywords = FALSE)
 }
 \arguments{
   \item{dataset_id}{This is the id of a dataset on a
@@ -20,6 +21,10 @@
   link. It can be used instead of the according ids. You
   can find the URL either on the dataset download page for
   a dataset or on the proposal page for a paper proposal.}
+
+  \item{keywords}{The can be false or true. If it is
+  defined as true the wrapper will get all keywords
+  associated with the BEFdata portal.}
 }
 \value{
   The function returns a dataframe in case of a single

@@ -1,3 +1,7 @@
+rbefdata 0.3 
+
+* New naming scheme introduced with this version. The names are now scoped via period only.
+
 rbefdata 0.2 
 ----------------------------------------------- 
 

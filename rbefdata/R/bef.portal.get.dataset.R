@@ -35,7 +35,7 @@
 #' @import RCurl
 #' @export
 
-bef.getDataset <- function(dataset_id, user_credentials=bef.options("user_credentials"),
+bef.portal.get.dataset <- function(dataset_id, user_credentials=bef.options("user_credentials"),
       full_url=dataset_url(dataset_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
   if (missing(dataset_id)) dataset_id = url_to_id(full_url)
   df = data.frame(id = dataset_id, full_url = full_url, stringsAsFactors = F)

@@ -14,6 +14,9 @@
 #'        the according ids. You can find the URL either on the dataset download page for
 #'        a dataset or on the proposal page for a paper proposal.
 #'
+#' @param keywords The can be false or true. If it is defined as true the wrapper will get all
+#'        keywords associated with the BEFdata portal.
+#'
 #' @return The function returns a dataframe in case of a single dataset and a list of objects in case
 #'         of a paper proposal as well as for multiple datasets defined via ids. An error is thrown when
 #'         the dataset or proposal is not found or you don't have the proper access right to perform
@@ -29,28 +32,35 @@
 #' @import RCurl
 #' @export
 
-bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials=bef.options("user_credentials")) {
+bef.portal.get <- function(dataset_id, proposal_id, full_url, user_credentials=bef.options("user_credentials"), keywords=FALSE) {
   if (!missing(full_url)) {
     # check which content to fetch
     if (grepl(full_url, pattern = "*/datasets/*")) {
-        dataset = bef.getDataset(full_url=full_url)
+        dataset = bef.portal.get.dataset(full_url=full_url)
         return(dataset)
     }
     if (grepl(full_url, pattern="*/paperproposals/*")) {
-        proposal = bef.getProposal(full_url=full_url)
+        proposal = bef.portal.get.proposal(full_url=full_url)
         return(proposal)
     }
   }
 
   # fetch via dataset_id
   if (!missing(dataset_id)) {
-      dataset = bef.getDataset(dataset_id=dataset_id, user_credentials=user_credentials)
+      dataset = bef.portal.get.dataset(dataset_id=dataset_id, user_credentials=user_credentials)
       return(dataset)
   }
 
   # fetch via proposal_id
   if (!missing(proposal_id)) {
-      proposal = bef.getProposal(proposal_id=proposal_id, user_credentials=user_credentials)
+      proposal = bef.portal.get.proposal(proposal_id=proposal_id, user_credentials=user_credentials)
       return(proposal)
   }
+
+  # get all the keywords
+  if (keywords) {
+    keywords=bef.portal.get.keywords()
+    return(keywords)
+  }
+
 }

@@ -1,8 +1,8 @@
-\name{bef.searchtematres}
-\alias{bef.searchtematres}
+\name{bef.search.tematres}
+\alias{bef.search.tematres}
 \title{A wrapper for the search on the tematres thesaurus.}
 \usage{
-  bef.searchtematres(lookup_keyword,
+  bef.search.tematres(lookup_keyword,
     search_task = "search")
 }
 \arguments{

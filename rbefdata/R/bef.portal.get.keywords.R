@@ -21,7 +21,7 @@
 #' @import XML
 #' @export
 
-bef.getKeywords = function()
+bef.portal.get.keywords= function()
    {
       keywords_json=fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
       keywords_summary=unlist(lapply(keywords_json, function(x) (x$name)))
