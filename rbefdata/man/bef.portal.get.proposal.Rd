@@ -48,7 +48,7 @@
 }
 \examples{
 \dontrun{
- prop1 = bef.getproposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+ prop1 = bef.portal.get.proposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
  prop1
  }
 }

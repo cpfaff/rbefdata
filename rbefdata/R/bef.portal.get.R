@@ -20,14 +20,14 @@
 #' @return The function returns a dataframe in case of a single dataset and a list of objects in case
 #'         of a paper proposal as well as for multiple datasets defined via ids. An error is thrown when
 #'         the dataset or proposal is not found or you don't have the proper access right to perform
-#'         the action. For detailed informations about the used functions see bef.getData() and
-#'         bef.getProposal().
+#'         the action. For detailed informations about the used functions see \code{\link{bef.portal.get.dataset}} and
+#'         \code{\link{bef.portal.get.proposal}}.
 #'
 #' @examples \dontrun{
-#'  dataset = bef.getdata(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'  proposal = bef.getdata(proposal_id=7, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'  dataset_full_url = bef.getdata(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
-#'  multiple = bef.getdata(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
+#'  dataset = bef.portal.get(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+#'  proposal = bef.portal.get(proposal_id=7, user_credentials="Yy2APsD87JiDbF9YBnU")
+#'  dataset_full_url = bef.portal.get(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+#'  multiple = bef.portal.get(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
 #'  }
 #' @import RCurl
 #' @export

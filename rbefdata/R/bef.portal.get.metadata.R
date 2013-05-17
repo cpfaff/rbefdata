@@ -8,11 +8,12 @@
 #' @param full_url functions as direct download link for the eml file.
 #' @param file path to a local eml file
 #'
+#' @return a list of metadata. metadata that doesn't exist is represented as \code{NA}
 #' @import XML
 #' @export
 #'
 
-bef.getMetadata = function(dataset_id, full_url = dataset_url(dataset_id, "eml"), file) {
+bef.portal.get.metadata = function(dataset_id, full_url = dataset_url(dataset_id, "eml"), file) {
   if (!missing(file)) full_url = file
   eml = xmlParse(full_url)
 

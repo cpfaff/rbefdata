@@ -1,8 +1,8 @@
-\name{bef.getMetadata}
-\alias{bef.getMetadata}
+\name{bef.portal.get.metadata}
+\alias{bef.portal.get.metadata}
 \title{Get the metadata of a dataset from the BEFdata portal}
 \usage{
-  bef.getMetadata(dataset_id,
+  bef.portal.get.metadata(dataset_id,
     full_url = dataset_url(dataset_id, "eml"), file)
 }
 \arguments{
@@ -13,6 +13,10 @@
   eml file.}
 
   \item{file}{path to a local eml file}
+}
+\value{
+  a list of metadata. metadata that doesn't exist is
+  represented as \code{NA}
 }
 \description{
   This function fetches the metadata associated with

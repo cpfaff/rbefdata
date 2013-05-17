@@ -12,7 +12,7 @@ Internally.}
   \item{dataset_url}{This is the url to a BEFdata dataset}
 
   \item{metadata_object}{This is a metadata object you can
-  get via bef.getMetadata}
+  get via bef.portal.get.metadata}
 
   \item{metadata_url}{This is the URL to a BEFdata dataset
   eml file}

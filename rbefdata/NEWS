@@ -2,6 +2,9 @@ rbefdata 0.3
 
 * New naming scheme introduced with this version. The names are now scoped via period only.
 
+* user credentials can be set globally via `bef.options(user_credentials="your key")`.
+  Note this won't affect user provided full urls.
+
 rbefdata 0.2 
 ----------------------------------------------- 
 

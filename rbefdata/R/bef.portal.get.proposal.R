@@ -26,7 +26,7 @@
 #'         or you don't have the access rights for it.
 #'
 #' @examples \dontrun{
-#'  prop1 = bef.getproposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+#'  prop1 = bef.portal.get.proposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
 #'  prop1
 #'  }
 #' @import RCurl
@@ -51,7 +51,7 @@ bef.portal.get.proposal <- function(proposal_id, user_credentials=bef.options('u
     lst$dataset_title[i] = toString(proposal_csv[i,"Title"])
     lst$dataset_url[i] = toString(proposal_csv[i,"Dataset.Url"])
     lst$dataset_csv_url[i] = toString(proposal_csv[i,"CSV.download"])
-    lst$dataset_csv[i] = list(bef.getdata(full_url=toString(proposal_csv[i,"CSV.download"])))
+    lst$dataset_csv[i] = list(bef.portal.get.dataset(full_url=toString(proposal_csv[i,"CSV.download"])))
   }
   return(lst)
 }

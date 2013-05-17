@@ -3,7 +3,7 @@
 #'
 #' @param dataset_object This a BEFdata dataset
 #' @param dataset_url This is the url to a BEFdata dataset
-#' @param metadata_object This is a metadata object you can get via bef.getMetadata
+#' @param metadata_object This is a metadata object you can get via bef.portal.get.metadata
 #' @param metadata_url This is the URL to a BEFdata dataset eml file
 #'
 #' @import RCurl
@@ -14,13 +14,13 @@ bef.combineObjects <- function(dataset_object, dataset_url, metadata_object, met
   {
     if (!missing(metadata_url))
       {
-        metadata = bef.getMetadata(full_url=metadata_url)
+        metadata = bef.portal.get.metadata(full_url=metadata_url)
         dataset = dataset_object
       }
 
     if (!missing(dataset_url))
       {
-        dataset = bef.getDataset(full_url=dataset_url)
+        dataset = bef.portal.get.dataset(full_url=dataset_url)
         metadata = metadata_object
       }
 

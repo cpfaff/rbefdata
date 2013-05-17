@@ -22,15 +22,16 @@
 #'        and pass in the returned value here. This avoids an unnecessary footprint.
 #' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
-#' @return The function returns a dataframe. An error is thrown when the dataset is
+#' @return The function returns a dataframe for each dataset. An error is thrown when the dataset is
 #'         not found or if you don't have the rights to access it.
 #'
 #' @examples \dontrun{
-#'              datset1 = bef.getDataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'              attributes(datset1) dataset2 = bef.getDataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
-#'              attributes(dataset2)$author
-#'              multi = bef.getDataset(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
-#'           }
+#'         datset1 = bef.portal.get.dataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
+#'         attributes(datset1)
+#'         dataset2 = bef.portal.get.dataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+#'         attributes(dataset2)$author
+#'         multi = bef.portal.get.dataset(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
+#'       }
 #'
 #' @import RCurl
 #' @export
@@ -49,7 +50,7 @@ bef.portal.get.dataset <- function(dataset_id, user_credentials=bef.options("use
       stop(msg)
     }
     dataset = read.csv(text = url_content)
-    metadata = bef.getMetadata(dataset_id=df$id[i])
+    metadata = bef.portal.get.metadata(dataset_id=df$id[i])
     attributes(dataset) = c(attributes(dataset), metadata)
     dataset_list[[paste("dataset_id", df$id[i], sep = "_")]] = dataset
   }
