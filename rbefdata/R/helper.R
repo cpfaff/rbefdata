@@ -1,7 +1,7 @@
 # a helper method which behaves like dataset_url in Rails
-dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml"), ...) {
-  type = match.arg(type, c("csv2", "csv", "xls", "eml"))
-  seg = switch(type, csv2 = "/download.csv", csv  = "/download.csv", xls  = "/download", eml  = ".eml")
+dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"), ...) {
+  type = match.arg(type, c("csv2", "csv", "xls", "eml", "freeformat"))
+  seg = switch(type, csv2="/download.csv", csv="/download.csv", xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
   if (type == "csv2") params$separate_category_columns = TRUE
   query_string = ""
@@ -33,4 +33,15 @@ xmlNodesValue <- function(doc, path){
   out = Filter(function(x) x!="", out)
   if (length(out) == 0) return(NA)
   out
+}
+
+# for existing file, append a number to its filename
+suggest_filename <- function(filename, dir=getwd()) {
+  ofn = filename
+  i = 0
+  while (file.exists(file.path(dir, filename))) {
+    i = i + 1
+    filename = sub(ofn, pattern="(\\.\\w+)?$", replacement=sprintf("(%d)\\1", i))
+  }
+  return(filename)
 }
