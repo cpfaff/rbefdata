@@ -1,4 +1,3 @@
-export(bef.combineObjects)
 export(bef.getdata)
 export(bef.getDataset)
 export(bef.getKeywords)
