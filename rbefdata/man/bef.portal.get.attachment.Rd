@@ -4,8 +4,7 @@
 \usage{
   bef.portal.get.attachment(dataset_id,
     user_credentials = bef.options("user_credentials"),
-    dir = getwd(), curl = getCurlHandle(), ...,
-    verbose = FALSE)
+    dir = getwd(), curl = getCurlHandle(), ...)
 }
 \arguments{
   \item{dataset_id}{the id of dataset}
@@ -21,14 +20,11 @@
 
   \item{\dots}{arguments passed to
   \code{\link[RCurl]{getURLContent}}.}
-
-  \item{verbose}{boolean flag whether to display details
-  about downloading. default to FALSE.  Note: this is a
-  experimental feature.}
 }
 \value{
-  a data frame of filenames and file descriptions are
-  returned invisibly.
+  a data frame of file information is returned invisibly.
+  NULL is returned when the dataset has no attachement
+  files.
 }
 \description{
   This function will download attachment files associated

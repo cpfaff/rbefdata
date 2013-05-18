@@ -2,7 +2,8 @@
 #'
 #' This function will download attachment files associated with a dataset into specified directory.
 #'
-#' @return a data frame of filenames and file descriptions are returned invisibly.
+#' @return a data frame of file information is returned invisibly. NULL is returned when 
+#'         the dataset has no attachement files.
 #'
 #' @param dataset_id the id of dataset
 #' @param user_credentials your login credentials
@@ -10,11 +11,9 @@
 #' @param curl If using in a loop, call getCurlHandle() first and pass the returned value
 #'         in here (avoids unnecessary footprint).
 #' @param \dots  arguments passed to \code{\link[RCurl]{getURLContent}}.
-#' @param verbose boolean flag whether to display details about downloading. default to FALSE.
-#'         Note: this is a experimental feature.
 #' @export
 
-bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=getwd(), curl=getCurlHandle(), ..., verbose=FALSE) {
+bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=getwd(), curl=getCurlHandle(), ...) {
   url = dataset_url(dataset_id, "freeformat", user_credentials=user_credentials)
   freeformats_csv = getURLContent(url, curl=curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {
@@ -24,21 +23,17 @@ bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('
 
   if (nrow(files)) {
     if (!file.exists(dir)) dir.create(dir)
+    files$path = file.path(dir, sapply(files$Filename, suggest_filename, dir=dir, USE.NAMES=T))
     for (i in seq_len(nrow(files))) {
-      filename = suggest_filename(files$Filename[i], dir)
-      f = CFILE(file.path(dir, filename), mode="wb")
-      if (verbose) cat("      ", sprintf("Saving %s => %s", sQuote(files$Filename[i]), sQuote(file.path(dir, filename))))
-      curlPerform(url = files$URL[i], writedata = f@ref,
-          progressfunction = function(down, up) {
-            if (down["downloadTotal"]) {
-              cat("\r", sprintf("[%3.0f%%]", 100*down["downloadNow"]/down["downloadTotal"]), sep="")
-            }
-          }, noprogress = !verbose)
+      f = CFILE(files$path[i], mode="wb")
+      cat(sprintf("Saving %s => %s\n", sQuote(files$Filename[i]), sQuote(files$path[i])))
+      flush.console()
+      curlPerform(url = files$URL[i], writedata = f@ref)
       close(f)
-      if (verbose) cat("\n")
     }
+    invisible(files)
   } else {
     warning(paste("No attachement files for dataset:", dataset_id))
+    invisible(NULL)
   }
-  invisible(files[c("Filename", "Description")])
 }
