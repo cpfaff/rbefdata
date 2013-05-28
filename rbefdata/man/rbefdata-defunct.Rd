@@ -1,9 +1,9 @@
 \name{rbefdata-defunct}
-\alias{bef.getdata}
 \alias{bef.getDataset}
 \alias{bef.getKeywords}
 \alias{bef.getMetadata}
 \alias{bef.getProposal}
+\alias{bef.getdata}
 \alias{bef.searchTematres}
 \alias{bef.searchTematresLower}
 \alias{bef.searchTematresUpper}

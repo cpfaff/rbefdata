@@ -2,18 +2,18 @@
 #'
 #' This function will download attachment files associated with a dataset into specified directory.
 #'
-#' @return a data frame of file information is returned invisibly. NULL is returned when 
+#' @return a data frame of file information is returned invisibly. NULL is returned when
 #'         the dataset has no attachement files.
 #'
-#' @param dataset_id the id of dataset
-#' @param user_credentials your login credentials
-#' @param dir the directory to store attachment files. default to the current working directory.
+#' @param dataset_id The id of dataset
+#' @param user_credentials Your login credentials
+#' @param dir The directory to store attachment files. default to the current working directory.
 #' @param curl If using in a loop, call getCurlHandle() first and pass the returned value
 #'         in here (avoids unnecessary footprint).
 #' @param \dots  arguments passed to \code{\link[RCurl]{getURLContent}}.
 #' @export
 
-bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=getwd(), curl=getCurlHandle(), ...) {
+bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=bef.options('download_dir'), curl=getCurlHandle(), ...) {
   url = dataset_url(dataset_id, "freeformat", user_credentials=user_credentials)
   freeformats_csv = getURLContent(url, curl=curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {

@@ -4,14 +4,15 @@
 \usage{
   bef.portal.get.attachment(dataset_id,
     user_credentials = bef.options("user_credentials"),
-    dir = getwd(), curl = getCurlHandle(), ...)
+    dir = bef.options("download_dir"),
+    curl = getCurlHandle(), ...)
 }
 \arguments{
-  \item{dataset_id}{the id of dataset}
+  \item{dataset_id}{The id of dataset}
 
-  \item{user_credentials}{your login credentials}
+  \item{user_credentials}{Your login credentials}
 
-  \item{dir}{the directory to store attachment files.
+  \item{dir}{The directory to store attachment files.
   default to the current working directory.}
 
   \item{curl}{If using in a loop, call getCurlHandle()

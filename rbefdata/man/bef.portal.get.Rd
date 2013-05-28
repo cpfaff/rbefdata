@@ -4,7 +4,8 @@
 \usage{
   bef.portal.get(dataset_id, proposal_id, full_url,
     user_credentials = bef.options("user_credentials"),
-    keywords = FALSE)
+    keywords = FALSE, attachments = FALSE,
+    dir = bef.options("download_dir"))
 }
 \arguments{
   \item{dataset_id}{This is the id of a dataset on a

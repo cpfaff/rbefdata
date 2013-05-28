@@ -32,7 +32,7 @@
 #' @import RCurl
 #' @export
 
-bef.portal.get <- function(dataset_id, proposal_id, full_url, user_credentials=bef.options("user_credentials"), keywords=FALSE) {
+bef.portal.get <- function(dataset_id, proposal_id, full_url, user_credentials=bef.options('user_credentials'), keywords=FALSE, attachments=FALSE, dir=bef.options('download_dir')) {
   if (!missing(full_url)) {
     # check which content to fetch
     if (grepl(full_url, pattern = "*/datasets/*")) {
@@ -43,6 +43,11 @@ bef.portal.get <- function(dataset_id, proposal_id, full_url, user_credentials=b
         proposal = bef.portal.get.proposal(full_url=full_url)
         return(proposal)
     }
+  }
+
+  if (dataset_id && attachments) {
+    bef.portal.get.attachment(dataset_id, user_credentials=user_credentials, dir=dir)
+    return()
   }
 
   # fetch via dataset_id
