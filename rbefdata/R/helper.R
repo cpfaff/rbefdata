@@ -11,6 +11,12 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"),
   return(url)
 }
 
+# a helper that returns the keyword url provided the id
+keyword_url <- function(id) {
+  url = sprintf("%s/keywords/%d", bef.options("url"), id)
+  return(url)
+}
+
 # a helper method which behaves like paperproposal_url in Rails
 paperproposal_url <- function(proposal_id, ...) {
   params = Filter(Negate(is.null), list(...))

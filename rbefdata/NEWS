@@ -1,10 +1,13 @@
 rbefdata 0.3  
 ==================
 
-* New naming scheme introduced with this version. The names are now scoped via period only.
+* New naming scheme introduced with this version. The names are now scoped via period. Deprecation notice
+  is shown for old fuction names. 
 
-* user credentials can be set globally via `bef.options(user_credentials="your key")`.
+* User credentials can be set globally via `bef.options(user_credentials="your key")`.
   Note this won't affect user provided full urls.
+
+* Download of freeformat files is now possible. The download folder can be set via the bef.options.
 
 rbefdata 0.2 
 ==================
