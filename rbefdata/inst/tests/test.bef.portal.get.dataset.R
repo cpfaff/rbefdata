@@ -21,5 +21,5 @@ test_that("it gets a dataset by full_url", {
 test_that("it gets multiple datasets by id", {
   bef.options(url="http://befdatadevelepment.biow.uni-leipzig.de")
   bef.options(user_credentials="Yy2APsD87JiDbF9YBnU")
-  expect_that(a=bef.portal.get.dataset(dataset_id=c(7,8)), is_a("list"))
+  expect_that(bef.portal.get.dataset(dataset_id=c(7,8)), is_a("list"))
 })
