@@ -2,9 +2,10 @@
 \alias{bef.portal.get}
 \title{This is a wrapper for the getter functions of the BEFdata R package.}
 \usage{
-  bef.portal.get(dataset_id, proposal_id, full_url,
+  bef.portal.get(dataset_id, proposal_id, full_url, file,
     user_credentials = bef.options("user_credentials"),
-    keywords = FALSE, attachments = FALSE,
+    keyword, keyword_id, keywords = FALSE,
+    metadata = FALSE, attachments = FALSE,
     dir = bef.options("download_dir"))
 }
 \arguments{
@@ -23,9 +24,28 @@
   can find the URL either on the dataset download page for
   a dataset or on the proposal page for a paper proposal.}
 
-  \item{keywords}{The can be false or true. If it is
-  defined as true the wrapper will get all keywords
-  associated with the BEFdata portal.}
+  \item{keywords}{Can be true or false. If it is defined as
+  true the wrapper will get all keywords associated with
+  the BEFdata portal.}
+
+  \item{keyword}{Is a keyword that you like to get the
+  associated datasets for.}
+
+  \item{keyword_id}{Is the id of a keyword you like to get
+  the associated datastes for.}
+
+  \item{metadata}{Can be true or false. If true it will get
+  the metadata of a dataset.}
+
+  \item{attachments}{This is true or false and will fetch
+  the attached freeformat files associated with a dataset.}
+
+  \item{dir}{This is the download directory for
+  attachments. This can be set via bef.options and the
+  default download directory is called "download"}
+
+  \item{file}{Hand over a file path. Functions that can
+  read a file like the metadata function make use of it.}
 }
 \value{
   The function returns a dataframe in case of a single

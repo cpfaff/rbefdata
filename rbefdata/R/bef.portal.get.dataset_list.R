@@ -21,9 +21,10 @@ bef.portal.get.dataset_list <- function(keyword, keyword_id) {
   ids = unlist(lapply(keyword_json, function(x) (x$id)))
   keyword_summary = data.frame(key = names, id = ids)
 
+
   if(!missing(keyword_id)) {
     url = keyword_url(id=keyword_id)
-    full_url = paste(url, ".csv")
+    full_url = paste(url, ".csv", sep = "")
     dataset_list = read.csv(full_url)
     output = data.frame(id=dataset_list$id, title=dataset_list$title)
     return(output)

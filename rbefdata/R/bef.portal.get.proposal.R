@@ -32,17 +32,18 @@
 #' @import RCurl
 #' @export
 
-bef.portal.get.proposal <- function(proposal_id, user_credentials=bef.options('user_credentials'),
-         full_url=paperproposal_url(proposal_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
+bef.portal.get.proposal <- function(proposal_id, user_credentials=bef.options('user_credentials'), full_url=paperproposal_url(proposal_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
   # The following chunk generates paperproposal csv URL from paperproposal's URL
   if (!missing(full_url) && !grepl(full_url, pattern="*.csv*")) {
     full_url = paperproposal_url(url_to_id(full_url, "paperproposals"), user_credentials=user_credentials)
   }
 
+
   proposal_raw_csv = getURLContent(full_url, curl = curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {
     stop("Proposal not found or not accessible. Please check your credentials and make sure you have access right for it.")
   }
+
   proposal_csv = read.csv(text = proposal_raw_csv)
 
   lst = list()

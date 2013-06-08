@@ -38,13 +38,14 @@
 
 bef.portal.get.dataset <- function(dataset_id, user_credentials=bef.options("user_credentials"),
       full_url=dataset_url(dataset_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
+
   if (missing(dataset_id)) dataset_id = url_to_id(full_url)
   df = data.frame(id = dataset_id, full_url = full_url, stringsAsFactors = F)
   df = df[order(df$id), ]
 
   dataset_list = list()
   for (i in seq_len(nrow(df))) {
-    url_content = getURLContent(df$full_url[i], curl = curl, ...)
+    url_content = getURLContent(df$full_url[i], curl = curl)
     if(getCurlInfo(curl)$response.code != 200) {
       msg = sprintf("Dataset(id=%d) not found or not accessible. Please check your credentials and make sure you have access right for it.", df$id[i])
       stop(msg)

@@ -7,7 +7,11 @@ rbefdata 0.3
 * User credentials can be set globally via `bef.options(user_credentials="your key")`.
   Note this won't affect user provided full urls.
 
-* Download of freeformat files is now possible. The download folder can be set via the bef.options.
+* Download of freeformat files is now possible. The download folder can be set via the bef.options. 
+
+* Improved wrapper bef.portal.get()
+
+* fixed error on empty fields in xml 
 
 rbefdata 0.2 
 ==================
