@@ -35,7 +35,8 @@
 #' @examples \dontrun{
 #'  dataset = bef.portal.get(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
 #'  proposal = bef.portal.get(proposal_id=7, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'  dataset_full_url = bef.portal.get(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+#'  dataset_full_url = bef.portal.get(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/
+#'    datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
 #'  multiple = bef.portal.get(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
 #'  }
 #' @import RCurl

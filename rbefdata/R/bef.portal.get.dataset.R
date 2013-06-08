@@ -28,7 +28,9 @@
 #' @examples \dontrun{
 #'         datset1 = bef.portal.get.dataset(dataset_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
 #'         attributes(datset1)
-#'         dataset2 = bef.portal.get.dataset(full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
+#'         dataset2 = bef.portal.get.dataset(
+#'           full_url = 'http://befdatadevelepment.biow.uni-leipzig.de/datasets/5/
+#'           download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
 #'         attributes(dataset2)$author
 #'         multi = bef.portal.get.dataset(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
 #'       }
