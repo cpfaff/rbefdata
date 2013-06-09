@@ -17,6 +17,12 @@ test_that("it gets metadata by id", {
   expect_that(bef.portal.get.metadata(dataset_id=7), is_a("list"))
 })
 
+test_that("it gets metadata by a full url", {
+  bef.options(url="http://befdatadevelepment.biow.uni-leipzig.de")
+  bef.options(user_credentials="invalid")
+  expect_that(bef.portal.get.metadata(dataset_id=7), is_a("list"))
+})
+
 test_that("it gets metadata from an eml file", {
   expect_that(bef.portal.get.metadata(file="../fixtures/test.eml"), is_a("list"))
 })
