@@ -6,6 +6,12 @@ test_that("it throws an error if the credentials are invalid", {
   expect_error(bef.portal.get.dataset(dataset_id=7), "*not found or not accessible*")
 })
 
+test_that("it throws an error if the dataset is not found", {
+  bef.options(url="http://befdatadevelepment.biow.uni-leipzig.de")
+  bef.options(user_credentials="Yy2APsD87JiDbF9YBnU")
+  expect_error(bef.portal.get.dataset(dataset_id=1000), "*Internal Server Error*")
+})
+
 test_that("it gets a dataset by dataset_id", {
   bef.options(url="http://befdatadevelepment.biow.uni-leipzig.de")
   bef.options(user_credentials="Yy2APsD87JiDbF9YBnU")
