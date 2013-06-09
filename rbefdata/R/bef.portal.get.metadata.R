@@ -14,6 +14,8 @@
 #'
 
 bef.portal.get.metadata = function(dataset_id, full_url = dataset_url(dataset_id, "eml"), file) {
+  is_internet_connected()#?
+
   if (!missing(file)) full_url = file
   eml = xmlParse(full_url)
 
