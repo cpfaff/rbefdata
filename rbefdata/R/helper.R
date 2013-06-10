@@ -56,11 +56,11 @@ xmlNodesValue <- function(doc, path){
 
 # for existing file, append a number to its filename
 suggest_filename <- function(filename, dir=getwd()) {
-  ofn = filename
+  suggested_filename = filename
   i = 0
-  while (file.exists(file.path(dir, filename))) {
+  while (file.exists(file.path(dir, suggested_filename))) {
     i = i + 1
-    filename = sub(ofn, pattern="(\\.\\w+)?$", replacement=sprintf("(%d)\\1", i))
+    suggested_filename = sub(filename, pattern="(\\.\\w+)?$", replacement=sprintf("(%d)\\1", i))
   }
-  return(filename)
+  return(suggested_filename)
 }
