@@ -25,22 +25,20 @@
 bef.getdata <- function(dataset_id, proposal_id, full_url, user_credentials) {
   .Defunct("bef.portal.get")
 }
-
 #' @rdname rbefdata-defunct
-bef.getDataset <- function(dataset_id, full_url, user_credentials, curl=getCurlHandle(), ...) {
+bef.getDataset <- function(dataset_id, full_url, user_credentials, curl = getCurlHandle(), ...) {
   .Defunct("bef.portal.get.dataset")
 }
-
 #' @rdname rbefdata-defunct
-bef.getKeywords = function() {
+bef.getKeywords <- function() {
   .Defunct("bef.portal.get.keywords")
 }
 #' @rdname rbefdata-defunct
-bef.getMetadata = function(dataset_id, full_url) {
+bef.getMetadata <- function(dataset_id, full_url) {
   .Defunct("bef.portal.get.metadata")
 }
 #' @rdname rbefdata-defunct
-bef.getProposal <- function(proposal_id, user_credentials, full_url, curl=getCurlHandle(), ...) {
+bef.getProposal <- function(proposal_id, user_credentials, full_url, curl = getCurlHandle(), ...) {
   .Defunct("bef.portal.get.proposal")
 }
 #' @rdname rbefdata-defunct
@@ -48,7 +46,7 @@ bef.searchTematres <- function(lookup_keyword) {
   .Defunct("bef.tematres.search.keywords")
 }
 #' @rdname rbefdata-defunct
-bef.searchTematresLower = function(lookup_keyword) {
+bef.searchTematresLower <- function(lookup_keyword) {
   .Defunct("bef.tematres.search.narrower_keywords")
 }
 #' @rdname rbefdata-defunct
