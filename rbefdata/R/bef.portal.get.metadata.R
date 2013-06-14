@@ -39,7 +39,7 @@ bef.portal.get.metadata = function(dataset_id, full_url = dataset_url(dataset_id
   out$authors = as.data.frame(out$authors, stringsAsFactors=F)
 
   attributeList = getNodeSet(eml, path="//attributeList/attribute")
-  column_template = list(header = "./attributeLabel", description = "./attributeDefinition", unit = ".//unit")
+  column_template = list(header = "./attributeLabel", description = "./attributeDefinition", unit = ".//unit", info = ".//attributeName")
   columns = lapply(column_template, function(c) {
     sapply(attributeList, function(d) {
       xmlNodesValue(doc=d, path=c)
