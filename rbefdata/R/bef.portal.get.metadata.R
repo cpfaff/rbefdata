@@ -34,22 +34,35 @@ bef.portal.get.metadata = function(dataset_id, full_url = dataset_url(dataset_id
     authors = list(
       firstname = "//creator/individualName/givenName",
       lastname = "//creator/individualName/surName",
-      email = "//creator/electronicMailAddress"))
+      email = "//creator/electronicMailAddress"),
+    keywordList = list(
+              keywords= "//keywordSet")
+  )
+
   out = rapply(template, function(x) xmlNodesValue(path=x, doc=eml), how="replace")
   out$authors = as.data.frame(out$authors, stringsAsFactors=F)
 
   attributeList = getNodeSet(eml, path="//attributeList/attribute")
-  column_template = list(header = "./attributeLabel", description = "./attributeDefinition", unit = ".//unit", info = ".//attributeName")
+
+  column_template = list(header = "./attributeLabel",
+                         description = "./attributeDefinition",
+                         unit = ".//unit",
+                         info = ".//attributeName"
+                         )
+
   columns = lapply(column_template, function(c) {
     sapply(attributeList, function(d) {
       xmlNodesValue(doc=d, path=c)
     })
   })
+
   columns = as.data.frame(columns, stringsAsFactors=F)
+
   if (nrow(columns)) {
     columns$unit = as.character(columns$unit)
-    columns$unit[is.na(columns$unit) | columns$unit == "dimensionless"] = ""
+    columns$unit[is.na(columns$unit) | columns$unit == "dimensionless"] = "dimensionless"
     out$columns = columns
   }
+
   return(out)
 }
