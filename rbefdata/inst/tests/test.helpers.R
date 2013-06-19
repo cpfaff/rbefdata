@@ -6,8 +6,9 @@
 
 given_the_user_is <- function(condition = NULL) {
   if(condition == "valid") {
-    bef.options(user_credentials="Yy2APsD87JiDbF9YBnU")
-    return("valid")
+    valid_credentials = "RCGdNY9oqMvUwBzMRM"
+    bef.options(user_credentials = valid_credentials)
+    return(valid_credentials)
   }
   if(condition == "invalid") {
     bef.options(user_credentials="invalid")
