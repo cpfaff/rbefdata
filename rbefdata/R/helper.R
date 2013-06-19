@@ -26,7 +26,7 @@ is_internet_connected <- function() {
   }
   validIP <- "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
   if(!any(grep(validIP, ipmessage[-grep("127.0.0.1", ipmessage)]))) {
-    stop("Sorry not internet connection. Please connect first!")
+    warning("Sorry not internet connection. Please connect first!")
   }
 }
 
