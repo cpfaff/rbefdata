@@ -21,7 +21,6 @@ test_that("it gets a dataset by dataset_id", {
 })
 
 test_that("it gets a dataset by full_url", {
-
   given_the_portal_is("development")
   expect_that(bef.portal.get.dataset(full_url= paste("http://befdatadevelepment.biow.uni-leipzig.de/datasets/7/download.csv?user_credentials=", given_the_user_is("valid"), sep = "")), is_a("data.frame"))
 })

@@ -6,7 +6,7 @@
 
 given_the_user_is <- function(condition = NULL) {
   if(condition == "valid") {
-    valid_credentials = "RCGdNY9oqMvUwBzMRM"
+    valid_credentials = "Yy2APsD87JiDbF9YBnU"
     bef.options(user_credentials = valid_credentials)
     return(valid_credentials)
   }
