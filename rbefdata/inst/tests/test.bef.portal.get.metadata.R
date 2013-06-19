@@ -22,8 +22,3 @@ test_that("it gets metadata by a full url", {
   given_the_portal_is("development")
   expect_that(bef.portal.get.metadata(dataset_id=7), is_a("list"))
 })
-
-test_that("it gets metadata from an eml file", {
-  expect_that(bef.portal.get.metadata(file="../fixtures/test.eml"), is_a("list"))
-})
-
