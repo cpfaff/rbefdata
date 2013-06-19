@@ -35,6 +35,6 @@ Collate:
     'bef.tematres.search.narrower_keywords.R'
     'bef.tematres.search.broader_keywords.R'
     'helper.R'
-    'rbefdata-defunct.R'
     'bef.portal.get.attachment.R'
     'bef.portal.get.dataset_list.R'
+    'rbefdata-deprecated.R'
