@@ -11,9 +11,10 @@
 #' @param curl If using in a loop, call getCurlHandle() first and pass the returned value
 #'         in here (avoids unnecessary footprint).
 #' @param \dots  arguments passed to \code{\link[RCurl]{getURLContent}}.
+#' @aliases bef.get.attachment
 #' @export
 
-bef.portal.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=bef.options('download_dir'), curl=getCurlHandle(), ...) {
+bef.portal.get.attachment <- bef.get.attachment <- function(dataset_id, user_credentials=bef.options('user_credentials'), dir=bef.options('download_dir'), curl=getCurlHandle(), ...) {
   is_internet_connected()#?
 
   url = dataset_url(dataset_id, "freeformat", user_credentials=user_credentials)

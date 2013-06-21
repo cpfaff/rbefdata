@@ -39,10 +39,11 @@
 #'    datasets/5/download.csv?seperate_category_columns=true&user_credentials=Yy2APsD87JiDbF9YBnU')
 #'  multiple = bef.portal.get(dataset_id=c(7,8), user_credentials="Yy2APsD87JiDbF9YBnU")
 #'  }
+#' @aliases bef.get
 #' @import RCurl
 #' @export
 
-bef.portal.get <- function(dataset_id, proposal_id, full_url, file, user_credentials=bef.options('user_credentials'), keyword, keyword_id,  keywords=FALSE, metadata=FALSE, attachments=FALSE, dir=bef.options('download_dir')) {
+bef.portal.get <- bef.get <- function(dataset_id, proposal_id, full_url, file, user_credentials=bef.options('user_credentials'), keyword, keyword_id,  keywords=FALSE, metadata=FALSE, attachments=FALSE, dir=bef.options('download_dir')) {
 
   is_internet_connected()#?
 
