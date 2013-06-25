@@ -1,13 +1,9 @@
-rbefdata 0.3.4
-==================
-
-* Small bugfix release: Removes internet connection test that made tests fail
-
 rbefdata 0.3.3
 ==================
 
 * Adds aliases to all functions that omit the portal and tematres in the name e.g 
   bef.portal.get.dataset -> bef.get.dataset 
+* Small bugfix release: Removes internet connection test that made tests fail
  
 
 rbefdata 0.3.2 
