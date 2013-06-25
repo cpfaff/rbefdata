@@ -8,8 +8,8 @@ Authors@R: c(person("Claas-Thido", "Pfaff",
     email="claas-thido.pfaff@idiv-biodiversity.de", role=c("cre","aut")),
     person("Karin", "Nadrowski", email="nadrowski@uni-leipzig.de", role="aut"),
     person("Xingxing", "Man", email="manxingxing@gmail.com", role="aut"))
-Description: Basic R package to access the data structures offered by the
-    BEFdata portal.
+Description: Basic R package to access data structures offered by any 
+    BEFdata portal instance.
 Suggests:
     ggplot2,
     plyr
