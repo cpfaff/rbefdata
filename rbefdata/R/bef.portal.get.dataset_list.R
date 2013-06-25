@@ -15,7 +15,6 @@
 #' @export
 
 bef.portal.get.dataset_list <- bef.get.dataset_list <- function(keyword, keyword_id) {
-  is_internet_connected()#?
 
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
   names = unlist(lapply(keyword_json, function(x) (x$name)))

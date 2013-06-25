@@ -1,3 +1,8 @@
+rbefdata 0.3.4
+==================
+
+* Small bugfix release: Removes internet connection test that made tests fail
+
 rbefdata 0.3.3
 ==================
 

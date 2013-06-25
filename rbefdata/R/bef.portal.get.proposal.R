@@ -34,7 +34,6 @@
 #' @export
 
 bef.portal.get.proposal <- bef.get.proposal <- function(proposal_id, user_credentials=bef.options('user_credentials'), full_url=paperproposal_url(proposal_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
-  is_internet_connected()#?
 
   # The following chunk generates paperproposal csv URL from paperproposal's URL
   if (!missing(full_url) && !grepl(full_url, pattern="*.csv*")) {
