@@ -14,7 +14,7 @@
 #' @export
 #'
 
-bef.portal.get.metadata <- bef.get.metadata <- function(dataset_id, full_url = dataset_url(dataset_id, "eml"), file) {
+bef.portal.get.metadata <- bef.get.metadata <- function(dataset_id, full_url = dataset_url(dataset_id, "eml", separate_category_columns=TRUE), file) {
 
   if (!missing(file)) full_url = file
   eml = xmlParse(full_url)
@@ -35,8 +35,7 @@ bef.portal.get.metadata <- bef.get.metadata <- function(dataset_id, full_url = d
       firstname = "//creator/individualName/givenName",
       lastname = "//creator/individualName/surName",
       email = "//creator/electronicMailAddress"),
-    keywordList = list(
-              keywords= "//keywordSet")
+    keywords = "//keyword"
   )
 
   out = rapply(template, function(x) xmlNodesValue(path=x, doc=eml), how="replace")

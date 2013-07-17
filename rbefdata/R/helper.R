@@ -30,6 +30,11 @@ is_internet_connected <- function() {
   }
 }
 
+# a helper that returns the metadata attached to a dataset object
+bef.display.metadata <- bef.metadata <- function(dataset) {
+  return(attributes(dataset))
+}
+
 # a helper method which behaves like paperproposal_url in Rails
 paperproposal_url <- function(proposal_id, ...) {
   params = Filter(Negate(is.null), list(...))

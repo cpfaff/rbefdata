@@ -4,7 +4,8 @@
 \title{Get the metadata of a dataset from the BEFdata portal}
 \usage{
   bef.portal.get.metadata(dataset_id,
-    full_url = dataset_url(dataset_id, "eml"), file)
+    full_url = dataset_url(dataset_id, "eml", separate_category_columns = TRUE),
+    file)
 }
 \arguments{
   \item{dataset_id}{The id of the dataset in the BEFdata

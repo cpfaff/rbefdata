@@ -1,3 +1,10 @@
+rbefdata 0.4
+==================
+
+* Introduces a helper "bef.display.metadata" which is a wrapper to attributes and helps to 
+  extract the metadata information from a dataset object.
+
+
 rbefdata 0.3.3
 ==================
 
