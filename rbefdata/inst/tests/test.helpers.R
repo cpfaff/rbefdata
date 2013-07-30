@@ -1,6 +1,6 @@
 # This can hold helpers maybe also some sort of factories to create a certain
 # condition for testing setting the right options. This helper needs to be
-# sourced into tests that make use of it with:
+# sourced into test files that make use of it with:
 
 # source("test.helpers.R")
 

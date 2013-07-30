@@ -3,7 +3,8 @@ rbefdata 0.4
 
 * Introduces a helper "bef.display.metadata" which is a wrapper to attributes and helps to 
   extract the metadata information from a dataset object.
-
+* Adds an upload method for datasets (bef.portal.upload.dataset()). It takes a dataset object 
+  (data.frame) or a CSV file and a title for the dataset as options.
 
 rbefdata 0.3.3
 ==================

@@ -11,6 +11,20 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"),
   return(url)
 }
 
+# returns the upload url with user credentials
+upload_url <- function() {
+  base_url = bef.options("url")
+  segment = "/datasets/create_with_datafile"
+  parameter_sep = "?"
+  user_credentials = bef.options("user_credentials")
+  if (user_credentials == "") {
+    stop("Please set your user credentials first via bef.options() before uploading a dataset.")
+  }
+  url = paste(base_url, segment, parameter_sep, "user_credentials=", user_credentials, sep='')
+  return(url)
+}
+
+
 # a helper that returns the keyword url provided the id
 keyword_url <- function(id) {
   url = sprintf("%s/keywords/%d", bef.options("url"), id)
