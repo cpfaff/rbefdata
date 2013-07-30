@@ -4,6 +4,7 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"),
   seg = switch(type, csv2="/download.csv", csv="/download.csv", xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
   if (type == "csv2") params$separate_category_columns = TRUE
+  if (type == "eml") params$separate_category_columns = TRUE
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), id, seg, query_string)
@@ -35,11 +36,18 @@ upload_file <- function(dataset) {
   return(upload_file)
 }
 
-
 # a helper that returns the keyword url provided the id
 keyword_url <- function(id) {
   url = sprintf("%s/keywords/%d", bef.options("url"), id)
   return(url)
+}
+
+# go to the dataset page of the file you just uploaded
+goto_dataset_page <- function(id) {
+  base_url = bef.options("url")
+  segment = "/datasets/"
+  id = id
+  browseURL(paste0(base_url, segment, id))
 }
 
 # Helper that determines internet connection
