@@ -24,6 +24,17 @@ upload_url <- function() {
   return(url)
 }
 
+# returns an upload file no matter if it is given as path to a file or data.frame
+upload_file <- function(dataset) {
+  if (is.data.frame(dataset)) {
+    write.csv(dataset, paste0(tempdir(), "/", "upload_preparation.csv"), row.names=FALSE)
+    upload_file = fileUpload(paste0(tempdir(), "/", "upload_preparation.csv"))
+  } else {
+    upload_file = fileUpload(dataset)
+  }
+  return(upload_file)
+}
+
 
 # a helper that returns the keyword url provided the id
 keyword_url <- function(id) {

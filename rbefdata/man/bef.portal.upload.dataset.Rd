@@ -2,17 +2,14 @@
 \alias{bef.portal.upload.dataset}
 \title{Upload a dataset to the BEFdata portal}
 \usage{
-  bef.portal.upload.dataset(dataset_title, dataset_object,
-    file_path, curl = getCurlHandle())
+  bef.portal.upload.dataset(title, dataset,
+    curl = getCurlHandle())
 }
 \arguments{
-  \item{dataset_title}{The title of the dataset.}
+  \item{title}{The title of the dataset.}
 
-  \item{dataset_object}{The data frame you like to upload
-  as dataset.}
-
-  \item{file_path}{The path to a CSV file for upload as
-  dataset.}
+  \item{dataset}{The data you like to upload as dataset.
+  This can be a path to a CSV file or a data frame.}
 
   \item{curl}{You can pass in a curl handle with additional
   options.}
