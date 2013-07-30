@@ -18,16 +18,17 @@
   options.}
 }
 \value{
-  Returns a status message with the ID of the dataset.
+  Returns a status message with the ID of the dataset (not
+  yet).
 }
 \description{
   This function uploads a dataset from within R to a
   BEFdata portal set in your options. Before you can do so
   you need to have an account on the portal and set your
-  credentials via bef.option() so the authentication works.
-  The function requires a title for the dataset and either
-  a path to a csv file for for upload or a dataset object.
-  The dataset object needs to be a data frame with unique
+  credentials via the bef.options() function so the
+  authentication works. The function requires a title for
+  the dataset and either a path to a CSV file for for
+  upload or a dataset object. The dataset must have unique
   column names.
 }
 
