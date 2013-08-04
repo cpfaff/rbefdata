@@ -74,14 +74,12 @@ capitalize <- function(string) {
  paste0(toupper(first_letter), rest_of_the_string)
 }
 
-# Check the portal if a dataset has been taken or not
+# Check the portal if a dataset title has been taken or not
 the_title_is_taken <- function(dataset_title) {
 	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternal = T)
 	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
 	datasets_info_titles = tolower(datasets_info_titles)
-	datasets_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
-	datastes_info_df = data.frame(datasets_info_ids, datasets_info_titles)
-	dataset_title_status = any(datastes_info_df$datasets_info_titles == tolower(dataset_title))
+	dataset_title_status = any(datasets_info_titles == tolower(dataset_title))
 	return(dataset_title_status)
 }
 
@@ -102,6 +100,11 @@ paperproposal_url <- function(proposal_id, ...) {
 
 # TODO this will tell the id to a given title if the user has uploaded his file successfully
 # title_to_id <- function(title)
+# datastes_info_df$
+# datasets_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
+# datastes_info_df = data.frame(datasets_info_ids, datasets_info_titles)
+
+
 
 # a helper function to extract id from a dataset or paperproposal url
 url_to_id <- function(url, resource="datasets") {
