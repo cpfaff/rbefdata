@@ -16,12 +16,18 @@
 #' @import XML
 #' @export
 
+# Todo: If the helper can return ids for datasets titles after upload a new param can call the
+# helper bef.goto.dataset_page so it will directly open it in the browser.
+# brower_open = FALSE,
 bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle()) {
   this_function_requires_api_authentication()
   if(the_title_is_taken(dataset_title = dataset_title)) {
     stop("The title you have choosen has already been taken. Please choose another one before uploading again!")
   } else {
     postForm(upload_url(), title = dataset_title,  "datafile[file]" = upload_file(dataset), curl = curl)
+      # if(browser_open) {
+         # bef.goto.dataset_page
+      # }
     return("Your data has been uploaded successfully!")
   }
 }
