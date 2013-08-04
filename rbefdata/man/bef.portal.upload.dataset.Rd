@@ -2,17 +2,20 @@
 \alias{bef.portal.upload.dataset}
 \title{Upload a dataset to the BEFdata portal}
 \usage{
-  bef.portal.upload.dataset(title, dataset,
+  bef.portal.upload.dataset(dataset, dataset_title,
     curl = getCurlHandle())
 }
 \arguments{
-  \item{title}{The title of the dataset.}
-
   \item{dataset}{The data you like to upload as dataset.
-  This can be a path to a CSV file or a data frame.}
+  This can be a path to a CSV file or a data frame. Please
+  not that you have to ensure that the column names are
+  unique.}
+
+  \item{dataset_title}{The title of the dataset.}
 
   \item{curl}{You can pass in a curl handle with additional
-  options.}
+  options. By default a curl handle is used to improve the
+  memory footprint.}
 }
 \value{
   Returns a status message with the ID of the dataset (not

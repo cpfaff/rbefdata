@@ -6,15 +6,22 @@
 #' The function requires a title for the dataset and either a path to a CSV file for
 #' for upload or a dataset object. The dataset must have unique column names.
 #'
-#' @param title The title of the dataset.
 #' @param dataset The data you like to upload as dataset. This can be a path to a CSV file
-#'        or a data frame.
-#' @param curl You can pass in a curl handle with additional options.
+#'        or a data frame. Please not that you have to ensure that the column names are unique.
+#' @param dataset_title The title of the dataset.
+#' @param curl You can pass in a curl handle with additional options. By default a curl handle is
+#'        used to improve the memory footprint.
 #' @return Returns a status message with the ID of the dataset (not yet).
 #' @import RCurl
+#' @import XML
 #' @export
 
-bef.portal.upload.dataset <- bef.upload.dataset <- function(title, dataset, curl = getCurlHandle()) {
-  postForm(upload_url(), title = title,  "datafile[file]" = upload_file(dataset), curl = curl)
-  return("Your data has been uploaded successfully")
+bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle()) {
+  this_function_requires_api_authentication()
+  if(the_title_is_taken(dataset_title = dataset_title)) {
+    stop("The title you have choosen has already been taken. Please choose another one before uploading again!")
+  } else {
+    postForm(upload_url(), title = dataset_title,  "datafile[file]" = upload_file(dataset), curl = curl)
+    return("Your data has been uploaded successfully!")
+  }
 }

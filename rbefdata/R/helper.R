@@ -12,24 +12,28 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"),
   return(url)
 }
 
+# function that checks if authentication is given
+this_function_requires_api_authentication <- function() {
+  user_credentials = bef.options("user_credentials")
+  if (missing(user_credentials)) {
+    stop("This function reuires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
+  }
+}
+
 # returns the upload url with user credentials
 upload_url <- function() {
   base_url = bef.options("url")
   segment = "/datasets/create_with_datafile"
   parameter_sep = "?"
-  user_credentials = bef.options("user_credentials")
-  if (user_credentials == "") {
-    stop("Please set your user credentials first via bef.options() before uploading a dataset.")
-  }
-  url = paste(base_url, segment, parameter_sep, "user_credentials=", user_credentials, sep='')
+  url = paste0(base_url, segment, parameter_sep, 'user_credentials=', bef.options('user_credentials'))
   return(url)
 }
 
 # returns an upload file no matter if it is given as path to a file or data.frame
 upload_file <- function(dataset) {
   if (is.data.frame(dataset)) {
-    write.csv(dataset, paste0(tempdir(), "/", "upload_preparation.csv"), row.names=FALSE)
-    upload_file = fileUpload(paste0(tempdir(), "/", "upload_preparation.csv"))
+    write.csv(dataset, paste0(tempdir(), "/", "upload_dataset.csv"), row.names=FALSE)
+    upload_file = fileUpload(paste0(tempdir(), "/", "upload_dataset.csv"))
   } else {
     upload_file = fileUpload(dataset)
   }
@@ -43,7 +47,7 @@ keyword_url <- function(id) {
 }
 
 # go to the dataset page of the file you just uploaded
-goto_dataset_page <- function(id) {
+bef.goto.dataset_page <- function(id) {
   base_url = bef.options("url")
   segment = "/datasets/"
   id = id
@@ -63,6 +67,24 @@ is_internet_connected <- function() {
   }
 }
 
+# A helper helper that capitalizes the first letter of a string
+capitalize <- function(string) {
+ first_letter = substr(string, start=0, stop=1)
+ rest_of_the_string = substr(string, start=2, stop=nchar(string))
+ paste0(toupper(first_letter), rest_of_the_string)
+}
+
+# Check the portal if a dataset has been taken or not
+the_title_is_taken <- function(dataset_title) {
+	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternal = T)
+	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
+	datasets_info_titles = tolower(datasets_info_titles)
+	datasets_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
+	datastes_info_df = data.frame(datasets_info_ids, datasets_info_titles)
+	dataset_title_status = any(datastes_info_df$datasets_info_titles == tolower(dataset_title))
+	return(dataset_title_status)
+}
+
 # a helper that returns the metadata attached to a dataset object
 bef.display.metadata <- bef.metadata <- function(dataset) {
   return(attributes(dataset))
@@ -77,6 +99,9 @@ paperproposal_url <- function(proposal_id, ...) {
   url = gsub("\\s", "", url)
   return(url)
 }
+
+# TODO this will tell the id to a given title if the user has uploaded his file successfully
+# title_to_id <- function(title)
 
 # a helper function to extract id from a dataset or paperproposal url
 url_to_id <- function(url, resource="datasets") {
