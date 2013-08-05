@@ -32,8 +32,8 @@ upload_url <- function() {
 # returns an upload file no matter if it is given as path to a file or data.frame
 upload_file <- function(dataset) {
   if (is.data.frame(dataset)) {
-    write.csv(dataset, paste0(tempdir(), "/", "upload_dataset.csv"), row.names=FALSE)
-    upload_file = fileUpload(paste0(tempdir(), "/", "upload_dataset.csv"))
+    write.csv(dataset, file.path(tempdir(), "upload_dataset.csv"), row.names = FALSE, fileEncoding = "UTF-8", quote = FALSE)
+    upload_file = fileUpload(file.path(tempdir(), "upload_dataset.csv"))
   } else {
     upload_file = fileUpload(dataset)
   }
