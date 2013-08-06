@@ -1,6 +1,7 @@
 #' Search a Tematres thesaurus via keywords
 #'
-#' @param lookup_keyword The keyword you are looking for
+#' @param keyword The keyword you are looking for
+#' @param task Is the task the api will perform
 #'
 #' @return The function returns a vector of keywords
 #' @aliases bef.search.keywords
@@ -8,10 +9,9 @@
 #' @import XML
 #' @export
 
-bef.tematres.search.keywords <- bef.search.keywords <- function(lookup_keyword) {
-  service_task = "search"
-  service_argument = lookup_keyword
-  service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), service_task, service_argument)
+bef.tematres.search.keyword <- bef.search.keyword <- function(keyword, task = "search") {
+  service_argument = keyword
+  service_url = sprintf("%s?task=%s&arg=%s", bef.options("tematres_service_url"), task, service_argument)
   search_fetch_xml = xmlParse(service_url)
   items = xpathSApply(search_fetch_xml, path = "//result/term/string", xmlValue, ignoreComments=T)
   if (length(items)) {

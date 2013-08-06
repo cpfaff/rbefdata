@@ -21,7 +21,6 @@ bef.portal.get.dataset_list <- bef.get.dataset_list <- function(keyword, keyword
   ids = unlist(lapply(keyword_json, function(x) (x$id)))
   keyword_summary = data.frame(key = names, id = ids)
 
-
   if(!missing(keyword_id)) {
     url = keyword_url(id=keyword_id)
     full_url = paste(url, ".csv", sep = "")
@@ -31,10 +30,22 @@ bef.portal.get.dataset_list <- bef.get.dataset_list <- function(keyword, keyword
   }
 
   if(!missing(keyword)) {
-    position = grep(keyword, keyword_summary$key)
+    grep_matches <- c(keyword)
+    matches <- unique(grep(paste(grep_matches,collapse="|"), keyword_summary$key, value=TRUE))
+    position = which(keyword_summary$key %in% matches)
     get_keyword_id = keyword_summary$id[position]
-    dataset_list = read.csv(paste0(keyword_url(get_keyword_id),".csv"))
-    output = data.frame(id=dataset_list$id, title=dataset_list$title)
-    return(output)
+    keyword_datasets_api_list = (unique(unlist(lapply(get_keyword_id, function(x) paste0(keyword_url(x),".csv")))))
+    dataset_list = keyword_datasets_api_list
+    dataset_info = lapply(dataset_list, function(x) read.csv(x)[,1:2])
+    titles = unique(unlist(lapply(dataset_info, function(x) x$title)))
+    ids = unique(unlist(lapply(dataset_info, function(x) x$id)))
+    id_title_df = data.frame(dataset_id = ids, dataset_titles = titles)
+    if (dim(id_title_df)[1] == 0 ) {
+      # here search the thesaurus give alternatives above below and partial mathings
+      print("The following keywords are available that are close to your search term:")
+      (bef.tematres.search.broader_keywords(lookup_keyword = keyword))
+    } else {
+      return(id_title_df)
+    }
   }
 }

@@ -8,7 +8,8 @@ rbefdata 0.4
   user about the id the new dataset got if the upload is successful and if the title has 
   already been taken. 
 * Introduces small helpers to extract metadata from a befdata dataset object (bef.display.metadata).
-* Introduces a small helper that opens the url to a dataset in the browser (bef.goto.dataset_page).
+* Introduces a small helper that opens the url to a dataset in the browser (bef.goto.dataset_page). 
+* Introduces a small  helper that querries a media wiki to give you a term definition. (bef.define_a(term="term"))
 
 rbefdata 0.3.3
 ==================

@@ -54,6 +54,13 @@ bef.goto.dataset_page <- function(id) {
   browseURL(paste0(base_url, segment, id))
 }
 
+bef.relate_a <- function(thing) {
+  upper = bef.tematres.search.broader_keywords(thing)
+  lower = bef.tematres.search.narrower_keywords(thing)
+  list(upper_terms = upper, lower_terms = lower)
+}
+
+
 # Helper that determines internet connection
 is_internet_connected <- function() {
   if (.Platform$OS.type == "windows") {
@@ -87,6 +94,25 @@ the_title_is_taken <- function(dataset_title) {
 bef.display.metadata <- bef.metadata <- function(dataset) {
   return(attributes(dataset))
 }
+
+# querry a media wiki (later semantic media wiki to get definitions of a term)
+bef.define_a <- function(term, wiki_api_url="http://en.wikipedia.org/w/api.php") {
+	search_return <- getForm(
+	  wiki_api_url,
+	  action  = "opensearch",
+	  search  = term,
+	  format  = "xml",
+	  .opts   = ""
+	)
+	document = xmlTreeParse(search_return, useInternal=TRUE)
+	document_root = xmlRoot(document)
+	nodeset = getNodeSet(document_root, "//*[local-name() = 'Description']")
+	description_list = (lapply(nodeset, function(x) xmlSApply(x, xmlValue)))
+	cleaned_descriptions = lapply(description_list, function(x) gsub("\"", "'", x))
+	descriptions = do.call(rbind, cleaned_descriptions)
+	return(descriptions)
+}
+
 
 # a helper method which behaves like paperproposal_url in Rails
 paperproposal_url <- function(proposal_id, ...) {
