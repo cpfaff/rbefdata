@@ -15,8 +15,8 @@ dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"),
 # function that checks if authentication is given
 this_function_requires_api_authentication <- function() {
   user_credentials = bef.options("user_credentials")
-  if (missing(user_credentials)) {
-    stop("This function reuires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
+  if (is.null(user_credentials) || is.na(user_credentials) || user_credentials == '') {
+    stop("This function requires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
   }
 }
 
