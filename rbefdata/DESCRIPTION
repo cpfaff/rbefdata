@@ -17,6 +17,7 @@ Imports:
     XML,
     RCurl,
     rjson,
+    gdata,
     testthat
 Date: 2013-04-17
 License: MIT
@@ -31,11 +32,11 @@ Collate:
     'bef.portal.get.metadata.R'
     'bef.portal.get.keywords.R'
     'bef.portal.upload.dataset.R'
-    'bef.tematres.search.R'
-    'bef.tematres.search.keywords.R'
-    'bef.tematres.search.narrower_keywords.R'
-    'bef.tematres.search.broader_keywords.R'
+    'bef.portal.api.R'
+    'bef.tematres.api.R'
+    'bef.mediawiki.api.R'
     'helper.R'
     'bef.portal.get.attachment.R'
     'bef.portal.get.dataset_list.R'
     'rbefdata-deprecated.R'
+    'rbefdata-defunct.R'

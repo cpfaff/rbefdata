@@ -25,9 +25,7 @@ bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_tit
     stop("The title you have choosen has already been taken. Please choose another one before uploading again!")
   } else {
     postForm(upload_url(), title = dataset_title,  "datafile[file]" = upload_file(dataset), curl = curl)
-      # if(browser_open) {
-         # bef.goto.dataset_page
-      # }
-    return("Your data has been uploaded successfully!")
+    message("Your data has been uploaded successfully!")
+    message(paste0("You can find your dataset now under the id:", title_to_dataset_id(dataset_title)))
   }
 }

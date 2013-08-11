@@ -27,13 +27,11 @@
 #'
 #' @examples \dontrun{
 #'  prop1 = bef.portal.get.proposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
-#'  prop1
 #'  }
-#' @aliases bef.get.proposal
 #' @import RCurl
 #' @export
 
-bef.portal.get.proposal <- bef.get.proposal <- function(proposal_id, user_credentials=bef.options('user_credentials'), full_url=paperproposal_url(proposal_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
+bef.portal.get.proposal <- function(proposal_id, user_credentials=bef.options('user_credentials'), full_url=paperproposal_url(proposal_id, user_credentials=user_credentials), curl=getCurlHandle(), ...) {
 
   # The following chunk generates paperproposal csv URL from paperproposal's URL
   if (!missing(full_url) && !grepl(full_url, pattern="*.csv*")) {

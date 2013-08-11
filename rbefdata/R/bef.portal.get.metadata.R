@@ -1,23 +1,23 @@
 #' Get the metadata of a dataset from the BEFdata portal
 #'
-#' This function fetches the metadata associated with dataset on a BEFdata portal.
-#' You need to provide the id of the dataset, or the direct link to the Ecological
-#' Metadata Language file. You can find the url on the dataset page.
+#' This function fetches the metadata associated with a dataset on a BEFdata portal.
+#' You need to provide the id of the dataset. You can find the url on the dataset page.
 #'
-#' @param dataset_id The id of the dataset in the BEFdata portal.
-#' @param full_url functions as direct download link for the eml file.
-#' @param file path to a local eml file
+#' @param given This is either a dataset id or a file path to a metadata eml file.
 #'
-#' @return a list of metadata. metadata that doesn't exist is represented as \code{NA}
-#' @aliases bef.get.metadata
+#' @return A list of metadata. metadata that doesn't exist is represented as \code{NA}
 #' @import XML
 #' @export
 #'
 
-bef.portal.get.metadata <- bef.get.metadata <- function(dataset_id, full_url = dataset_url(dataset_id, "eml", separate_category_columns=TRUE), file) {
+bef.portal.get.metadata <- function(given) {
+  if(is.character(given)) {
+    full_url = given
+  } else {
+    full_url = dataset_url(given, "eml", separate_category_columns=TRUE)
+  }
 
-  if (!missing(file)) full_url = file
-  eml = xmlParse(full_url)
+  metadata = xmlTreeParse(full_url, useInternalNodes = T)
 
   template = list(
     title = "//dataset/title",
@@ -38,23 +38,20 @@ bef.portal.get.metadata <- bef.get.metadata <- function(dataset_id, full_url = d
     keywords = "//keyword"
   )
 
-  out = rapply(template, function(x) xmlNodesValue(path=x, doc=eml), how="replace")
+  out = rapply(template, function(x) xmlNodesValue(path=x, doc=metadata), how="replace")
   out$authors = as.data.frame(out$authors, stringsAsFactors=F)
 
-  attributeList = getNodeSet(eml, path="//attributeList/attribute")
-
+  attributeList = getNodeSet(metadata, path="//attributeList/attribute")
   column_template = list(header = "./attributeLabel",
                          description = "./attributeDefinition",
                          unit = ".//unit",
                          info = ".//attributeName"
                          )
-
   columns = lapply(column_template, function(c) {
     sapply(attributeList, function(d) {
       xmlNodesValue(doc=d, path=c)
     })
   })
-
   columns = as.data.frame(columns, stringsAsFactors=F)
 
   if (nrow(columns)) {

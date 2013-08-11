@@ -1,5 +1,4 @@
 \name{bef.portal.get.dataset_list}
-\alias{bef.get.dataset_list}
 \alias{bef.portal.get.dataset_list}
 \title{Fetch a list of datasets for a keyword}
 \usage{

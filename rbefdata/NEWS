@@ -1,15 +1,18 @@
-rbefdata 0.4
+rbefdata 0.3.4
 ==================
 
-* Introduces a helper "bef.display.metadata" which is a wrapper to attributes and helps to 
-  extract the metadata information from a dataset object.
-* Adds an upload method for datasets (bef.portal.upload.dataset()). It takes a dataset object 
-  (data.frame) or a CSV file and a title for the dataset as options. The function informs the 
-  user about the id the new dataset got if the upload is successful and if the title has 
-  already been taken. 
-* Introduces small helpers to extract metadata from a befdata dataset object (bef.display.metadata).
-* Introduces a small helper that opens the url to a dataset in the browser (bef.goto.dataset_page). 
-* Introduces a small  helper that querries a media wiki to give you a term definition. (bef.define_a(term="term"))
+* Introduces a helper "bef.extract.metadata()" which is a wrapper to the function 
+  attributes() and helps to extract the metadata information of a dataset object. 
+* Introduces a helper that opens the url to a dataset in the browser given an id 
+  bef.goto.dataset_page(id).
+* Adds base API for tematres bef.tematres.api() to easyly exploit the vocabulary. 
+* Adds base API for media wiki bef.mediawiki.api() to easyly get descriptions of a term 
+  from a mediawiki. It takes a term and the language of the wikipedia querried can be changed
+  by two character country code wikipedia uses for its subdomains.
+* Adds an upload method for datasets (bef.portal.upload.dataset()). It takes a dataset 
+  object of file path (to CSV file) for upload and a title.
+* Refactors several functions as well as some names. Defuncts the old deprecates and adds 
+  new defunctioned functions.
 
 rbefdata 0.3.3
 ==================

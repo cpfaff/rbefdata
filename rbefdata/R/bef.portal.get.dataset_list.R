@@ -9,12 +9,11 @@
 #'         list = bef.portal.get.dataset_list(keyword="carbon")
 #'         list = bef.portal.get.dataset_list(keyword_id=47)
 #'       }
-#' @aliases bef.get.dataset_list
 #' @import RCurl
 #' @import rjson
 #' @export
 
-bef.portal.get.dataset_list <- bef.get.dataset_list <- function(keyword, keyword_id) {
+bef.portal.get.dataset_list <- function(keyword, keyword_id) {
 
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
   names = unlist(lapply(keyword_json, function(x) (x$name)))
@@ -41,9 +40,7 @@ bef.portal.get.dataset_list <- bef.get.dataset_list <- function(keyword, keyword
     ids = unique(unlist(lapply(dataset_info, function(x) x$id)))
     id_title_df = data.frame(dataset_id = ids, dataset_titles = titles)
     if (dim(id_title_df)[1] == 0 ) {
-      # here search the thesaurus give alternatives above below and partial mathings
-      print("The following keywords are available that are close to your search term:")
-      (bef.tematres.search.broader_keywords(lookup_keyword = keyword))
+      print("Sorry no datasets are tagged with this keyword!")
     } else {
       return(id_title_df)
     }

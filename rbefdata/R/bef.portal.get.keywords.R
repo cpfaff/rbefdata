@@ -1,27 +1,18 @@
 #' Fetch keywords from a BEFdata portal.
 #'
-#' This function fetches keywords from a BEFdata portal. It also enables the
-#' task of fetching all datasets associated with one, or a list of keywords.
-#'
-#' (not finished) It delegates the task of fetching multiple datasets to
-#' bef.portal.get.dataset which returns a data frame for one dataset and a list element
-#' if there are multiple datasets available.
-#'
-#' An error is thrown when dataset is not found or you don't have
-#' the proper access right for it.
+#' This function fetches keywords from a BEFdata portal.
 #'
 #' @return The function returns a character vector of keywords.
 #'
 #' @examples \dontrun{
 #'             keywords=bef.portal.get.keywords()
 #'           }
-#' @aliases bef.get.keywords
 #' @import RCurl
 #' @import rjson
 #' @import XML
 #' @export
 
-bef.portal.get.keywords <- bef.get.keywords <- function()
+bef.portal.get.keywords <- function()
    {
       keywords_json=fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
       keywords_summary=unlist(lapply(keywords_json, function(x) (x$name)))

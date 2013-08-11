@@ -1,23 +1,16 @@
 # a helper method which behaves like dataset_url in Rails
-dataset_url <- function(id, type = c("csv2", "csv", "xls", "eml", "freeformat"), ...) {
-  type = match.arg(type, c("csv2", "csv", "xls", "eml", "freeformat"))
-  seg = switch(type, csv2="/download.csv", csv="/download.csv", xls="/download", eml=".eml", freeformat="/freeformats_csv" )
+dataset_url <- function(id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), ...) {
+  type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
+  seg = switch(type, csv2="/download.csv", csv="/download.csv", ".xml" , xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
   if (type == "csv2") params$separate_category_columns = TRUE
   if (type == "eml") params$separate_category_columns = TRUE
+  if (type == "xml") params$separate_category_columns = TRUE
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), id, seg, query_string)
   url = gsub("\\s", "", url)
   return(url)
-}
-
-# function that checks if authentication is given
-this_function_requires_api_authentication <- function() {
-  user_credentials = bef.options("user_credentials")
-  if (missing(user_credentials)) {
-    stop("This function reuires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
-  }
 }
 
 # returns the upload url with user credentials
@@ -27,6 +20,20 @@ upload_url <- function() {
   parameter_sep = "?"
   url = paste0(base_url, segment, parameter_sep, 'user_credentials=', bef.options('user_credentials'))
   return(url)
+}
+
+# a helper that returns the keyword url provided the id
+keyword_url <- function(id) {
+  url = sprintf("%s/keywords/%d", bef.options("url"), id)
+  return(url)
+}
+
+# function that checks if authentication is given
+this_function_requires_api_authentication <- function() {
+  user_credentials = bef.options("user_credentials")
+  if (missing(user_credentials)) {
+    stop("This function reuires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
+  }
 }
 
 # returns an upload file no matter if it is given as path to a file or data.frame
@@ -40,12 +47,6 @@ upload_file <- function(dataset) {
   return(upload_file)
 }
 
-# a helper that returns the keyword url provided the id
-keyword_url <- function(id) {
-  url = sprintf("%s/keywords/%d", bef.options("url"), id)
-  return(url)
-}
-
 # go to the dataset page of the file you just uploaded
 bef.goto.dataset_page <- function(id) {
   base_url = bef.options("url")
@@ -53,13 +54,6 @@ bef.goto.dataset_page <- function(id) {
   id = id
   browseURL(paste0(base_url, segment, id))
 }
-
-bef.relate_a <- function(thing) {
-  upper = bef.tematres.search.broader_keywords(thing)
-  lower = bef.tematres.search.narrower_keywords(thing)
-  list(upper_terms = upper, lower_terms = lower)
-}
-
 
 # Helper that determines internet connection
 is_internet_connected <- function() {
@@ -81,38 +75,59 @@ capitalize <- function(string) {
  paste0(toupper(first_letter), rest_of_the_string)
 }
 
+# helper to remove nas from lists
+remove_na_from_list <- function(object) {
+  get_the_nas = lapply(object, function(x) is.na(x))
+  remove_the_nas = object[-which(data.frame(do.call(rbind, get_the_nas))$id)]
+  return(remove_the_nas)
+}
+
+# clean html strings
+clean_html_string <- function(string) {
+  remove_tags = gsub("<.*?>", "", string)
+  remove_newlines = gsub("\\n"," ",remove_tags)
+  replace_escaped_quotes = gsub("\"", "'", remove_newlines)
+  remove_square_brackets = gsub("\\[.?\\]", "", replace_escaped_quotes)
+  remove_empty_brackets = gsub("\\(\\s*\\)", "", remove_square_brackets)
+  remove_trailing_ws = gsub("\\s*$", "", remove_empty_brackets)
+  remove_leading_ws = gsub("^\\s*", "", remove_trailing_ws)
+  remove_unnecessary_ws = gsub("[ ]{2,}", " ", remove_leading_ws)
+  cleaned_string = remove_unnecessary_ws
+  return(cleaned_string)
+}
+
+# Given a title this returns the dataset id
+title_to_dataset_id <- function(dataset_title) {
+	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
+	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
+	dataset_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
+	dataframe = data.frame(titles = tolower(datasets_info_titles), ids = dataset_info_ids)
+	dataset_title_status = which((dataframe$titles == tolower(dataset_title)))
+	# todo refactor so the levels are removed
+	return(dataframe$ids[dataset_title_status])
+}
+
 # Check the portal if a dataset title has been taken or not
 the_title_is_taken <- function(dataset_title) {
-	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternal = T)
+	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
 	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
 	datasets_info_titles = tolower(datasets_info_titles)
 	dataset_title_status = any(datasets_info_titles == tolower(dataset_title))
 	return(dataset_title_status)
 }
 
+# compare two vectors potential candidates for merging
+compare_merging_ids <- function(vec1, vec2) {
+  matches = (which(!is.na(match(vec1, vec2))))
+  percent = (length(matches)/length(vec1)) * 100
+  warn = sprintf("Vector one is only an %f percent match to vector 2. Not sufficient for a merge", percent)
+  if(length(matches) != length(vec1)) warning(warn)
+}
+
 # a helper that returns the metadata attached to a dataset object
-bef.display.metadata <- bef.metadata <- function(dataset) {
+bef.extract.metadata <- bef.metadata <- function(dataset) {
   return(attributes(dataset))
 }
-
-# querry a media wiki (later semantic media wiki to get definitions of a term)
-bef.define_a <- function(term, wiki_api_url="http://en.wikipedia.org/w/api.php") {
-	search_return <- getForm(
-	  wiki_api_url,
-	  action  = "opensearch",
-	  search  = term,
-	  format  = "xml",
-	  .opts   = ""
-	)
-	document = xmlTreeParse(search_return, useInternal=TRUE)
-	document_root = xmlRoot(document)
-	nodeset = getNodeSet(document_root, "//*[local-name() = 'Description']")
-	description_list = (lapply(nodeset, function(x) xmlSApply(x, xmlValue)))
-	cleaned_descriptions = lapply(description_list, function(x) gsub("\"", "'", x))
-	descriptions = do.call(rbind, cleaned_descriptions)
-	return(descriptions)
-}
-
 
 # a helper method which behaves like paperproposal_url in Rails
 paperproposal_url <- function(proposal_id, ...) {
@@ -123,14 +138,6 @@ paperproposal_url <- function(proposal_id, ...) {
   url = gsub("\\s", "", url)
   return(url)
 }
-
-# TODO this will tell the id to a given title if the user has uploaded his file successfully
-# title_to_id <- function(title)
-# datastes_info_df$
-# datasets_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
-# datastes_info_df = data.frame(datasets_info_ids, datasets_info_titles)
-
-
 
 # a helper function to extract id from a dataset or paperproposal url
 url_to_id <- function(url, resource="datasets") {

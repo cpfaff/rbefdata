@@ -1,30 +1,15 @@
 \name{rbefdata-deprecated}
-\alias{bef.getDataset}
-\alias{bef.getKeywords}
-\alias{bef.getMetadata}
-\alias{bef.getProposal}
-\alias{bef.getdata}
-\alias{bef.searchTematres}
-\alias{bef.searchTematresLower}
-\alias{bef.searchTematresUpper}
+\alias{bef.tematres.search.broader_keywords}
+\alias{bef.tematres.search.keywords}
+\alias{bef.tematres.search.narrower_keywords}
 \alias{rbefdata-deprecated}
 \title{Deprecated functions in package rbefdata}
 \usage{
-  bef.getdata(...)
+  bef.tematres.search.keywords(...)
 
-  bef.getDataset(...)
+  bef.tematres.search.narrower_keywords(...)
 
-  bef.getKeywords()
-
-  bef.getMetadata(...)
-
-  bef.getProposal(...)
-
-  bef.searchTematres(...)
-
-  bef.searchTematresLower(...)
-
-  bef.searchTematresUpper(...)
+  bef.tematres.search.broader_keywords(...)
 }
 \description{
   These following functions are renamed or removed. Please
@@ -32,21 +17,13 @@
 }
 \details{
   \tabular{ll}{ \strong{Deprecated functions} \tab
-  \strong{Replacement} \cr \code{bef.getdata} \tab
-  \code{\link{bef.portal.get}} \cr \code{bef.getDataset}
-  \tab \code{\link{bef.portal.get.dataset}} \cr
-  \code{bef.getMetadata} \tab
-  \code{\link{bef.portal.get.metadata}} \cr
-  \code{bef.getKeywords} \tab
-  \code{\link{bef.portal.get.keywords}} \cr
-  \code{bef.getProposal} \tab
-  \code{\link{bef.portal.get.proposal}} \cr
-  \code{bef.searchTematres} \tab
-  \code{\link{bef.tematres.search.keywords}} \cr
-  \code{bef.searchTematresLower} \tab
-  \code{\link{bef.tematres.search.narrower_keywords}} \cr
-  \code{bef.searchTematresUpper} \tab
-  \code{\link{bef.tematres.search.broader_keywords}} \cr }
+  \strong{Replacement} \cr
+  \code{bef.tematres.search.keywords} \tab
+  \code{\link{bef.tematres.api.search}} \cr
+  \code{bef.tematres.search.narrower_keywords} \tab
+  \code{\link{bef.tematres.api.search}} \cr
+  \code{bef.tematres.search.broader_keywords} \tab
+  \code{\link{bef.tematres.api.search}} \cr }
 }
 \keyword{internal}
 
