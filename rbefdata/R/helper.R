@@ -11,6 +11,18 @@ dataset_url <- function(id, type = c("csv2", "csv", "xml", "xls", "eml", "freefo
   return(url)
 }
 
+paperproposal_url <- function(proposal_id, type = c("csv", "xml"),...) {
+  type = match.arg(type, c("csv", "xml"))
+  seg = switch(type, csv=".csv", xml=".xml")
+  params = Filter(Negate(is.null), list(...))
+  params$user_credentials = bef.options('user_credentials')
+  query_string = ""
+  if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
+  url = sprintf("%s/paperproposals/%d%s%s", bef.options('url'), proposal_id, seg ,query_string)
+  url = gsub("\\s", "", url)
+  return(url)
+}
+
 # returns the upload url with user credentials
 upload_url <- function() {
   base_url = bef.options("url")
@@ -125,16 +137,6 @@ compare_merging_ids <- function(vec1, vec2) {
 # a helper that returns the metadata attached to a dataset object
 bef.extract.metadata <- bef.metadata <- function(dataset) {
   return(attributes(dataset))
-}
-
-# a helper method which behaves like paperproposal_url in Rails
-paperproposal_url <- function(proposal_id, ...) {
-  params = Filter(Negate(is.null), list(...))
-  query_string = ""
-  if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
-  url = sprintf("%s/paperproposals/%d.csv%s", bef.options('url'), proposal_id, query_string)
-  url = gsub("\\s", "", url)
-  return(url)
 }
 
 # a helper function to extract id from a dataset or paperproposal url
