@@ -3,9 +3,7 @@ dataset_url <- function(id, type = c("csv2", "csv", "xml", "xls", "eml", "freefo
   type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
   seg = switch(type, csv2="/download.csv", csv="/download.csv", ".xml" , xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
-  if (type == "csv2") params$separate_category_columns = TRUE
-  if (type == "eml") params$separate_category_columns = TRUE
-  if (type == "xml") params$separate_category_columns = TRUE
+  if (type == "csv2" || type == "eml" || type == "xml") params$separate_category_columns = TRUE
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), id, seg, query_string)

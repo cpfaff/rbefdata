@@ -37,7 +37,7 @@
 
 bef.portal.get.dataset <- function(id, curl=getCurlHandle(), ...) {
   full_url = dataset_url(id, user_credentials= bef.options("user_credentials"))
-  response_body = getURLContent(full_url, curl = curl)
+  response_body = getURLContent(full_url, curl = curl, ...)
   if(getCurlInfo(curl)$response.code != 200) {
     msg = sprintf("Dataset(id=%d) not found or not accessible. Please check your credentials and make sure you have access right for it.", id)
     stop(msg)
