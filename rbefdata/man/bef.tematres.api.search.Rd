@@ -2,10 +2,10 @@
 \alias{bef.tematres.api.search}
 \title{A tematres base api based function to search the server}
 \usage{
-  bef.tematres.api.search(keyword, task = "search")
+  bef.tematres.api.search(term, task = "search")
 }
 \arguments{
-  \item{keyword}{The keyword you are looking for}
+  \item{term}{The term you are looking for}
 
   \item{task}{Defines behavior on search. Defaults to
   "search" but can also be "broader" (look for upward

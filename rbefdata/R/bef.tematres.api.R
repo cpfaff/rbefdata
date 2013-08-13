@@ -154,9 +154,9 @@ bef.tematres.api.conversion.key_id <- bef.tematres.api.conversion.id_key <- func
 #' @param term It takes a term that you are searching the definition for
 #'
 #' @return Either a string or id
-#' @export bef.tematres.api.fetch.definition
+#' @export bef.tematres.api.define
 
-bef.tematres.api.fetch.definition <- function(term) {
+bef.tematres.api.define <- function(term) {
   id = bef.tematres.api.conversion.key_id(term, warn = F)
   term_notes = bef.tematres.api(task = "fetchNotes", argument = id)
   term_notes$description = clean_html_string(term_notes$description)
@@ -168,28 +168,28 @@ bef.tematres.api.fetch.definition <- function(term) {
 #' Search a Tematres thesaurus via keywords. This function is a wrapper and so it calls
 #' the appropriate funtions depending on the search task.
 #'
-#' @param keyword The keyword you are looking for
+#' @param term The term you are looking for
 #' @param task Defines behavior on search. Defaults to "search" but can also be
 #'        "broader" (look for upward definitions) and "narrower" (looking for downward definitions).
 #'
 #' @return The function returns a vector of keywords
 #' @export bef.tematres.api.search
 
-bef.tematres.api.search <- function(keyword, task="search") {
+bef.tematres.api.search <- function(term, task="search") {
   if (task=="search")
     {
-      results=bef.tematres.api(task = "search", argument = keyword)
+      results=bef.tematres.api(task = "search", argument = term)
       return(results)
     }
-  if (task=="broader")
+  if (task=="fetchUp")
     {
-      id = bef.tematres.api.conversion.key_id(keyword, warn = F)
+      id = bef.tematres.api.conversion.key_id(term, warn = F)
       results = bef.tematres.api(task = "fetchUp", argument = id)
       return(results)
     }
-  if (task=="narrower")
+  if (task=="fetchDown")
     {
-      id = bef.tematres.api.conversion.key_id(keyword, warn = F)
+      id = bef.tematres.api.conversion.key_id(term, warn = F)
       results = bef.tematres.api(task = "fetchDown", argument = id)
       return(results)
     }

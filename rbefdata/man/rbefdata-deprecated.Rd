@@ -1,4 +1,6 @@
 \name{rbefdata-deprecated}
+\alias{bef.portal.get.dataset_list}
+\alias{bef.portal.get.proposal}
 \alias{bef.tematres.search.broader_keywords}
 \alias{bef.tematres.search.keywords}
 \alias{bef.tematres.search.narrower_keywords}
@@ -10,6 +12,10 @@
   bef.tematres.search.narrower_keywords(...)
 
   bef.tematres.search.broader_keywords(...)
+
+  bef.portal.get.dataset_list(...)
+
+  bef.portal.get.proposal(...)
 }
 \description{
   These following functions are renamed or removed. Please

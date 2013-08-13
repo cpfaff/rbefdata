@@ -3,6 +3,7 @@
 \alias{bef.getKeywords}
 \alias{bef.getMetadata}
 \alias{bef.getProposal}
+\alias{bef.portal.get}
 \alias{bef.searchTematres}
 \alias{bef.searchTematresLower}
 \alias{bef.searchTematresUpper}
@@ -22,6 +23,8 @@
   bef.searchTematresLower(...)
 
   bef.searchTematresUpper(...)
+
+  bef.portal.get(...)
 }
 \description{
   These following functions are renamed or removed. Please
@@ -29,9 +32,8 @@
 }
 \details{
   \tabular{ll}{ \strong{Defunct functions} \tab
-  \strong{Replacement} \cr \code{bef.getdata} \tab
-  \code{\link{bef.portal.get}} \cr \code{bef.getDataset}
-  \tab \code{\link{bef.portal.get.dataset}} \cr
+  \strong{Replacement} \cr \code{bef.getDataset} \tab
+  \code{\link{bef.portal.get.dataset}} \cr
   \code{bef.getMetadata} \tab
   \code{\link{bef.portal.get.metadata}} \cr
   \code{bef.getKeywords} \tab
@@ -43,7 +45,8 @@
   \code{bef.searchTematresLower} \tab
   \code{\link{bef.tematres.search.narrower_keywords}} \cr
   \code{bef.searchTematresUpper} \tab
-  \code{\link{bef.tematres.search.broader_keywords}} \cr }
+  \code{\link{bef.tematres.search.broader_keywords}} \cr
+  \code{bef.portal.get} \tab no replacement \cr }
 }
 \keyword{internal}
 

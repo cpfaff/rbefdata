@@ -1,24 +1,24 @@
 \name{bef.mediawiki.api.fetch.definition}
 \alias{bef.mediawiki.api.fetch.definition}
-\title{Basic mediawik with one task to retrieve descriptions}
+\title{Basic Mediawik API with one task to retrieve descriptions}
 \usage{
   bef.mediawiki.api.fetch.definition(term, language = "en")
 }
 \arguments{
   \item{term}{Is the term or string you are searching for
-  on wikipedia}
+  on Wikipedia.}
 
-  \item{language}{The language of the wikipedia to use
-  (default: en). You can use the two character country code
-  wikipedia uses in their subdomains.}
+  \item{language}{Is the language of the Wikipedia
+  (default: en). You can use two character country codes
+  that Wikipedia uses in their sub domains.}
 }
 \value{
-  The function returns a vector with descriptions strings.
+  The function returns a vector with description strings.
 }
 \description{
-  This function queries the wikipedie in the language of
-  your choice. You can select the language per two
-  character country code wikipedia uses in ther subdomains.
+  This function queries Wikipedia in the language of your
+  choice. You can select the language per two character
+  country code Wikipedia uses in they sub domains.
 }
 \examples{
 \dontrun{

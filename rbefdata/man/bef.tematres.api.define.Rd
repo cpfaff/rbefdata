@@ -1,8 +1,8 @@
-\name{bef.tematres.api.fetch.definition}
-\alias{bef.tematres.api.fetch.definition}
+\name{bef.tematres.api.define}
+\alias{bef.tematres.api.define}
 \title{A tematres base api based function to retrieve definitions}
 \usage{
-  bef.tematres.api.fetch.definition(term)
+  bef.tematres.api.define(term)
 }
 \arguments{
   \item{term}{It takes a term that you are searching the

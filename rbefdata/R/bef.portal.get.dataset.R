@@ -14,13 +14,12 @@
 #' which is also shown in the examples. If you like to fetch multiple datasets
 #' you can use the apply functions provided by R see example belwo.
 #'
-#' @param id This is the id of a dataset on a BEFdata portal. Works also
-#'        multiple datasets. In this case you provide the ids with c(1,2,3)
+#' @param id This is the ID of a dataset on a BEFdata portal.
 #' @param curl If the function is used inside a loop, call getCurlHandle() first
 #'        and pass in the returned value here. This avoids an unnecessary footprint.
-#' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
+#' @param \dots Arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
-#' @return The function returns a dataframe for each dataset. An error is thrown when the dataset is
+#' @return The function returns a dataframe of the dataset. An error is thrown when the dataset is
 #'         not found or if you don't have the rights to access it.
 #'
 #' @examples \dontrun{
@@ -29,15 +28,15 @@
 #'
 #'         curl = getCurlHandle()
 #'         ids = c(8,70)
-#'         dataset_list = lapply(ids, function(x) bef.portal.get.dataset(id = x, curl = curl))
+#'         dataset_list = lapply(ids, function(x) bef.portal.get.dataset_by(id = x, curl = curl))
 #'         metadata = attributes(dataset_list[[1]])
 #'       }
 #' @import RCurl
-#' @export
+#' @export bef.portal.get.dataset
 
-bef.portal.get.dataset <- function(id, curl=getCurlHandle(), ...) {
-  full_url = dataset_url(id, user_credentials= bef.options("user_credentials"))
-  response_body = getURLContent(full_url, curl = curl, ...)
+bef.portal.get.dataset <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
+  dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"))
+  response_body = getURLContent(dataset_url, curl = curl, ...)
   if(getCurlInfo(curl)$response.code != 200) {
     msg = sprintf("Dataset(id=%d) not found or not accessible. Please check your credentials and make sure you have access right for it.", id)
     stop(msg)
@@ -46,4 +45,42 @@ bef.portal.get.dataset <- function(id, curl=getCurlHandle(), ...) {
   metadata = bef.portal.get.metadata(id)
   attributes(dataset) = c(attributes(dataset), metadata)
   return(dataset)
+}
+
+#' Fetch a list of datasets for a keyword
+#'
+#' This function fetches a list of datasets associated with a BEFdata portal keyword.
+#'
+#' @param keyword The keyword you like to fetch the associated datasets for
+#'
+#' @examples \dontrun{
+#'         list = bef.portal.get.datasets_for(keyword = "carbon")
+#'       }
+#' @import RCurl
+#' @import rjson
+#' @export bef.portal.get.datasets_for_keyword
+
+bef.portal.get.datasets_for_keyword <- function(keyword) {
+  keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
+  names = unlist(lapply(keyword_json, function(x) (x$name)))
+  ids = unlist(lapply(keyword_json, function(x) (x$id)))
+  keyword_summary = data.frame(key = names, id = ids)
+
+  if(!missing(keyword)) {
+    grep_matches <- c(keyword)
+    matches <- unique(grep(paste(grep_matches,collapse="|"), keyword_summary$key, value=TRUE))
+    position = which(keyword_summary$key %in% matches)
+    get_keyword_id = keyword_summary$id[position]
+    keyword_datasets_api_list = (unique(unlist(lapply(get_keyword_id, function(x) paste0(keyword_url(x),".csv")))))
+    dataset_list = keyword_datasets_api_list
+    dataset_info = lapply(dataset_list, function(x) read.csv(x)[,1:2])
+    titles = unique(unlist(lapply(dataset_info, function(x) x$title)))
+    ids = unique(unlist(lapply(dataset_info, function(x) x$id)))
+    id_title_df = data.frame(id = ids, title = titles)
+    if (dim(id_title_df)[1] == 0 ) {
+      print("Sorry no datasets are tagged with this keyword!")
+    } else {
+      return(id_title_df)
+    }
+  }
 }

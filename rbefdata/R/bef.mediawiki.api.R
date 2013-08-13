@@ -1,13 +1,14 @@
-#' Basic mediawik with one task to retrieve descriptions
+#' Basic Mediawik API with one task to retrieve descriptions
 #'
-#' This function queries the wikipedie in the language of your choice. You
-#' can select the language per two character country code wikipedia uses in
-#' ther subdomains.
+#' This function queries Wikipedia in the language of your choice. You
+#' can select the language per two character country code Wikipedia uses in
+#' they sub domains.
 #'
-#' @param term Is the term or string you are searching for on wikipedia
-#' @param language The language of the wikipedia to use (default: en). You
-#'  	  can use the two character country code wikipedia uses in their subdomains.
-#' @return The function returns a vector with descriptions strings.
+#' @param term Is the term or string you are searching for on Wikipedia.
+#' @param language Is the language of the Wikipedia (default: en). You
+#'  	  can use two character country codes that Wikipedia uses in their
+#' 	  sub domains.
+#' @return The function returns a vector with description strings.
 #' @examples \dontrun{
 #' 		descriptions = bef.mediawiki.api.fetch.definition(term = "Tree")
 #' 		descriptions = bef.mediawiki.api.fetch.definition(term = "Baum", language = "de")

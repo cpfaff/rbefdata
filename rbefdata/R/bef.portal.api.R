@@ -1,66 +1,31 @@
-#' Basic api to the BEFdata portal
+#' Basic access to the BEFdata portal XML API.
 #'
-#' This function returns the information available for a dataset.
+#' This function gives access to the meta data available for a dataset
 #'
-#' @param given Is an id of the dataset you like to get the information for. You find
-#'  	  the id in the url of the dataset on the portal page.
+#' This function takes a dataset id and returns the metadata of the dataset as list.
+#' This is not the eml metadata. It is the metadata read from the XML API of the
+#' data portal.
+#'
+#' @param id Is the ID of the dataset you like to get the information for. You find
+#'  	  the ID in the URL of the dataset on the BEFdata portal.
 #' @return Returns a list of metadata information for a dataset.
 #' @import RCurl
 #' @import XML
-#' @export
+#' @export bef.portal.api.dataset_info
 
-bef.portal.api.dataset.metadata <- function(given) {
-  full_url = dataset_url(given, "xml", separate_category_columns=TRUE)
-
-  metadata = xmlTreeParse(full_url, useInternalNodes = T)
-
-  template = list(title = "//dataset/title",
-		  abstract = "//dataset/abstract",
-		  taxonomicextent = "//dataset/taxonomicextent",
-		  spatialextent = "//dataset/spatialextent",
-		  temporalextent = list(begindate = "//dataset/temporalextent/begin",
-					enddate = "//dataset/temporalextent/begin"),
-		  design = "//dataset/design",
-		  authors = list(authorname = "//dataset/authors/author/name",
-				 email = "//dataset/authors/author/email"),
-		  projects = "//dataset/projects",
-		  accessright = "//dataset/accessRight",
-		  urls = list(xls = "//dataset/urls/xls",
-			      csv = "//dataset/urls/csv"),
-		  keywords = "//dataset/keywordSet",
-		  attachment = "//dataset/attachments"
-		  )
-
-  extracted_metadata = rapply(template, function(x) xmlNodesValue(path=x, doc=metadata), how="replace")
-  extracted_metadata$authors = as.data.frame(extracted_metadata$authors, stringsAsFactors=F)
-
-  column_set = getNodeSet(metadata, path="//dataset/columns/column")
-
-  column_template = list(header = "./header",
-			 definition = "./definition",
-			 unit = "./unit",
-			 type = "./type",
-			 instrumentation = "./instrumentation",
-			 reference = "./reference")
-
-  column_metadata = lapply(column_template, function(c) {
-    sapply(column_set, function(d) {
-      xmlNodesValue(doc=d, path=c)
-    })
-  })
-
-  extracted_metadata$column_metadata = as.data.frame(column_metadata, stringsAsFactors=F)
-
-  keyword_set = getNodeSet(metadata, path="//dataset/columns/column/keywordSet")
-  column_template = list(keywordSet = "./keyword")
-
-  column_keywords = lapply(column_template, function(c) {
-    lapply(keyword_set, function(d) {
-      xmlNodesValue(doc=d, path=c)
-    })
-  })
-
-  extracted_metadata$column_keywords = column_keywords
-  return(extracted_metadata)
+bef.portal.api.dataset_info <- function(id) {
+  dataset_xml_to_list = xmlToList(dataset_url(dataset_id = id, type = "xml"))
+  return(dataset_xml_to_list)
 }
 
+#' This function returns the information available for a paper proposal.
+#'
+#' @param id Is the ID of the paperproposal you like to get information for. You can
+#'        find the ID in the URL on the paper proposal.
+#' @return Returns a list of metadata information for the proposal.
+#' @export bef.portal.api.proposal_info
+
+bef.portal.api.proposal_info <- function(id) {
+  proposal_xml_to_list = xmlToList(paperproposal_url(proposal_id = id, type = "xml"))
+  return(proposal_xml_to_list)
+}

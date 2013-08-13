@@ -1,6 +1,6 @@
 Package: rbefdata
 Title: BEFdata R package
-Version: 0.3.3
+Version: 0.3.4
 Author: Claas-Thido Pfaff <claas-thido.pfaff@idiv-biodiversity.de>, Karin
     Nadrowski <nadrowski@uni-leipzig.de>, Xingxing Man <manxingxing@gmail.com>
 Maintainer: Claas-Thido Pfaff <claas-thido.pfaff@idiv-biodiversity.de>
@@ -26,7 +26,6 @@ Collate:
     'bef.options.R'
     'zzz.R'
     'rbefdata-package.R'
-    'bef.portal.get.R'
     'bef.portal.get.dataset.R'
     'bef.portal.get.proposal.R'
     'bef.portal.get.metadata.R'
@@ -36,7 +35,6 @@ Collate:
     'bef.tematres.api.R'
     'bef.mediawiki.api.R'
     'helper.R'
-    'bef.portal.get.attachment.R'
-    'bef.portal.get.dataset_list.R'
+    'bef.portal.get.attachments.R'
     'rbefdata-deprecated.R'
     'rbefdata-defunct.R'

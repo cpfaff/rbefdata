@@ -1,12 +1,12 @@
 # a helper method which behaves like dataset_url in Rails
-dataset_url <- function(id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), ...) {
+dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), ...) {
   type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
   seg = switch(type, csv2="/download.csv", csv="/download.csv", ".xml" , xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
   if (type == "csv2" || type == "eml" || type == "xml") params$separate_category_columns = TRUE
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
-  url = sprintf("%s/datasets/%d%s%s", bef.options("url"), id, seg, query_string)
+  url = sprintf("%s/datasets/%d%s%s", bef.options("url"), dataset_id, seg, query_string)
   url = gsub("\\s", "", url)
   return(url)
 }
@@ -33,8 +33,8 @@ upload_url <- function() {
 }
 
 # a helper that returns the keyword url provided the id
-keyword_url <- function(id) {
-  url = sprintf("%s/keywords/%d", bef.options("url"), id)
+keyword_url <- function(keyword_id) {
+  url = sprintf("%s/keywords/%d", bef.options("url"), keyword_id)
   return(url)
 }
 

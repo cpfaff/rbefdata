@@ -1,21 +1,13 @@
-\name{bef.portal.get.proposal}
-\alias{bef.portal.get.proposal}
+\name{bef.portal.get.datasets_for_proposal}
+\alias{bef.portal.get.datasets_for_proposal}
 \title{Fetch primary data in CSV format from a BEFdata portal paperproposal}
 \usage{
-  bef.portal.get.proposal(proposal_id,
-    user_credentials = bef.options("user_credentials"),
-    full_url = paperproposal_url(proposal_id, user_credentials = user_credentials),
+  bef.portal.get.datasets_for_proposal(id,
     curl = getCurlHandle(), ...)
 }
 \arguments{
-  \item{proposal_id}{This is the id of a paper proposal.
-  You can download all datasets in one turn given the
-  proposal_id and your user credentials.}
-
-  \item{user_credentials}{This are your login credentials}
-
-  \item{full_url}{This functions as a download link and you
-  can use is instead of the proposal_id.}
+  \item{id}{This is the ID of a paper proposal. You can
+  download all datasets in one turn given the ID.}
 
   \item{curl}{If using in a loop, call getCurlHandle()
   first and pass the returned value in here (avoids
@@ -48,7 +40,7 @@
 }
 \examples{
 \dontrun{
- prop1 = bef.portal.get.proposal(proposal_id=8, user_credentials="Yy2APsD87JiDbF9YBnU")
- }
+	  prop1 = bef.portal.get.datasets_for_proposal(proposal = 8)
+ 	}
 }
 

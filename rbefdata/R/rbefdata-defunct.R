@@ -4,7 +4,6 @@
 #'
 #' \tabular{ll}{
 #'  \strong{Defunct functions} \tab \strong{Replacement} \cr
-#'  \code{bef.getdata} \tab \code{\link{bef.portal.get}} \cr
 #'  \code{bef.getDataset} \tab \code{\link{bef.portal.get.dataset}} \cr
 #'  \code{bef.getMetadata} \tab \code{\link{bef.portal.get.metadata}} \cr
 #'  \code{bef.getKeywords} \tab \code{\link{bef.portal.get.keywords}} \cr
@@ -12,11 +11,12 @@
 #'  \code{bef.searchTematres} \tab \code{\link{bef.tematres.search.keywords}} \cr
 #'  \code{bef.searchTematresLower} \tab \code{\link{bef.tematres.search.narrower_keywords}} \cr
 #'  \code{bef.searchTematresUpper} \tab \code{\link{bef.tematres.search.broader_keywords}} \cr
+#'  \code{bef.portal.get} \tab no replacement \cr
 #' }
 #'
 #' @name rbefdata-defunct
-#' @aliases bef.getDataset bef.getKeywords bef.getMetadata bef.getProposal bef.searchTematres bef.searchTematresLower bef.searchTematresUpper
-#' @export bef.getDataset bef.getKeywords bef.getMetadata bef.getProposal bef.searchTematres bef.searchTematresLower bef.searchTematresUpper
+#' @aliases bef.getDataset bef.getKeywords bef.getMetadata bef.getProposal bef.searchTematres bef.searchTematresLower bef.searchTematresUpper bef.portal.get
+#' @export bef.getDataset bef.getKeywords bef.getMetadata bef.getProposal bef.searchTematres bef.searchTematresLower bef.searchTematresUpper bef.portal.get
 #' @keywords internal
 #'
 
@@ -48,4 +48,19 @@ bef.searchTematresLower <- function(...) {
 #' @rdname rbefdata-defunct
 bef.searchTematresUpper <- function(...) {
   .Defunct("bef.tematres.search.broader_keywords")
+}
+
+# version 0.4 defuncts
+#' @rdname rbefdata-defunct
+bef.portal.get <- function(...) {
+  .Defunct("Use the appropriate function for your task instead of this wrapper, e.g:
+	    bef.portal.get.attachments(dataset = 72)
+	    bef.portal.get.attachments_for(dataset = 72)
+	    bef.portal.get.dataset(id = 72)
+	    bef.portal.get.dataset_by(id = 72)
+	    bef.portal.get.datasets_for_keyword(keyword = 'explanatory')
+	    bef.portal.get.keywords()
+	    bef.portal.get.metadata(dataset = 72)
+	    bef.portal.get.metadata_for(dataset = 72)
+	    bef.portal.get.datasets_for_proposal(id = 7) ")
 }

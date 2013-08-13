@@ -3,18 +3,17 @@
 #' This function fetches the metadata associated with a dataset on a BEFdata portal.
 #' You need to provide the id of the dataset. You can find the url on the dataset page.
 #'
-#' @param given This is either a dataset id or a file path to a metadata eml file.
+#' @param dataset This is either a dataset ID or a file path to a metadata eml file.
 #'
 #' @return A list of metadata. metadata that doesn't exist is represented as \code{NA}
 #' @import XML
-#' @export
-#'
+#' @export bef.portal.get.metadata
 
-bef.portal.get.metadata <- function(given) {
-  if(is.character(given)) {
-    full_url = given
+bef.portal.get.metadata <- bef.portal.get.metadata_for <- function(dataset) {
+  if(is.character(dataset)) {
+    full_url = dataset
   } else {
-    full_url = dataset_url(given, "eml", separate_category_columns=TRUE)
+    full_url = dataset_url(dataset, "eml", separate_category_columns=TRUE)
   }
 
   metadata = xmlTreeParse(full_url, useInternalNodes = T)

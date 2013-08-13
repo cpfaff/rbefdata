@@ -2,10 +2,10 @@
 \alias{bef.portal.get.metadata}
 \title{Get the metadata of a dataset from the BEFdata portal}
 \usage{
-  bef.portal.get.metadata(given)
+  bef.portal.get.metadata(dataset)
 }
 \arguments{
-  \item{given}{This is either a dataset id or a file path
+  \item{dataset}{This is either a dataset ID or a file path
   to a metadata eml file.}
 }
 \value{

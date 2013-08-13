@@ -2,19 +2,24 @@
 #'
 #' This function fetches keywords from a BEFdata portal.
 #'
-#' @return The function returns a character vector of keywords.
+#' @param curl You can pass in a curl handle with additional options. By default a curl handle is
+#'        used to improve the memory footprint.
+#' @param \dots Arguments passed to \code{\link[RCurl]{getURLContent}}
+#'
+#' @return The function returns a data frame of keyword (id, name, cound).
 #'
 #' @examples \dontrun{
 #'             keywords=bef.portal.get.keywords()
 #'           }
 #' @import RCurl
-#' @import rjson
 #' @import XML
-#' @export
+#' @export bef.portal.get.keywords
 
-bef.portal.get.keywords <- function()
-   {
-      keywords_json=fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
-      keywords_summary=unlist(lapply(keywords_json, function(x) (x$name)))
-      return(keywords_summary)
-   }
+bef.portal.get.keywords <-  function(curl = getCurlHandle(), ...) {
+   raw_keywords_xml = getURLContent(paste0(bef.options('url'),"/keywords.xml"), curl = curl, ...)
+   if(getCurlInfo(curl)$response.code != 200) stop("Server Error. Try again later!")
+   keywords_xml = xmlTreeParse(raw_keywords_xml, useInternalNodes = T)
+   keywords_nodeset = getNodeSet(keywords_xml, "//object")
+   data_frame_keywords = xmlToDataFrame(keywords_nodeset)
+   return(data_frame_keywords)
+}

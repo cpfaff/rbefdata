@@ -5,21 +5,20 @@
   bef.portal.get.dataset(id, curl = getCurlHandle(), ...)
 }
 \arguments{
-  \item{id}{This is the id of a dataset on a BEFdata
-  portal. Works also multiple datasets. In this case you
-  provide the ids with c(1,2,3)}
+  \item{id}{This is the ID of a dataset on a BEFdata
+  portal.}
 
   \item{curl}{If the function is used inside a loop, call
   getCurlHandle() first and pass in the returned value
   here. This avoids an unnecessary footprint.}
 
-  \item{\dots}{This are other arguments passed to
+  \item{\dots}{Arguments passed to
   \code{\link[RCurl]{getURLContent}}}
 }
 \value{
-  The function returns a dataframe for each dataset. An
-  error is thrown when the dataset is not found or if you
-  don't have the rights to access it.
+  The function returns a dataframe of the dataset. An error
+  is thrown when the dataset is not found or if you don't
+  have the rights to access it.
 }
 \description{
   This function fetches data associated with a BEFdata
@@ -49,7 +48,7 @@
 
         curl = getCurlHandle()
         ids = c(8,70)
-        dataset_list = lapply(ids, function(x) bef.portal.get.dataset(id = x, curl = curl))
+        dataset_list = lapply(ids, function(x) bef.portal.get.dataset_by(id = x, curl = curl))
         metadata = attributes(dataset_list[[1]])
       }
 }

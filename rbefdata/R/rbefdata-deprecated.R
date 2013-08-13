@@ -10,23 +10,36 @@
 #' }
 #'
 #' @name rbefdata-deprecated
-#' @aliases bef.tematres.search.keywords bef.tematres.search.narrower_keywords bef.tematres.search.broader_keywords
-#' @export bef.tematres.search.keywords bef.tematres.search.narrower_keywords bef.tematres.search.broader_keywords
+#' @aliases bef.tematres.search.keywords bef.tematres.search.narrower_keywords bef.tematres.search.broader_keywords bef.portal.get.dataset_list bef.portal.get.proposal
+#' @export bef.tematres.search.keywords bef.tematres.search.narrower_keywords bef.tematres.search.broader_keywords bef.portal.get.dataset_list bef.portal.get.proposal
 #' @keywords internal
 
 ## version 0.3 -> 0.4 deprecates
 #' @rdname rbefdata-deprecated
 bef.tematres.search.keywords <- function(...) {
   .Deprecated("bef.tematres.api.search")
-  bef.tematres.search.keywords(...)
+  bef.tematres.api.search(...)
 }
 #' @rdname rbefdata-deprecated
 bef.tematres.search.narrower_keywords <- function(...) {
   .Deprecated("bef.tematres.api.search")
-  bef.tematres.search.narrower_keywords(...)
+  bef.tematres.api.search(...)
 }
 #' @rdname rbefdata-deprecated
 bef.tematres.search.broader_keywords <- function(...) {
   .Deprecated("bef.tematres.api.search")
-  bef.tematres.search.broader_keywords(...)
+  bef.tematres.api.search(...)
 }
+#' @rdname rbefdata-deprecated
+bef.portal.get.dataset_list <- function(...) {
+  .Deprecated("bef.portal.get.datasets_for_keyword")
+  bef.portal.get.datasets_for_keyword(...)
+}
+#' @rdname rbefdata-deprecated
+bef.portal.get.proposal <- function(...) {
+  .Deprecated("bef.portal.get.datasets_for_proposal")
+  bef.portal.get.datasets_for_proposal(...)
+}
+
+
+

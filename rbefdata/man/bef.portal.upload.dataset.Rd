@@ -3,7 +3,7 @@
 \title{Upload a dataset to the BEFdata portal}
 \usage{
   bef.portal.upload.dataset(dataset, dataset_title,
-    curl = getCurlHandle())
+    curl = getCurlHandle(), open_browser = F)
 }
 \arguments{
   \item{dataset}{The data you like to upload as dataset.
@@ -16,10 +16,13 @@
   \item{curl}{You can pass in a curl handle with additional
   options. By default a curl handle is used to improve the
   memory footprint.}
+
+  \item{open_browser}{If this is set to true the page of
+  the dataset is opened in the broser after successful
+  upload. This defaults to FALSE.}
 }
 \value{
-  Returns a status message with the ID of the dataset (not
-  yet).
+  Returns a status message with the ID of the dataset.
 }
 \description{
   This function uploads a dataset from within R to a
