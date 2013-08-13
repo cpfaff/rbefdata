@@ -15,9 +15,9 @@
 #'	     }
 #' @import RCurl
 #' @import XML
-#' @export bef.mediawiki.api.fetch.definition
+#' @export bef.mediawiki.api.define
 
-bef.mediawiki.api.fetch.definition <- function(term, language="en") {
+bef.mediawiki.api.define <- function(term, language="en") {
       wiki_api_url= paste0("http://", language, ".wikipedia.org/w/api.php")
 	search_return <- getForm(
 	  wiki_api_url,
