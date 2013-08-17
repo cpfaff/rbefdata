@@ -30,3 +30,18 @@ given_the_portal_is <- function(environment = NULL) {
     warning("Valid parameters are: development and production")
   }
 }
+
+given_the_dataset_is <- function(available = NULL) {
+  if(availtable == TRUE) {
+    id = 1
+    return(id)
+  }
+  if(environment == "production") {
+    id = 11230982734
+    return(id)
+  } else {
+    warning("Valid parameters are: TRUE and FALSE")
+  }
+}
+
+
