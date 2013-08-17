@@ -19,7 +19,8 @@
 #'        the returned value in here (avoids unnecessary footprint)
 #' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
-#' @return The function returns a list. An error is thrown when the proposal is not found
+#' @return The function returns a data frame with information about the proposals
+#'         attached datasets. An error is thrown when the proposal is not found
 #'         or you don't have the access rights for it.
 #'
 #' @examples \dontrun{
