@@ -6,7 +6,7 @@
 
 given_the_user_is <- function(condition = NULL) {
   if(condition == "valid") {
-    valid_credentials = "Yy2APsD87JiDbF9YBnU"
+    valid_credentials = "i9ZtE0F5qoma1EooxVM"
     bef.options(user_credentials = valid_credentials)
     return(valid_credentials)
   }
@@ -20,7 +20,7 @@ given_the_user_is <- function(condition = NULL) {
 
 given_the_portal_is <- function(environment = NULL) {
   if(environment == "development") {
-    bef.options(url = "http://befdatadevelepment.biow.uni-leipzig.de")
+    bef.options(url = "http://befdatadevelopment.biow.uni-leipzig.de")
     return("development")
   }
   if(environment == "production") {
@@ -32,11 +32,11 @@ given_the_portal_is <- function(environment = NULL) {
 }
 
 given_the_dataset_is <- function(available = NULL) {
-  if(availtable == TRUE) {
+  if(available == TRUE) {
     id = 1
     return(id)
   }
-  if(environment == "production") {
+  if(available == FALSE) {
     id = 11230982734
     return(id)
   } else {
