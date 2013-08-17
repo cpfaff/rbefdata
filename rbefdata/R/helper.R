@@ -3,7 +3,7 @@ dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml",
   type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
   seg = switch(type, csv2="/download.csv", csv="/download.csv", ".xml" , xls="/download", eml=".eml", freeformat="/freeformats_csv" )
   params = Filter(Negate(is.null), list(...))
-  if (type == "csv2" || type == "eml" || type == "xml") params$separate_category_columns = TRUE
+  if (type %in% c("csv2" ,"eml", "xml")) params$separate_category_columns = TRUE
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), dataset_id, seg, query_string)
@@ -106,24 +106,24 @@ clean_html_string <- function(string) {
   return(cleaned_string)
 }
 
+# get a full list of dataset from portal
+all_dataset_of_portal = function() {
+  datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
+  datasets = xmlToDataFrame(datasets_info_xml, colClasses = c('numeric', 'character'), stringsAsFactors = FALSE)
+  return(datasets)
+}
+
 # Given a title this returns the dataset id
 title_to_dataset_id <- function(dataset_title) {
-	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
-	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
-	dataset_info_ids = xpathSApply(datasets_info_xml, "//id", xmlValue)
-	dataframe = data.frame(titles = tolower(datasets_info_titles), ids = dataset_info_ids)
-	dataset_title_status = which((dataframe$titles == tolower(dataset_title)))
-	# todo refactor so the levels are removed
-	return(dataframe$ids[dataset_title_status])
+  all_datasets = all_dataset_of_portal()
+  index = match(tolower(dataset_title), tolower(all_datasets$title))
+  all_datasets[index, 'id']
 }
 
 # Check the portal if a dataset title has been taken or not
 the_title_is_taken <- function(dataset_title) {
-	datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
-	datasets_info_titles = xpathSApply(datasets_info_xml, "//title", xmlValue)
-	datasets_info_titles = tolower(datasets_info_titles)
-	dataset_title_status = any(datasets_info_titles == tolower(dataset_title))
-	return(dataset_title_status)
+  all_datasets = all_dataset_of_portal()
+  is.element(tolower(dataset_title), tolower(all_datasets$title))
 }
 
 # compare two vectors potential candidates for merging

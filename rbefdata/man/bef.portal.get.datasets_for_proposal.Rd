@@ -7,7 +7,7 @@
 }
 \arguments{
   \item{id}{This is the ID of a paper proposal. You can
-  download all datasets in one turn given the ID.}
+  download all datasets of the paper proposal at once.}
 
   \item{curl}{If using in a loop, call getCurlHandle()
   first and pass the returned value in here (avoids
@@ -40,7 +40,7 @@
 }
 \examples{
 \dontrun{
-	  prop1 = bef.portal.get.datasets_for_proposal(proposal = 8)
+	  prop1 = bef.portal.get.datasets_for_proposal(id = 8)
  	}
 }
 
