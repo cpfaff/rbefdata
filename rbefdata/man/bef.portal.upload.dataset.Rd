@@ -8,7 +8,7 @@
 \arguments{
   \item{dataset}{The data you like to upload as dataset.
   This can be a path to a CSV file or a data frame. Please
-  note that you have to ensure that the column names are
+  not that you have to ensure that the column names are
   unique.}
 
   \item{dataset_title}{The title of the dataset.}
@@ -18,8 +18,8 @@
   memory footprint.}
 
   \item{open_browser}{If this is set to true the page of
-  the dataset is opened in the browser after successful
-  upload. It defaults to FALSE.}
+  the dataset is opened in the broser after successful
+  upload. This defaults to FALSE.}
 }
 \value{
   Returns a status message with the ID of the dataset.
