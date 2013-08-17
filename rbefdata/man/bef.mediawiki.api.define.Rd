@@ -22,8 +22,8 @@
 }
 \examples{
 \dontrun{
-		descriptions = bef.mediawiki.api.fetch.definition(term = "Tree")
-		descriptions = bef.mediawiki.api.fetch.definition(term = "Baum", language = "de")
+		descriptions = bef.mediawiki.api.define(term = "Tree")
+		descriptions = bef.mediawiki.api.define(term = "Baum", language = "de")
 	     }
 }
 
