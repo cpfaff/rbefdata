@@ -6,15 +6,18 @@
 }
 \arguments{
   \item{dataset}{This is either a dataset ID or a file path
-  to a metadata eml file.}
+  to a eml metadata file.}
 }
 \value{
-  A list of metadata. metadata that doesn't exist is
+  A list of metadata. Metadata That doesn't exist is
   represented as \code{NA}
 }
 \description{
   This function fetches the metadata associated with a
-  dataset on a BEFdata portal. You need to provide the id
-  of the dataset. You can find the url on the dataset page.
+  dataset on a BEFdata portal. You need to provide the
+  function with an id of the dataset or a path to an eml
+  file you downloaded from the portal manually. You can
+  find the ID in the URL of the dataset page in the portal
+  (e.g ID 6: .../datasets/6).
 }
 

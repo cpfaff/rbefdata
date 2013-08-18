@@ -12,7 +12,28 @@ rbefdata 0.3.4
 * Adds an upload method for datasets (bef.portal.upload.dataset()). It takes a dataset 
   object (data frame) or file path (to CSV file) for upload and a title.
 * Re-factors several functions as well as some names. Defuncts the old deprecates and adds 
-  new de-functioned functions.
+  new de-functioned functions. 
+* Improves the metadata read from eml (ecological metadata language files) provided by 
+  the BEF-Data portal for each dataset. Now also supporting information about related 
+  material provided as freeformats for the dataset. 
+
+      x = bef.portal.get.metadata(dataset = 72)
+      names(x)
+      x$title
+      x$abstract
+      x$publicationDate
+      x$language
+      x$creators
+      x$authors
+      x$intellectualRights
+      x$distribution
+      x$keywords
+      x$taxonomicextent
+      x$sampling
+      x$spatial_coverage
+      x$temporal_coverage
+      x$columns
+      x$related_material
 
 rbefdata 0.3.3
 ==================
