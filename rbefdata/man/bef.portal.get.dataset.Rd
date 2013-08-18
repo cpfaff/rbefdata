@@ -16,9 +16,9 @@
   \code{\link[RCurl]{getURLContent}}}
 }
 \value{
-  The function returns a dataframe of the dataset. An error
-  is thrown when the dataset is not found or if you don't
-  have the rights to access it.
+  The function returns a data frame of the dataset. An
+  error is thrown when the dataset is not found or if you
+  don't have the rights to access it.
 }
 \description{
   This function fetches data associated with a BEFdata
@@ -39,7 +39,7 @@
   query the information via the attributes() function which
   is also shown in the examples. If you like to fetch
   multiple datasets you can use the apply functions
-  provided by R see example belwo.
+  provided by R see example below.
 }
 \examples{
 \dontrun{

@@ -12,14 +12,14 @@
 #' shown in the examples below. The object also offers additional information
 #' by attributes. You can query the information via the attributes() function
 #' which is also shown in the examples. If you like to fetch multiple datasets
-#' you can use the apply functions provided by R see example belwo.
+#' you can use the apply functions provided by R see example below.
 #'
 #' @param id This is the ID of a dataset on a BEFdata portal.
 #' @param curl If the function is used inside a loop, call getCurlHandle() first
 #'        and pass in the returned value here. This avoids an unnecessary footprint.
 #' @param \dots Arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
-#' @return The function returns a dataframe of the dataset. An error is thrown when the dataset is
+#' @return The function returns a data frame of the dataset. An error is thrown when the dataset is
 #'         not found or if you don't have the rights to access it.
 #'
 #' @examples \dontrun{
