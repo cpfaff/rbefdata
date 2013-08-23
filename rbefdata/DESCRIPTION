@@ -17,7 +17,9 @@ Imports:
     XML,
     RCurl,
     rjson,
-    gdata
+    gdata,
+    wordcloud,
+    RColorBrewer
 Date: 2013-04-17
 License: MIT + file LICENSE
 URL: https://github.com/befdata/rbefdata
@@ -37,3 +39,4 @@ Collate:
     'bef.portal.get.attachments.R'
     'rbefdata-deprecated.R'
     'rbefdata-defunct.R'
+    'bef.portal.vizalize.R'
