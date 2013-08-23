@@ -16,7 +16,9 @@ Suggests:
 Imports:
     XML,
     RCurl,
-    gdata
+    rjson,
+    gdata,
+    testthat
 Date: 2013-04-17
 License: MIT
 URL: https://github.com/befdata/rbefdata
