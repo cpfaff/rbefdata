@@ -16,16 +16,16 @@
 #'	 bef.tematres.api(task = "fetchTerm", argument = 12)
 #'	 bef.tematres.api(task = "fetchDown", argument = 4 )
 #'	 bef.tematres.api(task = "fetchUp", argument = 4)
-#'	 bef.tematres.api(task = "fetchRelated", argument = 4) # there are no realted terms atm
+#'	 bef.tematres.api(task = "fetchRelated", argument = 4)
 #'	 bef.tematres.api(task = "fetchAlt", argument = 12 )
-#'	 bef.tematres.api(task = "fetchCode", argument = "tree") # i do not know how this works
-#'	 bef.tematres.api(task = "fetchNotes", argument = 5 ) # this will require another extraction  sheme
+#'	 bef.tematres.api(task = "fetchCode", argument = "tree")
+#'	 bef.tematres.api(task = "fetchNotes", argument = 5 )
 #'	 bef.tematres.api(task = "fetchDirectTerms", argument = 12)
-#'	 bef.tematres.api(task = "fetchURI", argument = 12) # this will require another extraction  sheme
-#'	 bef.tematres.api(task = "fetchTargetTerms", argument = 12 ) # no target terms atm
-#'	 bef.tematres.api(task = "fetchSourceTerm", argument = 12) # not avail atm
-#'	 bef.tematres.api(task = "fetchTerms", argument = '12,13' ) # may need treatment for multiple arguments
-#'	 bef.tematres.api(task = "fetchRelatedTerms", argument = '12,13' )
+#'	 bef.tematres.api(task = "fetchURI", argument = 12)
+#'	 bef.tematres.api(task = "fetchTargetTerms", argument = 12 )
+#'	 bef.tematres.api(task = "fetchSourceTerm", argument = 12)
+#'	 bef.tematres.api(task = "fetchTerms", argument = '12,13' )
+#'	 bef.tematres.api(task = "fetchRelatedTerms", argument = '12,13')
 #'	 bef.tematres.api(task = "fetchSimilar", argument = 12)
 #'	 bef.tematres.api(task = "fetchLast")
 #'	 bef.tematres.api.conversion.keyword_id(given = "Measurement")
