@@ -1,7 +1,7 @@
 # a helper method which behaves like dataset_url in Rails
 dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), ...) {
   type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
-  seg = switch(type, csv2="/download.csv", csv="/download.csv", ".xml" , xls="/download", eml=".eml", freeformat="/freeformats_csv" )
+  seg = switch(type, csv2="/download.csv", csv="/download.csv", xml = ".xml", xls="/download", eml=".eml", freeformat="/freeformats_csv")
   params = Filter(Negate(is.null), list(...))
   if (type %in% c("csv2" ,"eml", "xml")) params$separate_category_columns = TRUE
   query_string = ""

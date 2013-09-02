@@ -2,7 +2,9 @@ rbefdata 0.3.5
 ==================
 
 * Adds a vizaliation function. Now you can use "bef.portal.vizualize.keywords()" to 
-  get a nice wordcoud of your BEFdata portal. 
+  get a nice wordcoud of your BEFdata portal.  
+* Improves the functionality of the bef.portal.get.paperproposal function to return 
+  the data instead of returning the information about the proposal.
 
 rbefdata 0.3.4
 ==================
