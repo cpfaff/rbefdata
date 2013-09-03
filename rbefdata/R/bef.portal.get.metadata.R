@@ -11,7 +11,7 @@
 #' @import XML
 #' @export bef.portal.get.metadata
 
-bef.portal.get.metadata <- bef.portal.get.metadata_for <- function(dataset) {
+bef.get.metadata <- bef.get.metadata_for <- bef.portal.get.metadata <- bef.portal.get.metadata_for <- function(dataset) {
   if(is.character(dataset)) {
     object = dataset
   } else {

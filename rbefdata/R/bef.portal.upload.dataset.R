@@ -18,7 +18,7 @@
 #' @import XML
 #' @export bef.portal.upload.dataset
 
-bef.portal.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
+bef.upload.dataset <- bef.portal.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
   this_function_requires_api_authentication()
   if(the_title_is_taken(dataset_title = dataset_title)) {
     stop("The title you have choosen has already been taken. Please choose another one before uploading again!")

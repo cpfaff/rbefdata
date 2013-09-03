@@ -13,7 +13,7 @@
 #'         the dataset has no attachement files.
 #' @export bef.portal.get.attachments
 
-bef.portal.get.attachments <- bef.portal.get.attachments_for <- function(dataset, directory = bef.options('download_dir'), curl = getCurlHandle(), ...) {
+bef.get.attachments <- bef.get.attachments_for <- bef.portal.get.attachments <- bef.portal.get.attachments_for <- function(dataset, directory = bef.options('download_dir'), curl = getCurlHandle(), ...) {
   dataset_url = dataset_url(dataset, "freeformat", user_credentials = bef.options('user_credentials'))
   freeformats_csv = getURLContent(dataset_url, curl = curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {

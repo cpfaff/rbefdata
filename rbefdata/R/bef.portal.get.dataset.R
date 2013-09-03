@@ -34,7 +34,7 @@
 #' @import RCurl
 #' @export bef.portal.get.dataset
 
-bef.portal.get.dataset <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
+bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
   dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"), type = "csv2")
   response_body = getURLContent(dataset_url, curl = curl, ...)
   if(getCurlInfo(curl)$response.code != 200) {
@@ -60,7 +60,7 @@ bef.portal.get.dataset <- bef.portal.get.dataset_by <- function(id, curl=getCurl
 #' @import rjson
 #' @export bef.portal.get.datasets_for_keyword
 
-bef.portal.get.datasets_for_keyword <- function(keyword) {
+bef.get.datasets_for_keyword <- bef.portal.get.datasets_for_keyword <- function(keyword) {
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
   names = unlist(lapply(keyword_json, function(x) (x$name)))
   ids = unlist(lapply(keyword_json, function(x) (x$id)))
