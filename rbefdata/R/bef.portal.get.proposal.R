@@ -29,7 +29,7 @@
 #' @import RCurl
 #' @export
 
-bef.get.datasets_for_proposal <- bef.portal.get.datasets_for_proposal <- function(id, curl = getCurlHandle(), ...) {
+bef.portal.get.datasets_for_proposal <- bef.get.datasets_for_proposal <- function(id, curl = getCurlHandle(), ...) {
   paperproposal_url = paperproposal_url(proposal_id = id)
   proposal_raw_csv = getURLContent(paperproposal_url, curl = curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {
