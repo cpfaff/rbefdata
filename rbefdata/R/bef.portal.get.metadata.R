@@ -9,7 +9,7 @@
 #'
 #' @return A list of metadata. Metadata That doesn't exist is represented as \code{NA}
 #' @import XML
-#' @export bef.portal.get.metadata
+#' @export
 
 bef.get.metadata <- bef.get.metadata_for <- bef.portal.get.metadata <- bef.portal.get.metadata_for <- function(dataset) {
   if(is.character(dataset)) {

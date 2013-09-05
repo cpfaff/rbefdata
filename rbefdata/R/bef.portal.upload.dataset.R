@@ -16,7 +16,7 @@
 #' @return Returns a status message with the ID of the dataset.
 #' @import RCurl
 #' @import XML
-#' @export bef.portal.upload.dataset
+#' @export
 
 bef.upload.dataset <- bef.portal.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
   this_function_requires_api_authentication()

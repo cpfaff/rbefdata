@@ -13,7 +13,7 @@
 #'           }
 #' @import wordcloud
 #' @import RColorBrewer
-#' @export bef.portal.vizualize.keywords
+#' @export
 
 bef.vizualize.keywords <- bef.portal.vizualize.keywords <- function(color_pal = brewer.pal(8,"Dark2"), min_freq = 1) {
   keyword_table = data.frame(bef.portal.get.keywords(), stringsAsFactors=FALSE)

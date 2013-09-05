@@ -15,7 +15,7 @@
 #'	     }
 #' @import RCurl
 #' @import XML
-#' @export bef.mediawiki.api.define
+#' @export
 
 bef.mediawiki.api.define <- function(term, language="en") {
       wiki_api_url= paste0("http://", language, ".wikipedia.org/w/api.php")
