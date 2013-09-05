@@ -34,7 +34,7 @@
 #' @import RCurl
 #' @import XML
 #' @import gdata
-#' @export
+#' @export bef.tematres.api
 
 bef.tematres.api <- function(task = "availableTasks", argument) {
 	if(task == "availableTasks") {
@@ -130,6 +130,8 @@ bef.tematres.api <- function(task = "availableTasks", argument) {
 #' @param warn Give a waring when the term/id is not found. Defaults to TRUE.
 #'
 #' @return Either a string or id
+#' @export bef.tematres.api.conversion.key_id bef.tematres.api.conversion.id_key
+#' @aliases bef.tematres.api.conversion.id_key
 
 bef.tematres.api.conversion.key_id <- bef.tematres.api.conversion.id_key <- function(given, warn = T) {
 	if(is.character(given)) {
@@ -153,6 +155,7 @@ bef.tematres.api.conversion.key_id <- bef.tematres.api.conversion.id_key <- func
 #' @param term It takes a term that you are searching the definition for
 #'
 #' @return Either a string or id
+#' @export bef.tematres.api.define
 
 bef.tematres.api.define <- function(term) {
   id = bef.tematres.api.conversion.key_id(term, warn = F)
@@ -171,6 +174,7 @@ bef.tematres.api.define <- function(term) {
 #'        "broader" (look for upward definitions) and "narrower" (looking for downward definitions).
 #'
 #' @return The function returns a vector of keywords
+#' @export bef.tematres.api.search
 
 bef.tematres.api.search <- function(term, task="search") {
   if (task=="search")

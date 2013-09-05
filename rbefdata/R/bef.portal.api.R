@@ -11,7 +11,7 @@
 #' @return Returns a list of metadata information for a dataset.
 #' @import RCurl
 #' @import XML
-#' @export
+#' @export bef.portal.api.dataset_info
 
 bef.portal.api.dataset_info <- function(id) {
   dataset_xml_to_list = xmlToList(dataset_url(dataset_id = id, type = "xml"))
@@ -23,6 +23,7 @@ bef.portal.api.dataset_info <- function(id) {
 #' @param id Is the ID of the paperproposal you like to get information for. You can
 #'        find the ID in the URL on the paper proposal.
 #' @return Returns a list of metadata information for the proposal.
+#' @export bef.portal.api.proposal_info
 
 bef.portal.api.proposal_info <- function(id) {
   proposal_xml_to_list = xmlToList(paperproposal_url(proposal_id = id, type = "xml"))
