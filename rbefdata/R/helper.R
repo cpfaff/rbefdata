@@ -147,7 +147,7 @@ url_to_id <- function(url, resource="datasets") {
 
 # a wrapper function of xpathSApply. which will return NA instead of zero-lenght list when nodes not found
 xmlNodesValue <- function(doc, path){
-  out = xpathSApply(doc, path, xmlValue, trim=T, ignoreComments=T)
+  out = xpathSApply(doc, path, xmlValue, ignoreComments=T)
   out = Filter(function(x) x!="", out)
   if (length(out) == 0) return(NA)
   out
