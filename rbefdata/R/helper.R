@@ -32,6 +32,15 @@ upload_url <- function() {
   return(url)
 }
 
+# returns an update url for a dataset
+update_url <- function(dataset_id) {
+  base_url = bef.options("url")
+  segment = paste0("/datasets/", dataset_id)
+  parameter_sep = "?"
+  url = paste0(base_url, segment, parameter_sep, 'user_credentials=', bef.options('user_credentials'))
+  return(url)
+}
+
 # a helper that returns the keyword url provided the id
 keyword_url <- function(keyword_id) {
   url = sprintf("%s/keywords/%d", bef.options("url"), keyword_id)
@@ -111,6 +120,14 @@ all_dataset_of_portal = function() {
   datasets_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T)
   datasets = xmlToDataFrame(datasets_info_xml, colClasses = c('numeric', 'character'), stringsAsFactors = FALSE)
   return(datasets)
+}
+
+# returns all datagroups of the portal
+all_datagroups_of_portal = function() {
+  this_function_requires_api_authentication()
+  datagroup_info_xml = xmlTreeParse(paste0(bef.options("url"), "/datagroups.xml", "?", "user_credentials=", bef.options("user_credentials")), useInternalNodes = T)
+  datagroups = xmlToDataFrame(datagroup_info_xml, colClasses = c('numeric', 'character', 'character', 'numeric', 'numeric'), stringsAsFactors = FALSE)
+  return(datagroups)
 }
 
 # Given a title this returns the dataset id
