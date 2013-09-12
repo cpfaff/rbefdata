@@ -13,7 +13,7 @@
 #'           }
 #' @import RCurl
 #' @import XML
-#' @export bef.portal.get.keywords
+#' @export bef.portal.get.keywords bef.get.keywords
 #' @aliases bef.get.keywords,
 
 bef.portal.get.keywords <- bef.get.keywords <- function(curl = getCurlHandle(), ...) {

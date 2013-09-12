@@ -20,7 +20,7 @@
 #'       }
 #' @import RCurl
 #' @import XML
-#' @export bef.portal.upload.dataset
+#' @export bef.portal.upload.dataset bef.upload.dataset
 #' @aliases bef.upload.dataset,
 
 bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
@@ -67,7 +67,7 @@ bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_tit
 #'  bef.portal.update.dataset(dataset = dataset, dataset_id = 72)
 #'       }
 #' @import RCurl
-#' @export bef.portal.update.dataset
+#' @export bef.portal.update.dataset bef.update.dataset
 #' @aliases bef.update.dataset,
 
 bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id, warn = TRUE, open_browser = F, curl = getCurlHandle()) {
@@ -105,7 +105,7 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #'                is a pure test description for the new attachment file", open_browser = T)
 #'       }
 #' @import RCurl
-#' @export bef.portal.attach.freeformat
+#' @export bef.portal.attach.freeformat bef.attach.freeformat
 #' @aliases bef.attach.freeformat,
 
 bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, attachment, description, open_browser = FALSE, curl = getCurlHandle()){

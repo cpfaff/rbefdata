@@ -32,7 +32,7 @@
 #'         metadata = attributes(dataset_list[[1]])
 #'       }
 #' @import RCurl
-#' @export bef.portal.get.dataset
+#' @export bef.portal.get.dataset bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 #' @aliases bef.get.dataset, bef.get.dataset_by, bef.portal.get.dataset_by
 
 bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
@@ -59,7 +59,7 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
 #'       }
 #' @import RCurl
 #' @import rjson
-#' @export bef.portal.get.datasets_for_keyword
+#' @export bef.portal.get.datasets_for_keyword bef.get.datasets_for_keyword
 #' @aliases bef.get.datasets_for_keyword,
 
 bef.portal.get.datasets_for_keyword <- bef.get.datasets_for_keyword <- function(keyword) {

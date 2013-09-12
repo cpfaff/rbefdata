@@ -27,7 +27,7 @@
 #'	  prop1 = bef.portal.get.datasets_for_proposal(proposal = 8)
 #'  	}
 #' @import RCurl
-#' @export bef.portal.get.datasets_for_proposal
+#' @export bef.portal.get.datasets_for_proposal bef.get.datasets_for_proposal
 #' @aliases bef.get.datasets_for_proposal,
 
 bef.portal.get.datasets_for_proposal <- bef.get.datasets_for_proposal <- function(id, curl = getCurlHandle(), ...) {
