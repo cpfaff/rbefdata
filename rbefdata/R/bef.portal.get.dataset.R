@@ -32,8 +32,8 @@
 #'         metadata = attributes(dataset_list[[1]])
 #'       }
 #' @import RCurl
-#' @export bef.portal.get.dataset bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
-#' @aliases bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
+#' @export bef.portal.get.dataset
+#' @aliases bef.get.dataset, bef.get.dataset_by, bef.portal.get.dataset_by
 
 bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
   dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"), type = "csv2")
@@ -59,8 +59,8 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
 #'       }
 #' @import RCurl
 #' @import rjson
-#' @export bef.portal.get.datasets_for_keyword bef.get.datasets_for_keyword
-#' @aliases bef.get.datasets_for_keyword
+#' @export bef.portal.get.datasets_for_keyword
+#' @aliases bef.get.datasets_for_keyword,
 
 bef.portal.get.datasets_for_keyword <- bef.get.datasets_for_keyword <- function(keyword) {
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))

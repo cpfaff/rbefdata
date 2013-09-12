@@ -13,8 +13,8 @@
 #'           }
 #' @import RCurl
 #' @import XML
-#' @export bef.portal.get.keywords bef.get.keywords
-#' @aliases bef.get.keywords
+#' @export bef.portal.get.keywords
+#' @aliases bef.get.keywords,
 
 bef.portal.get.keywords <- bef.get.keywords <- function(curl = getCurlHandle(), ...) {
    raw_keywords_xml = getURLContent(paste0(bef.options('url'),"/keywords.xml"), curl = curl, ...)

@@ -1,6 +1,6 @@
 \name{bef.portal.vizualize.keywords}
 \alias{bef.portal.vizualize.keywords}
-\alias{bef.vizualize.keywords}
+\alias{bef.vizualize.keywords,}
 \title{Vizualization functions to your BEFdata portal}
 \usage{
   bef.portal.vizualize.keywords(color_pal = brewer.pal(8, "Dark2"),

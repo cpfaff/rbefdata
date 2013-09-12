@@ -1,6 +1,6 @@
 \name{bef.portal.get.dataset}
-\alias{bef.get.dataset}
-\alias{bef.get.dataset_by}
+\alias{bef.get.dataset,}
+\alias{bef.get.dataset_by,}
 \alias{bef.portal.get.dataset}
 \alias{bef.portal.get.dataset_by}
 \title{Fetch primary data in CSV format from a BEFdata portal dataset.}
