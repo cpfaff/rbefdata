@@ -12,7 +12,7 @@
 #' @param curl You can pass in a curl handle with additional options. By default a curl handle is
 #'        used to improve the memory footprint.
 #' @param open_browser If this is set to true the page of the dataset is opened in the
-#'        broser after successful upload. This defaults to FALSE.
+#'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message with the ID of the dataset.
 #' @import RCurl
 #' @import XML
