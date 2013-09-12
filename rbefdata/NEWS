@@ -5,7 +5,8 @@ rbefdata 0.3.5
   get a nice wordcoud of your BEFdata portal.  
 * Improves the functionality of the bef.portal.get.paperproposal function to return 
   the data instead of returning the information about the proposal.
-* Shorter versions of function names now available as aliases 
+* Shorter versions of function names now available as aliases  
+* Adds helper to get datagroups (title, description, column_count, category_count)
 
 rbefdata 0.3.4
 ==================
