@@ -1,5 +1,5 @@
 \name{bef.portal.get.datasets_for_proposal}
-\alias{bef.get.datasets_for_proposal,}
+\alias{bef.get.datasets_for_proposal}
 \alias{bef.portal.get.datasets_for_proposal}
 \title{Fetch primary data in CSV format from a BEFdata portal paperproposal}
 \usage{

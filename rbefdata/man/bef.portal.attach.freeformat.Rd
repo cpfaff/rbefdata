@@ -1,5 +1,5 @@
 \name{bef.portal.attach.freeformat}
-\alias{bef.attach.freeformat,}
+\alias{bef.attach.freeformat}
 \alias{bef.portal.attach.freeformat}
 \title{Attach a freeformat file to a dataset}
 \usage{

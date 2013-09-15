@@ -21,7 +21,7 @@
 #' @import RCurl
 #' @import XML
 #' @export bef.portal.upload.dataset bef.upload.dataset
-#' @aliases bef.upload.dataset,
+#' @aliases bef.upload.dataset
 
 bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
   this_function_requires_api_authentication()
@@ -68,7 +68,7 @@ bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_tit
 #'       }
 #' @import RCurl
 #' @export bef.portal.update.dataset bef.update.dataset
-#' @aliases bef.update.dataset,
+#' @aliases bef.update.dataset
 
 bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id, warn = TRUE, open_browser = F, curl = getCurlHandle()) {
   if(warn) {
@@ -106,7 +106,7 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #'       }
 #' @import RCurl
 #' @export bef.portal.attach.freeformat bef.attach.freeformat
-#' @aliases bef.attach.freeformat,
+#' @aliases bef.attach.freeformat
 
 bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, attachment, description, open_browser = FALSE, curl = getCurlHandle()){
   if(missing(description)) {
@@ -139,5 +139,36 @@ bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, at
       bef.goto.dataset_page(id = dataset_id)
     }
     return(paste("Attachment to dataset with ID:", dataset_id, "successful!"))
+  }
+}
+
+#' Upload a category set
+#'
+#' This function is thought for data admin of a BEFdata portal. It uses the data haromization
+#' features provided by the BEFdata portal. In order to do harmonize a datagroup you
+#' download dthe category with the command below:
+#' bef.portal.get.categories_for(datagroups_id = 22)
+#'
+#' @param datagroup_id Categories ID you like to harmonize. You can find this in the URL of
+#' the category.
+#' @param categories Either a data frame with the categories or a csv containing the categories
+#' and merge ID and stuff downloaded from the portal.
+#' @param curl Pass in a curl handle with own options or to reduce memory footprint.
+#' @return Returns a status message whether the upload was successful or not.
+#' @examples \dontrun{
+#'   dataframe = my_categories_df
+#'   bef.portal.upload.categories(categories_id = 22, categories = dataframe)
+#'       }
+#' @import RCurl
+#' @export bef.portal.upload.categories bef.upload.categories
+#' @aliases bef.upload.categories
+
+bef.portal.upload.categories <- bef.upload.categories <- function(datagroup_id, categories, curl = getCurlHandle()) {
+  postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"), "csvfile[file]" = upload_file(categories),
+	   .opts = curlOptions(referer="http://befdatadevelopment.biow.uni-leipzig.de", useragent = "rbefdata"), curl = curl)
+  if(getCurlInfo(curl)$response.code != 302) {
+    stop("Your Category upload failed. Check your access rights!")
+  } else {
+    return(paste("Your Category upload was successful!"))
   }
 }

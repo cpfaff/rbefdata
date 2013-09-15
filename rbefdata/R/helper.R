@@ -41,6 +41,21 @@ update_url <- function(dataset_id) {
   return(url)
 }
 
+# handle datagroups related urls
+datagroups_url <- function(datagroups_id, type = c("upload", "download")) {
+  type = match.arg(type, c("upload", "download"))
+  ending = switch(type, download = "/categories.csv", upload = "/update_categories")
+  base_url = bef.options("url")
+  segment = paste0("/datagroups/", datagroups_id)
+  parameter_sep = "?"
+  if(type == "upload") {
+    url = paste0(base_url, segment, ending, parameter_sep, 'user_credentials=', bef.options('user_credentials'))
+  } else {
+    url = paste0(base_url, segment, ending, parameter_sep, 'user_credentials=', bef.options('user_credentials'))
+  }
+  return(url)
+}
+
 # a helper that returns the keyword url provided the id
 keyword_url <- function(keyword_id) {
   url = sprintf("%s/keywords/%d", bef.options("url"), keyword_id)

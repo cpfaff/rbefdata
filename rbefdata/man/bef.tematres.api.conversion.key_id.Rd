@@ -1,5 +1,5 @@
 \name{bef.tematres.api.conversion.key_id}
-\alias{bef.tematres.api.conversion.id_key,}
+\alias{bef.tematres.api.conversion.id_key}
 \alias{bef.tematres.api.conversion.key_id}
 \title{An tematres api helper that converts ids to strings and vise versa}
 \usage{

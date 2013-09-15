@@ -1,6 +1,6 @@
 \name{bef.portal.get.attachments}
-\alias{bef.get.attachments,}
-\alias{bef.get.attachments_for,}
+\alias{bef.get.attachments}
+\alias{bef.get.attachments_for}
 \alias{bef.portal.get.attachments}
 \alias{bef.portal.get.attachments_for}
 \title{Download attachment files of a dataset in BEFdata portal}

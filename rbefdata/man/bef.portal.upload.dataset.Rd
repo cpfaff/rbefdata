@@ -1,6 +1,6 @@
 \name{bef.portal.upload.dataset}
 \alias{bef.portal.upload.dataset}
-\alias{bef.upload.dataset,}
+\alias{bef.upload.dataset}
 \title{Upload a dataset to the BEFdata portal}
 \usage{
   bef.portal.upload.dataset(dataset, dataset_title,

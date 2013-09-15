@@ -131,7 +131,7 @@ bef.tematres.api <- function(task = "availableTasks", argument) {
 #'
 #' @return Either a string or id
 #' @export bef.tematres.api.conversion.key_id bef.tematres.api.conversion.id_key
-#' @aliases bef.tematres.api.conversion.id_key,
+#' @aliases bef.tematres.api.conversion.id_key
 
 bef.tematres.api.conversion.key_id <- bef.tematres.api.conversion.id_key <- function(given, warn = T) {
 	if(is.character(given)) {

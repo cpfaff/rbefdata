@@ -1,4 +1,4 @@
-#' Fetch primary data in CSV format from a BEFdata portal dataset.
+#' Fetch primary data from a BEFdata portal dataset.
 #'
 #' This function fetches data associated with a BEFdata portal dataset. By
 #' default it will fetch the CSV file of a dataset. You need to provide the
@@ -33,7 +33,7 @@
 #'       }
 #' @import RCurl
 #' @export bef.portal.get.dataset bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
-#' @aliases bef.get.dataset, bef.get.dataset_by, bef.portal.get.dataset_by
+#' @aliases bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 
 bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
   dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"), type = "csv2")
@@ -60,7 +60,7 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
 #' @import RCurl
 #' @import rjson
 #' @export bef.portal.get.datasets_for_keyword bef.get.datasets_for_keyword
-#' @aliases bef.get.datasets_for_keyword,
+#' @aliases bef.get.datasets_for_keyword
 
 bef.portal.get.datasets_for_keyword <- bef.get.datasets_for_keyword <- function(keyword) {
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
