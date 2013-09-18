@@ -8,7 +8,8 @@ rbefdata 0.3.5
 * Shorter versions of function names now available as aliases  
 * Adds helper to get datagroups (title, description, column_count, category_count)
 * Adds dataset update function "bef.portal.update.dataset()" 
-* Adds freeformat attachment function "bef.portal.attach.freeformat()"  
+* Adds freeformat attachment function "bef.portal.attach.to_dataset()" and 
+  "bef.portal.attach.to_proposal()"
 * Adds helper for categories URLs 
 * Admin interface:
   + get categories of a datagroup bef.portal.get.categories_for() 

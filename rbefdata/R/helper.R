@@ -89,6 +89,15 @@ bef.goto.dataset_page <- function(id) {
   browseURL(paste0(base_url, segment, id))
 }
 
+# go to proposal page
+bef.goto.proposal_page <- function(id) {
+  base_url = bef.options("url")
+  segment = "/paperproposals/"
+  id = id
+  browseURL(paste0(base_url, segment, id))
+}
+
+
 # Helper that determines internet connection
 is_internet_connected <- function() {
   if (.Platform$OS.type == "windows") {

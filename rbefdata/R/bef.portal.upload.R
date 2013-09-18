@@ -92,7 +92,7 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #'
 #' This function attaches a freeformat file to a dataset.
 #'
-#' @param dataset_id The ID of the dataset you like to attach to. You can get the ID from the URL
+#' @param id The ID of the dataset you like to attach to. You can get the ID from the URL
 #'        of the dataset.
 #' @param attachment Can be either a path to a file or an R data frame.
 #' @param description An optional description to your attachmed freeformat file.
@@ -101,17 +101,17 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message whether the update was successful or not.
 #' @examples \dontrun{
-#'   bef.portal.attach.freeformat(dataset_id = 72, attachment = dataset, description = "This
+#'   bef.portal.attach.to_dataset(id = 72, attachment = dataset, description = "This
 #'                is a pure test description for the new attachment file", open_browser = T)
 #'       }
 #' @import RCurl
-#' @export bef.portal.attach.freeformat bef.attach.freeformat
-#' @aliases bef.attach.freeformat
+#' @export bef.portal.attach.to_dataset bef.attach.to_dataset
+#' @aliases bef.attach.to_dataset
 
-bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, attachment, description, open_browser = FALSE, curl = getCurlHandle()){
+bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment, description, open_browser = FALSE, curl = getCurlHandle()){
   if(missing(description)) {
     postForm("http://befdatadevelopment.biow.uni-leipzig.de/files/freeformats",
-	     freeformattable_id = dataset_id,
+	     freeformattable_id = id,
 	     freeformattable_type = "Dataset",
 	     user_credentials = bef.options("user_credentials"),
 	     "freeformat[file]" = upload_file(attachment),
@@ -121,7 +121,7 @@ bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, at
 	     curl = curl)
   } else {
     postForm("http://befdatadevelopment.biow.uni-leipzig.de/files/freeformats",
-	     freeformattable_id = dataset_id,
+	     freeformattable_id = id,
 	     freeformattable_type = "Dataset",
 	     user_credentials = bef.options("user_credentials"),
 	     "freeformat[file]" = upload_file(attachment),
@@ -136,9 +136,56 @@ bef.portal.attach.freeformat <- bef.attach.freeformat <- function(dataset_id, at
     stop("Your Attachment failed. Check your access rights!")
   } else {
     if(open_browser) {
-      bef.goto.dataset_page(id = dataset_id)
+      bef.goto.dataset_page(id = id)
     }
-    return(paste("Attachment to dataset with ID:", dataset_id, "successful!"))
+    return(paste("Attachment to dataset with ID:", id, "successful!"))
+  }
+}
+
+#' Attach a freeformat file to a paper proposal
+#'
+#' This function attaches a freeformat file to a proposal
+#'
+#' @param id The ID of the proposal you like to attach to. You can get the ID from the URL
+#'        of the proposal.
+#' @param attachment Can be either a path to a file or an R data frame.
+#' @param description An optional description to your attachmed freeformat file.
+#' @param curl You can pass in a curl handle to reduce memory footprint and to add own options
+#' @param is_paper Just to tell the portal if it is a published paper you are attaching as pdf
+#'        for example. This parameter can be 0 or 1 for false and true and defaults to 0.
+#' @param doi If the attachment has a persistent digital identifyer you can add it here.
+#' @param open_browser If this is set to true the page of the proposal is opened in the
+#'        browser after successful upload. This defaults to FALSE.
+#' @return Returns a status message whether the update was successful or not.
+#' @examples \dontrun{
+#'   bef.portal.attach.to_proposal(id = 72, attachment = dataset, description = "This
+#'                is a pure test description for the new attachment file", open_browser = T)
+#'       }
+#' @import RCurl
+#' @export bef.portal.attach.to_proposal bef.attach.to_proposal
+#' @aliases bef.attach.to_proposal
+
+bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachment, description, is_paper = 0, doi = "",  open_browser = FALSE, curl = getCurlHandle()){
+  postForm("http://befdatadevelopment.biow.uni-leipzig.de/files/freeformats",
+	   freeformattable_id = id,
+	   freeformattable_type = "Paperproposal",
+	   user_credentials = bef.options("user_credentials"),
+	   "freeformat[uri]" = doi,
+	   "freeformat[is_essential]" = is_paper,
+	   "freeformat[file]" = upload_file(attachment),
+	   "freeformat[description]" = "",
+	   .opts = curlOptions(
+			       referer="http://befdatadevelopment.biow.uni-leipzig.de",
+			       useragent = "rbefdata"),
+	   curl = curl)
+
+  if(getCurlInfo(curl)$response.code != 302) {
+    stop("Your Attachment failed. Check your access rights!")
+  } else {
+    if(open_browser) {
+      bef.goto.proposal_page(id = id)
+    }
+    return(paste("Attachment to proposal with ID:", id, "successful!"))
   }
 }
 

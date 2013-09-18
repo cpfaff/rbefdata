@@ -1,16 +1,14 @@
-\name{bef.portal.attach.freeformat}
-\alias{bef.attach.freeformat}
-\alias{bef.portal.attach.freeformat}
+\name{bef.portal.attach.to_dataset}
+\alias{bef.attach.to_dataset}
+\alias{bef.portal.attach.to_dataset}
 \title{Attach a freeformat file to a dataset}
 \usage{
-  bef.portal.attach.freeformat(dataset_id, attachment,
-    description, open_browser = FALSE,
-    curl = getCurlHandle())
+  bef.portal.attach.to_dataset(id, attachment, description,
+    open_browser = FALSE, curl = getCurlHandle())
 }
 \arguments{
-  \item{dataset_id}{The ID of the dataset you like to
-  attach to. You can get the ID from the URL of the
-  dataset.}
+  \item{id}{The ID of the dataset you like to attach to.
+  You can get the ID from the URL of the dataset.}
 
   \item{attachment}{Can be either a path to a file or an R
   data frame.}
@@ -34,7 +32,7 @@
 }
 \examples{
 \dontrun{
-  bef.portal.attach.freeformat(dataset_id = 72, attachment = dataset, description = "This
+  bef.portal.attach.to_dataset(id = 72, attachment = dataset, description = "This
                is a pure test description for the new attachment file", open_browser = T)
       }
 }
