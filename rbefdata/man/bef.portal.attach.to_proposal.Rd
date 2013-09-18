@@ -4,7 +4,7 @@
 \title{Attach a freeformat file to a paper proposal}
 \usage{
   bef.portal.attach.to_proposal(id, attachment,
-    description, is_paper = 0, doi = "",
+    description = "", is_paper = 0, doi = "",
     open_browser = FALSE, curl = getCurlHandle())
 }
 \arguments{
