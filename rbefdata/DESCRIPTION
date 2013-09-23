@@ -36,6 +36,7 @@ Collate:
     'bef.portal.upload.R'
     'bef.portal.api.R'
     'bef.mediawiki.api.R'
+    'bef.tematres.api.R'
     'helper.R'
     'bef.portal.get.attachments.R'
     'rbefdata-deprecated.R'
