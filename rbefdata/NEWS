@@ -13,8 +13,9 @@ rbefdata 0.3.5
 * Adds helper for categories URLs 
 * Admin interface:
   + get categories of a datagroup bef.portal.get.categories_for() 
-  + New method to upload categories for harmonization
-
+  + New method to upload categories for harmonization 
+* removes the tematres functions as they are now provided via the rtematres 
+  package
 
 rbefdata 0.3.4
 ==================

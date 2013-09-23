@@ -19,6 +19,7 @@ Imports:
     rjson,
     gdata,
     wordcloud,
+    rtematres,
     RColorBrewer
 Date: 2013-04-17
 License: MIT + file LICENSE
@@ -34,7 +35,6 @@ Collate:
     'bef.portal.get.categories.R'
     'bef.portal.upload.R'
     'bef.portal.api.R'
-    'bef.tematres.api.R'
     'bef.mediawiki.api.R'
     'helper.R'
     'bef.portal.get.attachments.R'
