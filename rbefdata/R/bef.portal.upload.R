@@ -108,32 +108,19 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #' @export bef.portal.attach.to_dataset bef.attach.to_dataset
 #' @aliases bef.attach.to_dataset
 
-bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment, description, open_browser = FALSE, curl = getCurlHandle()){
-  if(missing(description)) {
-    postForm("http://befdataproduction.biow.uni-leipzig.de/files/freeformats",
-	     freeformattable_id = id,
-	     freeformattable_type = "Dataset",
-	     user_credentials = bef.options("user_credentials"),
-	     "freeformat[file]" = upload_file(attachment),
-	     .opts = curlOptions(
-				 referer="http://befdataproduction.biow.uni-leipzig.de",
-				 useragent = "rbefdata"),
-	     curl = curl)
-  } else {
-    postForm("http://befdataproduction.biow.uni-leipzig.de/files/freeformats",
-	     freeformattable_id = id,
-	     freeformattable_type = "Dataset",
-	     user_credentials = bef.options("user_credentials"),
-	     "freeformat[file]" = upload_file(attachment),
-	     "freeformat[description]" = description,
-	     .opts = curlOptions(
-				 referer="http://befdataproduction.biow.uni-leipzig.de",
-				 useragent = "rbefdata"),
-	     curl = curl)
-  }
-
+bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment, description = "", open_browser = FALSE, curl = getCurlHandle()){
+  postForm(paste0(bef.options("url"),"/files/freeformats"),
+	   freeformattable_id = id,
+	   freeformattable_type = "Dataset",
+	   user_credentials = bef.options("user_credentials"),
+	   "freeformat[file]" = upload_file(attachment),
+	   "freeformat[description]" = description,
+	   .opts = curlOptions(
+			       referer="http://befdataproduction.biow.uni-leipzig.de",
+			       useragent = "rbefdata"),
+	   curl = curl)
   if(getCurlInfo(curl)$response.code != 302) {
-    stop("Your Attachment failed. Check your access rights!")
+    stop("Your attachment failed. Check your access rights!")
   } else {
     if(open_browser) {
       bef.goto.dataset_page(id = id)
@@ -152,7 +139,7 @@ bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment
 #' @param description An optional description to your attachmed freeformat file.
 #' @param curl You can pass in a curl handle to reduce memory footprint and to add own options
 #' @param is_paper Just to tell the portal if it is a published paper you are attaching as pdf
-#'        for example. This parameter can be 0 or 1 for false and true and defaults to 0.
+#'        for example. This parameter can be TRUE or FALSE and defaults to FALSE.
 #' @param doi If the attachment has a persistent digital identifyer you can add it here.
 #' @param open_browser If this is set to true the page of the proposal is opened in the
 #'        browser after successful upload. This defaults to FALSE.
@@ -165,19 +152,18 @@ bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment
 #' @export bef.portal.attach.to_proposal bef.attach.to_proposal
 #' @aliases bef.attach.to_proposal
 
-bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachment, description = "", is_paper = 0, doi = "",  open_browser = FALSE, curl = getCurlHandle()){
-  postForm("http://befdataproduction.biow.uni-leipzig.de/files/freeformats",
+bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachment, description = "", is_paper = FALSE, doi = "",  open_browser = FALSE, curl = getCurlHandle()){
+  postForm(paste0(bef.options("url"),"/files/freeformats"),
 	   freeformattable_id = id,
 	   freeformattable_type = "Paperproposal",
 	   user_credentials = bef.options("user_credentials"),
 	   "freeformat[uri]" = doi,
-	   "freeformat[is_essential]" = is_paper,
+	   if(is_paper) {"freeformat[is_essential]" = 1} else {"freeformat[is_essential]" = 0},
 	   "freeformat[file]" = upload_file(attachment),
 	   "freeformat[description]" = description,
-	   .opts = curlOptions(
-			       referer="http://befdataproduction.biow.uni-leipzig.de",
-			       useragent = "rbefdata"),
-	   curl = curl)
+	   .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",
+												 useragent = "rbefdata"),
+												 curl = curl)
 
   if(getCurlInfo(curl)$response.code != 302) {
     stop("Your Attachment failed. Check your access rights!")
@@ -211,10 +197,14 @@ bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachme
 #' @aliases bef.upload.categories
 
 bef.portal.upload.categories <- bef.upload.categories <- function(datagroup_id, categories, curl = getCurlHandle()) {
-  postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"), "csvfile[file]" = upload_file(categories),
-	   .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de", useragent = "rbefdata"), curl = curl)
+	# TODO: This is not working and might needs a proper login with session cookie
+  postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"),
+					 "csvfile[file]" = upload_file(categories),
+					 .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",
+															 useragent = "rbefdata"),
+															 curl = curl)
   if(getCurlInfo(curl)$response.code != 302) {
-    stop("Your Category upload failed. Check your access rights!")
+    stop("Your category upload failed. Check your access rights!")
   } else {
     return(paste("Your Category upload was successful!"))
   }

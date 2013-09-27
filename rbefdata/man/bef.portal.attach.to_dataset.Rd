@@ -3,8 +3,9 @@
 \alias{bef.portal.attach.to_dataset}
 \title{Attach a freeformat file to a dataset}
 \usage{
-  bef.portal.attach.to_dataset(id, attachment, description,
-    open_browser = FALSE, curl = getCurlHandle())
+  bef.portal.attach.to_dataset(id, attachment,
+    description = "", open_browser = FALSE,
+    curl = getCurlHandle())
 }
 \arguments{
   \item{id}{The ID of the dataset you like to attach to.

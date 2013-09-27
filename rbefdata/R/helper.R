@@ -11,6 +11,7 @@ dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml",
   return(url)
 }
 
+# returns the url of a paper proposal
 paperproposal_url <- function(proposal_id, type = c("csv", "xml"),...) {
   type = match.arg(type, c("csv", "xml"))
   seg = switch(type, csv=".csv", xml=".xml")

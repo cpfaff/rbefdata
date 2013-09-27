@@ -4,7 +4,7 @@
 \title{Attach a freeformat file to a paper proposal}
 \usage{
   bef.portal.attach.to_proposal(id, attachment,
-    description = "", is_paper = 0, doi = "",
+    description = "", is_paper = FALSE, doi = "",
     open_browser = FALSE, curl = getCurlHandle())
 }
 \arguments{
@@ -22,8 +22,8 @@
 
   \item{is_paper}{Just to tell the portal if it is a
   published paper you are attaching as pdf for example.
-  This parameter can be 0 or 1 for false and true and
-  defaults to 0.}
+  This parameter can be TRUE or FALSE and defaults to
+  FALSE.}
 
   \item{doi}{If the attachment has a persistent digital
   identifyer you can add it here.}
