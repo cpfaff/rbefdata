@@ -1,7 +1,7 @@
 \name{bef.portal.update.dataset}
 \alias{bef.portal.update.dataset}
 \alias{bef.update.dataset}
-\title{Update a dataset alredy on BEFdata portal}
+\title{Update a dataset already on BEFdata portal}
 \usage{
   bef.portal.update.dataset(dataset, dataset_id,
     warn = TRUE, open_browser = F, curl = getCurlHandle())

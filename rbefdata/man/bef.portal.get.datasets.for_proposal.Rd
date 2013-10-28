@@ -1,9 +1,9 @@
-\name{bef.portal.get.datasets_for_proposal}
-\alias{bef.get.datasets_for_proposal}
-\alias{bef.portal.get.datasets_for_proposal}
+\name{bef.portal.get.datasets.for_proposal}
+\alias{bef.get.datasets.for_proposal}
+\alias{bef.portal.get.datasets.for_proposal}
 \title{Fetch primary data in CSV format from a BEFdata portal paperproposal}
 \usage{
-  bef.portal.get.datasets_for_proposal(id,
+  bef.portal.get.datasets.for_proposal(id,
     curl = getCurlHandle(), ...)
 }
 \arguments{
@@ -41,7 +41,7 @@
 }
 \examples{
 \dontrun{
-	  prop1 = bef.portal.get.datasets_for_proposal(proposal = 8)
+	  prop1 = bef.portal.get.datasets.for_proposal(proposal = 8)
  	}
 }
 

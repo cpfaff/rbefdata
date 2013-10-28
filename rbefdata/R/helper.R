@@ -73,6 +73,9 @@ this_function_requires_api_authentication <- function() {
 
 # returns an upload file no matter if it is given as path to a file or data.frame
 upload_file <- function(dataset) {
+  if(!is.character(dataset) & !is.data.frame(dataset)) {
+    stop("Please provide a data frame or a path to a CSV file")
+  }
   if (is.data.frame(dataset)) {
     write.csv(dataset, file.path(tempdir(), "upload_dataset.csv"), row.names = FALSE, fileEncoding = "UTF-8", quote = FALSE)
     upload_file = fileUpload(file.path(tempdir(), "upload_dataset.csv"))

@@ -55,14 +55,14 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
 #' @param keyword The keyword you like to fetch the associated datasets for
 #'
 #' @examples \dontrun{
-#'         list = bef.portal.get.datasets_for(keyword = "carbon")
+#'         list = bef.portal.get.datasets.for_keyword(keyword = "carbon")
 #'       }
 #' @import RCurl
 #' @import rjson
-#' @export bef.portal.get.datasets_for_keyword bef.get.datasets_for_keyword
-#' @aliases bef.get.datasets_for_keyword
+#' @export bef.portal.get.datasets.for_keyword bef.get.datasets.for_keyword
+#' @aliases bef.get.datasets.for_keyword
 
-bef.portal.get.datasets_for_keyword <- bef.get.datasets_for_keyword <- function(keyword) {
+bef.portal.get.datasets.for_keyword <- bef.get.datasets.for_keyword <- function(keyword) {
   keyword_json = fromJSON(getURL(paste0(bef.options('url'),"/keywords.json")))
   names = unlist(lapply(keyword_json, function(x) (x$name)))
   ids = unlist(lapply(keyword_json, function(x) (x$id)))

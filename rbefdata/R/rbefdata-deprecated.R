@@ -4,8 +4,8 @@
 #'
 #' \tabular{ll}{
 #'  \strong{Deprecated functions} \tab \strong{Replacement} \cr
-#'  \code{bef.portal.get.dataset_list} \tab \code{\link{bef.portal.get.datasets_for_keyword}} \cr
-#'  \code{bef.portal.get.proposal} \tab \code{\link{bef.portal.get.datasets_for_proposal}} \cr
+#'  \code{bef.portal.get.dataset_list} \tab \code{\link{bef.portal.get.datasets.for_keyword}} \cr
+#'  \code{bef.portal.get.proposal} \tab \code{\link{bef.portal.get.datasets.for_proposal}} \cr
 #' }
 #'
 #' @name rbefdata-deprecated
@@ -17,10 +17,12 @@
 #' @rdname rbefdata-deprecated
 bef.portal.get.dataset_list <- function(...) {
   .Deprecated("bef.portal.get.datasets_for_keyword")
-  bef.portal.get.datasets_for_keyword(...)
+  bef.portal.get.datasets.for_keyword(...)
 }
+
 #' @rdname rbefdata-deprecated
 bef.portal.get.proposal <- function(...) {
   .Deprecated("bef.portal.get.datasets_for_proposal")
-  bef.portal.get.datasets_for_proposal(...)
+  bef.portal.get.datasets.for_proposal(...)
 }
+

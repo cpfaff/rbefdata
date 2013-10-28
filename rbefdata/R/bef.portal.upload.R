@@ -42,7 +42,7 @@ bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_tit
   }
 }
 
-#' Update a dataset alredy on BEFdata portal
+#' Update a dataset already on BEFdata portal
 #'
 #' This function updates a dataset from within R. Before you can do so you need to have
 #' an account on the portal and set your credentials via the bef.options() function so
