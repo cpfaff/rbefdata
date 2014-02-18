@@ -67,7 +67,7 @@ keyword_url <- function(keyword_id) {
 this_function_requires_api_authentication <- function() {
   user_credentials = bef.options("user_credentials")
   if (is.null(user_credentials) || is.na(user_credentials) || user_credentials == '') {
-    stop("This function requires an API key for authentication. Please set your key via bef.options('user_credentials'=yourkey)!")
+    stop("This function requires an API key for authentication against the portal. Please set your key via bef.options('user_credentials' = yourkey)!")
   }
 }
 
@@ -101,20 +101,6 @@ bef.goto.proposal_page <- function(id) {
   browseURL(paste0(base_url, segment, id))
 }
 
-
-# Helper that determines internet connection
-is_internet_connected <- function() {
-  if (.Platform$OS.type == "windows") {
-    ipmessage <- system("ipconfig", intern = TRUE)
-  } else {
-    ipmessage <- system("ifconfig", intern = TRUE)
-  }
-  validIP <- "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-  if(!any(grep(validIP, ipmessage[-grep("127.0.0.1", ipmessage)]))) {
-    warning("Sorry not internet connection. Please connect first!")
-  }
-}
-
 # A helper helper that capitalizes the first letter of a string
 capitalize <- function(string) {
  first_letter = substr(string, start=0, stop=1)
@@ -125,8 +111,8 @@ capitalize <- function(string) {
 # helper to remove nas from lists
 remove_na_from_list <- function(object) {
   get_the_nas = lapply(object, function(x) is.na(x))
-  remove_the_nas = object[-which(data.frame(do.call(rbind, get_the_nas))$id)]
-  return(remove_the_nas)
+  removed_the_nas = object[-which(data.frame(do.call(rbind, get_the_nas))$id)]
+  return(removed_the_nas)
 }
 
 # clean html strings
@@ -165,6 +151,13 @@ title_to_dataset_id <- function(dataset_title) {
   all_datasets[index, 'id']
 }
 
+# Given an id return the title
+id_to_dataset_title <- function(dataset_id) {
+  all_datasets = all_dataset_of_portal()
+  index = match(tolower(dataset_id), tolower(all_datasets$id))
+  all_datasets[index, 'title']
+}
+
 # Check the portal if a dataset title has been taken or not
 the_title_is_taken <- function(dataset_title) {
   all_datasets = all_dataset_of_portal()
@@ -172,6 +165,7 @@ the_title_is_taken <- function(dataset_title) {
 }
 
 # compare two vectors potential candidates for merging
+# fixme: unused
 compare_merging_ids <- function(vec1, vec2) {
   matches = (which(!is.na(match(vec1, vec2))))
   percent = (length(matches)/length(vec1)) * 100
