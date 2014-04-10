@@ -6,11 +6,12 @@
 #'  \strong{Deprecated functions} \tab \strong{Replacement} \cr
 #'  \code{bef.portal.get.dataset_list} \tab \code{\link{bef.portal.get.datasets.for_keyword}} \cr
 #'  \code{bef.portal.get.proposal} \tab \code{\link{bef.portal.get.datasets.for_proposal}} \cr
+#'  \code{bef.tematres.api} \tab \code{\link{bef.tematres}} \cr
 #' }
 #'
 #' @name rbefdata-deprecated
-#' @aliases bef.portal.get.dataset_list bef.portal.get.proposal
-#' @export bef.portal.get.dataset_list bef.portal.get.proposal
+#' @aliases bef.portal.get.dataset_list bef.portal.get.proposal bef.tematres.api
+#' @export bef.portal.get.dataset_list bef.portal.get.proposal bef.tematres.api
 #' @keywords internal
 
 ## version 0.3 -> 0.4 deprecates
@@ -26,3 +27,8 @@ bef.portal.get.proposal <- function(...) {
   bef.portal.get.datasets.for_proposal(...)
 }
 
+#' @rdname rbefdata-deprecated
+bef.tematres.api <- function(...) {
+  .Deprecated("bef.tematres")
+  bef.tematres.api(...)
+}
