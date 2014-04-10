@@ -7,5 +7,5 @@
 #' @export bef.tematres.api
 
 bef.tematres.api <- function(...) {
-      rtematres.api.do(...)
+      rtematres(...)
 }
