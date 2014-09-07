@@ -3,7 +3,8 @@
 \alias{bef.upload.categories}
 \title{Upload a category set}
 \usage{
-bef.portal.upload.categories(datagroup_id, categories, curl = getCurlHandle())
+  bef.portal.upload.categories(datagroup_id, categories,
+    curl = getCurlHandle())
 }
 \arguments{
   \item{datagroup_id}{Categories ID you like to harmonize.
@@ -17,20 +18,24 @@ bef.portal.upload.categories(datagroup_id, categories, curl = getCurlHandle())
   reduce memory footprint.}
 }
 \value{
-Returns a status message whether the upload was successful
-or not.
+  Returns a status message whether the upload was
+  successful or not.
 }
 \description{
-This function is thought for data admin of a BEFdata
-portal. It uses the data haromization features provided by
-the BEFdata portal. In order to do harmonize a datagroup
-you download dthe category with the command below:
-bef.portal.get.categories_for(datagroups_id = 22)
+  This function changes the categories of a datagroup
+  on a BEFdata portal. It expects categories in the exact
+  same format as they are downloaded using the 
+  "bef.portal.get.categories_for" command. These are five 
+  columns specifying the category id, the short, long, and 
+  description field of the category, as well as a "merge id" 
+  column. The latter is used if a category should be merged 
+  with another one. The category given in teh "merge id" 
+  column will stay on the portal.
 }
 \examples{
 \dontrun{
-  dataframe = my_categories_df
-  bef.portal.upload.categories(categories_id = 22, categories = dataframe)
+  dataframe = bef.portal.get.categories_for(datagroup_id = 22)
+  bef.portal.upload.categories(datagroup_id = 22, categories = dataframe)
       }
 }
 
