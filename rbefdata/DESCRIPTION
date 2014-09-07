@@ -20,21 +20,3 @@ Imports:
 Date: 2013-04-17
 License: MIT + file LICENSE
 URL: https://github.com/befdata/rbefdata
-Collate:
-    'bef.options.R'
-    'zzz.R'
-    'rbefdata-package.R'
-    'bef.portal.get.dataset.R'
-    'bef.portal.get.proposal.R'
-    'bef.portal.get.metadata.R'
-    'bef.portal.get.keywords.R'
-    'bef.portal.get.categories.R'
-    'bef.portal.upload.R'
-    'bef.portal.api.R'
-    'bef.mediawiki.api.R'
-    'bef.tematres.api.R'
-    'helper.R'
-    'bef.portal.get.attachments.R'
-    'rbefdata-deprecated.R'
-    'rbefdata-defunct.R'
-    'bef.portal.vizalize.R'

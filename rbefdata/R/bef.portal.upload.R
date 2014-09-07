@@ -197,7 +197,7 @@ bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachme
 #' @aliases bef.upload.categories
 
 bef.portal.upload.categories <- bef.upload.categories <- function(datagroup_id, categories, curl = getCurlHandle()) {
-	# TODO: This is not working and might needs a proper login with session cookie
+	# TODO: This is not working and might needs user credentials of course 
   postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"),
 					 "csvfile[file]" = upload_file(categories),
 					 .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",

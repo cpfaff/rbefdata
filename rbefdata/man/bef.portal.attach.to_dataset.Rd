@@ -3,9 +3,8 @@
 \alias{bef.portal.attach.to_dataset}
 \title{Attach a freeformat file to a dataset}
 \usage{
-  bef.portal.attach.to_dataset(id, attachment,
-    description = "", open_browser = FALSE,
-    curl = getCurlHandle())
+bef.portal.attach.to_dataset(id, attachment, description = "",
+  open_browser = FALSE, curl = getCurlHandle())
 }
 \arguments{
   \item{id}{The ID of the dataset you like to attach to.
@@ -25,11 +24,11 @@
   upload. This defaults to FALSE.}
 }
 \value{
-  Returns a status message whether the update was
-  successful or not.
+Returns a status message whether the update was successful
+or not.
 }
 \description{
-  This function attaches a freeformat file to a dataset.
+This function attaches a freeformat file to a dataset.
 }
 \examples{
 \dontrun{

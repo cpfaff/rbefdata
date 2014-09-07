@@ -5,9 +5,8 @@
 \alias{bef.portal.get.attachments_for}
 \title{Download attachment files of a dataset in BEFdata portal}
 \usage{
-  bef.portal.get.attachments(dataset,
-    directory = bef.options("download_dir"),
-    curl = getCurlHandle(), ...)
+bef.portal.get.attachments(dataset, directory = bef.options("download_dir"),
+  curl = getCurlHandle(), ...)
 }
 \arguments{
   \item{dataset}{The ID of dataset you like to fetch the
@@ -27,12 +26,11 @@
   \code{\link[RCurl]{getURLContent}}.}
 }
 \value{
-  A data frame of file information is returned invisibly.
-  NULL is returned when the dataset has no attachement
-  files.
+A data frame of file information is returned invisibly.
+NULL is returned when the dataset has no attachement files.
 }
 \description{
-  This function will download attachment files associated
-  with a dataset into specified directory.
+This function will download attachment files associated
+with a dataset into specified directory.
 }
 

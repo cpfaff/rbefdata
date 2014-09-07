@@ -3,8 +3,8 @@
 \alias{bef.update.dataset}
 \title{Update a dataset already on BEFdata portal}
 \usage{
-  bef.portal.update.dataset(dataset, dataset_id,
-    warn = TRUE, open_browser = F, curl = getCurlHandle())
+bef.portal.update.dataset(dataset, dataset_id, warn = TRUE,
+  open_browser = F, curl = getCurlHandle())
 }
 \arguments{
   \item{dataset}{The data you like to use for upload and to
@@ -27,20 +27,20 @@
   upload. This defaults to FALSE.}
 }
 \value{
-  Returns a status message whether the update was
-  successful or not.
+Returns a status message whether the update was successful
+or not.
 }
 \description{
-  This function updates a dataset from within R. Before you
-  can do so you need to have an account on the portal and
-  set your credentials via the bef.options() function so
-  the authentication works. The function requires an ID of
-  the dataset and either a path to a CSV file or a data
-  frame used to update the old dataset.
+This function updates a dataset from within R. Before you
+can do so you need to have an account on the portal and set
+your credentials via the bef.options() function so the
+authentication works. The function requires an ID of the
+dataset and either a path to a CSV file or a data frame
+used to update the old dataset.
 }
 \details{
-  Please be careful as this function overrides the old
-  dataset (raw data) on the portal completely.
+Please be careful as this function overrides the old
+dataset (raw data) on the portal completely.
 }
 \examples{
 \dontrun{

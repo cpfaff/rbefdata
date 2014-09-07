@@ -2,16 +2,16 @@
 \alias{bef.options}
 \title{Set or query otions related to the BEFdata R package.}
 \usage{
-  bef.options(...)
+bef.options(...)
 }
 \arguments{
   \item{\dots}{similar to \code{\link{options}}. see
   examples below.}
 }
 \description{
-  This function is used to query and set R BEFdata package
-  specific options like the URL to the BEFdata portal and
-  the URL to the tematres thesaurus.
+This function is used to query and set R BEFdata package
+specific options like the URL to the BEFdata portal and the
+URL to the tematres thesaurus.
 }
 \examples{
 # BEFdata URL

@@ -3,8 +3,8 @@
 \alias{bef.vizualize.keywords}
 \title{Vizualization functions to your BEFdata portal}
 \usage{
-  bef.portal.vizualize.keywords(color_pal = brewer.pal(8, "Dark2"),
-    min_freq = 1)
+bef.portal.vizualize.keywords(color_pal = brewer.pal(8, "Dark2"),
+  min_freq = 1)
 }
 \arguments{
   \item{color_pal}{Is a color palette you can create for
@@ -16,12 +16,12 @@
   in the cloud. This defaults to 1.}
 }
 \value{
-  The function returns a wordcloud based on the keywords of
-  the BEFdata portal.
+The function returns a wordcloud based on the keywords of
+the BEFdata portal.
 }
 \description{
-  Vizalize the keywords contained in your BEFdata portal
-  vai a nice wordcloud.
+Vizalize the keywords contained in your BEFdata portal vai
+a nice wordcloud.
 }
 \examples{
 \dontrun{

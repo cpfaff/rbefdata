@@ -3,8 +3,7 @@
 \alias{bef.upload.categories}
 \title{Upload a category set}
 \usage{
-  bef.portal.upload.categories(datagroup_id, categories,
-    curl = getCurlHandle())
+bef.portal.upload.categories(datagroup_id, categories, curl = getCurlHandle())
 }
 \arguments{
   \item{datagroup_id}{Categories ID you like to harmonize.
@@ -18,15 +17,15 @@
   reduce memory footprint.}
 }
 \value{
-  Returns a status message whether the upload was
-  successful or not.
+Returns a status message whether the upload was successful
+or not.
 }
 \description{
-  This function is thought for data admin of a BEFdata
-  portal. It uses the data haromization features provided
-  by the BEFdata portal. In order to do harmonize a
-  datagroup you download dthe category with the command
-  below: bef.portal.get.categories_for(datagroups_id = 22)
+This function is thought for data admin of a BEFdata
+portal. It uses the data haromization features provided by
+the BEFdata portal. In order to do harmonize a datagroup
+you download dthe category with the command below:
+bef.portal.get.categories_for(datagroups_id = 22)
 }
 \examples{
 \dontrun{

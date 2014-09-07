@@ -3,9 +3,9 @@
 \alias{bef.portal.attach.to_proposal}
 \title{Attach a freeformat file to a paper proposal}
 \usage{
-  bef.portal.attach.to_proposal(id, attachment,
-    description = "", is_paper = FALSE, doi = "",
-    open_browser = FALSE, curl = getCurlHandle())
+bef.portal.attach.to_proposal(id, attachment, description = "",
+  is_paper = FALSE, doi = "", open_browser = FALSE,
+  curl = getCurlHandle())
 }
 \arguments{
   \item{id}{The ID of the proposal you like to attach to.
@@ -33,11 +33,11 @@
   upload. This defaults to FALSE.}
 }
 \value{
-  Returns a status message whether the update was
-  successful or not.
+Returns a status message whether the update was successful
+or not.
 }
 \description{
-  This function attaches a freeformat file to a proposal
+This function attaches a freeformat file to a proposal
 }
 \examples{
 \dontrun{
