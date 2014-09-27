@@ -24,7 +24,7 @@
 #'	   the access rights for it.
 #'
 #' @examples \dontrun{
-#'	  prop1 = bef.portal.get.datasets.for_proposal(proposal = 8)
+#'	  prop1 = bef.portal.get.datasets.for_proposal(id = 8)
 #'  	}
 #' @import RCurl
 #' @export bef.portal.get.datasets.for_proposal bef.get.datasets.for_proposal
