@@ -29,6 +29,7 @@
 #' @import RCurl
 #' @export bef.portal.get.datasets.for_proposal bef.get.datasets.for_proposal
 #' @aliases bef.get.datasets.for_proposal
+#' @seealso \code{\link{bef.get.datasets.for_keyword}}, \code{\link{bef.portal.api.proposal_info}}
 
 bef.portal.get.datasets.for_proposal <- bef.get.datasets.for_proposal <- function(id, curl = getCurlHandle(), ...) {
   paperproposal_url = paperproposal_url(proposal_id = id)
