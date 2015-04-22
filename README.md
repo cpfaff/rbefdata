@@ -27,7 +27,7 @@ You can also install the latest version from Github via the following commands.
 install.packages("devtools")
 # install rbefdata package from github
 library(devtools)
-install_github(username = "befdata", repo = "rbefdata", subdir = "rbefdata")
+install_github("befdata/rbefdata", subdir = "rbefdata")
 ```
 
 You should be aware that this installation gets you a bleeding edge version
