@@ -74,7 +74,7 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
   if(warn) {
     stop("This function overrides the dataset on the portal! If you are sure set the function option warn = FALSE")
   }
-  postForm(paste0("http://befdataproduction.biow.uni-leipzig.de/datasets/", dataset_id, "/update_workbook"),
+  postForm(paste0(bef.options("url"), dataset_id, "/update_workbook"),
 	   user_credentials = bef.options("user_credentials"),
 	   "datafile[file]" = upload_file(dataset),
 	   curl = curl)
@@ -179,12 +179,12 @@ bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachme
 #'
 #' This function changes the categories of a datagroup
 #' on a BEFdata portal. It expects categories in the exact
-#' same format as they are downloaded using the 
-#' "bef.portal.get.categories_for" command. These are five 
-#' columns specifying the category id, the short, long, and 
-#' description field of the category, as well as a "merge id" 
-#' column. The latter is used if a category should be merged 
-#' with another one. The category given in teh "merge id" 
+#' same format as they are downloaded using the
+#' "bef.portal.get.categories_for" command. These are five
+#' columns specifying the category id, the short, long, and
+#' description field of the category, as well as a "merge id"
+#' column. The latter is used if a category should be merged
+#' with another one. The category given in teh "merge id"
 #' column will stay on the portal.
 #'
 #' @param datagroup_id Categories ID you like to harmonize. You can find this in the URL of
@@ -203,7 +203,7 @@ bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachme
 #' @seealso \code{bef.portal.get.categories_for}
 
 bef.portal.upload.categories <- bef.upload.categories <- function(datagroup_id, categories, curl = getCurlHandle()) {
-	# TODO: This is not working and might needs user credentials of course 
+	# TODO: This is not working and might needs user credentials of course
   postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"),
 					 "csvfile[file]" = upload_file(categories),
 					 .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",
