@@ -6,17 +6,19 @@
 #' the dataset page in the portal (e.g ID 6: .../datasets/6).
 #'
 #' @param dataset This is either a dataset ID or a file path to a eml metadata file.
-#'
+#' @param split_category Determines whether the metadata of a column with mixed data types
+#'        is split into two separate numeric and factorial fields to describe the columns.
+#'        See also split_category for the dataset download function.
 #' @return A list of metadata. Metadata That doesn't exist is represented as \code{NA}
 #' @import XML
 #' @export bef.portal.get.metadata bef.get.metadata bef.get.metadata_for bef.portal.get.metadata_for
 #' @aliases bef.get.metadata bef.get.metadata_for bef.portal.get.metadata_for
 
-bef.portal.get.metadata <-  bef.get.metadata <- bef.get.metadata_for <- bef.portal.get.metadata_for <- function(dataset) {
+bef.portal.get.metadata <-  bef.get.metadata <- bef.get.metadata_for <- bef.portal.get.metadata_for <- function(dataset, split_category=T) {
   if(is.character(dataset)) {
     object = dataset
   } else {
-    object = dataset_url(dataset, "eml", separate_category_columns=TRUE)
+    object = dataset_url(dataset, "eml", split_category=split_category)
   }
 
   metadata = xmlTreeParse(object, useInternalNodes = T)

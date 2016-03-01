@@ -17,6 +17,8 @@
 #' @param id This is the ID of a dataset on a BEFdata portal.
 #' @param curl If the function is used inside a loop, call getCurlHandle() first
 #'        and pass in the returned value here. This avoids an unnecessary footprint.
+#' @param split_category Determines whether columns with mixed data types are split
+#'        into two separate numeric and factorial columns
 #' @param \dots Arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
 #' @return The function returns a data frame of the dataset. An error is thrown when the dataset is
@@ -35,15 +37,22 @@
 #' @export bef.portal.get.dataset bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 #' @aliases bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 
-bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), ...) {
-  dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"), type = "csv2")
+bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.get.dataset_by <- function(id, curl=getCurlHandle(), split_category=T,...) {
+  dataset_url = dataset_url(id, user_credentials= bef.options("user_credentials"), type = "csv2", split_category=split_category)
+
   response_body = getURLContent(dataset_url, curl = curl, ...)
   if(getCurlInfo(curl)$response.code != 200) {
     msg = sprintf("Dataset(id=%d) not found or not accessible. Please check your credentials and make sure you have access right for it.", id)
     stop(msg)
   }
   dataset = read.csv(text = response_body)
-  metadata = bef.portal.get.metadata(id)
+
+  if (split_category == T) {
+    metadata = bef.portal.get.metadata(id, split_category=T)
+  } else {
+    metadata = bef.portal.get.metadata(id, split_category=F)
+  }
+
   attributes(dataset) = c(attributes(dataset), metadata)
 
   categories = (attributes(dataset)$columns)$numericDomain

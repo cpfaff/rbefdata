@@ -17,6 +17,8 @@
 #'        one turn given the ID.
 #' @param curl If using in a loop, call getCurlHandle() first and pass
 #'        the returned value in here (avoids unnecessary footprint)
+#' @param split_category Determines whether columns with mixed data types are split
+#'        into two separate numeric and factorial columns
 #' @param \dots This are other arguments passed to \code{\link[RCurl]{getURLContent}}
 #'
 #' @return The function returns a list of raw data attached to a proposal.
@@ -31,13 +33,13 @@
 #' @aliases bef.get.datasets.for_proposal
 #' @seealso \code{\link{bef.get.datasets.for_keyword}}, \code{\link{bef.portal.api.proposal_info}}
 
-bef.portal.get.datasets.for_proposal <- bef.get.datasets.for_proposal <- function(id, curl = getCurlHandle(), ...) {
+bef.portal.get.datasets.for_proposal <- bef.get.datasets.for_proposal <- function(id, split_category=T, curl = getCurlHandle(), ...) {
   paperproposal_url = paperproposal_url(proposal_id = id)
   proposal_raw_csv = getURLContent(paperproposal_url, curl = curl, ...)
   if (getCurlInfo(curl)$response.code != 200) {
     stop("Proposal not found or not accessible. Please check your credentials and make sure you have access right for it.")
   }
   proposal_data = read.csv(text = proposal_raw_csv)
-  datasets = sapply(proposal_data$ID, function(x) bef.portal.get.dataset(id = x))
+  datasets = sapply(proposal_data$ID, function(x) bef.portal.get.dataset(id = x, split_category=split_category))
   return(datasets)
 }
