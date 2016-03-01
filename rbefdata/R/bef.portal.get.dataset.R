@@ -45,6 +45,10 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
   dataset = read.csv(text = response_body)
   metadata = bef.portal.get.metadata(id)
   attributes(dataset) = c(attributes(dataset), metadata)
+
+  categories = (attributes(dataset)$columns)$numericDomain
+  dataset[, which(is.na(categories))] = columns.as(dataset[, which(is.na(categories))], "factor")
+  dataset[, which(!is.na(categories))] = columns.as(dataset[, which(!is.na(categories))], "numeric")
   return(dataset)
 }
 
