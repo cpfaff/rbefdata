@@ -3,7 +3,10 @@
 #' This function is used to query and set R BEFdata package specific options like
 #' the URL to the BEFdata portal and the URL to the tematres thesaurus.
 #'
-#' @param \dots similar to \code{\link{options}}. see examples below.
+#' @param \dots similar to \code{\link{options}}. Note: The user credentials you
+#' can set with the parameter 'user_credentials="xxxx"'. You find the credentials
+#' on your profile page on the BEFdata portal that you are using.
+#'
 #' @examples
 #' # BEFdata URL
 #' bef.options('url')
