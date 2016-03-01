@@ -22,7 +22,7 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup_id
   datagroup_url = datagroups_url(datagroups_id = datagroup_id, type = "download")
   response_body = getURLContent(datagroup_url, curl = curl, ...)
   if(getCurlInfo(curl)$response.code != 200) {
-    msg = sprintf("Datagroups (id=%d) not found or not accessible. Please check your credentials!", id)
+    msg = sprintf("Datagroups (datagroup_id=%d) not found or not accessible. Please check your credentials!", datagroup_id)
     stop(msg)
   }
   dataframe = read.csv(text = response_body)
