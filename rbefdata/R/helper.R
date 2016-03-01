@@ -1,9 +1,13 @@
 # a helper method which behaves like dataset_url in Rails
-dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), ...) {
+dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml", "freeformat"), split_category=T, ...) {
   type = match.arg(type, c("csv2", "csv", "xml", "xls", "eml", "freeformat"))
   seg = switch(type, csv2="/download.csv", csv="/download.csv", xml = ".xml", xls="/download", eml=".eml", freeformat="/freeformats_csv")
   params = Filter(Negate(is.null), list(...))
-  if (type %in% c("csv2" ,"eml", "xml")) params$separate_category_columns = TRUE
+  if (split_category) {
+    params$separate_category_columns = TRUE
+  } else {
+    params$separate_category_columns = FALSE
+  }
   query_string = ""
   if (length(params)) query_string = paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
   url = sprintf("%s/datasets/%d%s%s", bef.options("url"), dataset_id, seg, query_string)
@@ -201,4 +205,14 @@ suggest_filename <- function(filename, dir=getwd()) {
     suggested_filename = sub(filename, pattern="(\\.\\w+)?$", replacement=sprintf("(%d)\\1", i))
   }
   return(suggested_filename)
+}
+
+# coerces specic columns of a data frame to a certain class
+columns.as <- function(obj, type){
+  FUN1 <- switch(type,
+                 character = as.character,
+                 numeric = as.numeric,
+                 factor = as.factor)
+  out <- lapply(obj, FUN1)
+  as.data.frame(out)
 }
