@@ -47,11 +47,7 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
   }
   dataset = read.csv(text = response_body)
 
-  if (split_category == T) {
-    metadata = bef.portal.get.metadata(id, split_category=T)
-  } else {
-    metadata = bef.portal.get.metadata(id, split_category=F)
-  }
+  metadata = bef.portal.get.metadata(id, split_category=split_category)
 
   attributes(dataset) = c(attributes(dataset), metadata)
 
