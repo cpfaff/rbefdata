@@ -51,9 +51,26 @@ bef.portal.get.dataset <-  bef.get.dataset <- bef.get.dataset_by <- bef.portal.g
 
   attributes(dataset) = c(attributes(dataset), metadata)
 
+  # categories = (attributes(dataset)$columns)$numericDomain
+  # dataset[, which(is.na(categories))] = columns.as(dataset[, which(is.na(categories))], "factor")
+  # dataset[, which(!is.na(categories))] = columns.as(dataset[, which(!is.na(categories))], "numeric")
+
   categories = (attributes(dataset)$columns)$numericDomain
-  dataset[, which(is.na(categories))] = columns.as(dataset[, which(is.na(categories))], "factor")
-  dataset[, which(!is.na(categories))] = columns.as(dataset[, which(!is.na(categories))], "numeric")
+  factor_treatment = which(is.na(categories))
+  numeric_treatment = which(!is.na(categories))
+
+  if(is.data.frame(dataset[, numeric_treatment])) {
+    dataset[, numeric_treatment] = as.data.frame(lapply((dataset[, numeric_treatment]), as.numeric))
+  } else {
+    dataset[, numeric_treatment] = as.numeric(dataset[, numeric_treatment])
+  }
+
+  if(is.data.frame(dataset[, factor_treatment])) {
+    dataset[, factor_treatment] = as.data.frame(lapply((dataset[, factor_treatment]), as.factor))
+  } else {
+    dataset[, factor_treatment] = as.numeric(dataset[, factor_treatment])
+  }
+
   return(dataset)
 }
 
