@@ -46,8 +46,9 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
 #'   bef.portal.get.datagroups(reference="Scientific plant speices name")
 #'       }
 #' @export bef.portal.get.datagroup
+#' @alias bef.poral.data.group
 
-bef.portal.get.datagroup <- function (reference, list=F) {
+bef.portal.get.datagroup <- bef.portal.datagroup <- function (reference, list=F) {
   if (bef.options("user_credentials") == "") stop("Sorry this function requires the user credentials to be set")
 
   if (list) {
@@ -72,4 +73,9 @@ bef.portal.get.datagroup <- function (reference, list=F) {
       subset(get_all_datagroups(), id == reference)
     }
   }
+}
+
+#' @export extract
+extract <- function(the,from) {
+  as.character(unlist(from[,the]))
 }
