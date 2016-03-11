@@ -5,10 +5,11 @@
 \alias{bef.portal.get.categories_for}
 \title{Get a data groups categories as data frame (data admin interface)}
 \usage{
-bef.portal.get.categories_for(datagroup_id, curl = getCurlHandle(), ...)
+bef.portal.get.categories_for(datagroup, curl = getCurlHandle(), ...)
 }
 \arguments{
-\item{datagroup_id}{It the ID of the data group you like to get the categories from.}
+\item{datagroup}{It is the ID (or the name) of the data group you like to get
+the categories from.}
 
 \item{curl}{Pass in a curl handle here if you like with own options or to reduce the
 memory footprint.}
@@ -26,7 +27,7 @@ the categories upload command.
 }
 \examples{
 \dontrun{
-  bef.portal.get.categories_for(datagroup_id = 22)
+  bef.portal.get.categories_for(datagroup = 22)
       }
 }
 
