@@ -207,21 +207,16 @@ suggest_filename <- function(filename, dir=getwd()) {
   return(suggested_filename)
 }
 
-# coerces columns of a data frame to a certain class
-columns.as <- function(obj, type){
-  FUN1 <- switch(type,
-                 character = as.character,
-                 numeric = as.numeric,
-                 factor = as.factor)
-  out <- lapply(obj, FUN1)
-  as.data.frame(out)
+# a helper that fetches all datagroups details
+get_all_datagroups <- function () {
+  parsed_tree = xmlTreeParse(paste0(bef.options("url"),"/datagroups.xml?user_credentials=",bef.options("user_credentials")), useInternalNodes=T)
+  interesting_nodeset = getNodeSet(parsed_tree, path="//*/datagroup")
+  xmlToDataFrame(interesting_nodeset)
 }
 
 # a function to convert data group names into id's and vice versa
 datagroup_name_id_conversion <- function(input){
-  parsed_tree = xmlTreeParse(paste0(bef.options("url"),"/datagroups.xml?user_credentials=",bef.options("user_credentials")), useInternalNodes=T)
-  interesting_nodeset = getNodeSet(parsed_tree, path="//*/datagroup")
-  datagroup_name_id_lookup_table = xmlToDataFrame(interesting_nodeset)
+  datagroup_name_id_lookup_table = get_all_datagroups()
   if(is.numeric(input)) {
     as.character(datagroup_name_id_lookup_table$title[which(datagroup_name_id_lookup_table$id == input)])
   } else {
@@ -229,3 +224,14 @@ datagroup_name_id_conversion <- function(input){
   }
 }
 
+# test for integer zero
+is.integer0 <- function(x)
+{
+  is.integer(x) && length(x) == 0L
+}
+
+# test for character zero
+is.character0 <- function(x)
+{
+  is.character(x) && length(x) == 0L
+}

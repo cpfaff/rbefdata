@@ -31,3 +31,45 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
   dataframe = read.csv(text = response_body)
   return(dataframe)
 }
+
+#' Get all or one specifc data group of interest
+#'
+#' This function fetches a specific or all datagroups with all their
+#' detail information which is a title a description and the count of
+#' categories it contains.
+#'
+#' @param reference The id or name of the data groups you are interested in
+#' @param list If this is set to true you get all datagroups as data frame
+#' @return Returns a data frame with the datagroup details
+#' @examples \dontrun{
+#'   bef.portal.get.datagroups(list=T)
+#'   bef.portal.get.datagroups(reference="Scientific plant speices name")
+#'       }
+#' @export bef.portal.get.datagroup
+
+bef.portal.get.datagroup <- function (reference, list=F) {
+  if (bef.options("user_credentials") == "") stop("Sorry this function requires the user credentials to be set")
+
+  if (list) {
+    get_all_datagroups()
+  } else {
+
+    checkit = datagroup_name_id_conversion(input=reference)
+
+    if(is.integer0(checkit)){
+      stop("Sorry the datagroup you are looking for does not exist! Check the spelling!")
+    }
+
+    if(is.character0(checkit)){
+      stop("Sorry the datagroup you are looking for does not exist! Check the id")
+    }
+
+    if(is.character(reference)){
+      reference = datagroup_name_id_conversion(input=reference)
+    }
+
+    if(is.numeric(reference)){
+      subset(get_all_datagroups(), id == reference)
+    }
+  }
+}
