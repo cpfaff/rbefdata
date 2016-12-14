@@ -74,8 +74,3 @@ bef.portal.get.datagroup <- bef.portal.datagroup <- function (reference, list=F)
     }
   }
 }
-
-#' @export extract
-extract <- function(the,from) {
-  as.character(unlist(from[,the]))
-}
