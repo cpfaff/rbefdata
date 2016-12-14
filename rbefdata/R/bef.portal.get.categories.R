@@ -48,6 +48,7 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
 #' @export bef.portal.get.datagroup
 #' @alias bef.portal.datagroup
 
+
 bef.portal.get.datagroup <- bef.portal.datagroup <- function (reference, list=F) {
   if (bef.options("user_credentials") == "") stop("Sorry this function requires the user credentials to be set")
 

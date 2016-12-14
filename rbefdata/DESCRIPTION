@@ -1,6 +1,6 @@
 Package: rbefdata
-Title: BEFdata R package
-Version: 0.3.5
+Title: BEFdata R Package
+Version: 0.3.6
 Authors@R: c(person("Claas-Thido", "Pfaff",
     email="claas-thido.pfaff@idiv-biodiversity.de", role=c("cre","aut")),
     person("Karin", "Nadrowski", email="nadrowski@uni-leipzig.de", role="aut"),
@@ -17,7 +17,7 @@ Imports:
     wordcloud,
     rtematres,
     RColorBrewer
-Date: 2013-04-17
+Date: 2016-12-14
 License: MIT + file LICENSE
 URL: https://github.com/befdata/rbefdata
 RoxygenNote: 5.0.1
