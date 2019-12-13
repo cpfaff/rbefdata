@@ -19,7 +19,7 @@
 bef.portal.get.keywords <- bef.get.keywords <- function(curl = getCurlHandle(), ...) {
    raw_keywords_xml = getURLContent(paste0(bef.options('url'),"/keywords.xml"), curl = curl, ...)
    if(getCurlInfo(curl)$response.code != 200) stop("Server Error. Try again later!")
-   keywords_xml = xmlTreeParse(raw_keywords_xml, useInternalNodes = T)
+   keywords_xml = xmlTreeParse(getURL(raw_keywords_xml, useInternalNodes = T))
    data_frame_keywords = xmlToDataFrame(keywords_xml, colClasses=c('numeric', 'character', 'numeric'), stringsAsFactors = FALSE)
    return(data_frame_keywords)
 }

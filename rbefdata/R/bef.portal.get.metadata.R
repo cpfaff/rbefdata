@@ -21,7 +21,7 @@ bef.portal.get.metadata <-  bef.get.metadata <- bef.get.metadata_for <- bef.port
     object = dataset_url(dataset, "eml", split_category=split_category)
   }
 
-  metadata = xmlTreeParse(object, useInternalNodes = T)
+  metadata = xmlTreeParse(getURL(object), useInternalNodes = T)
 
   template_dataset = list(title = "//dataset/title",
                   abstract = "//dataset/abstract",
