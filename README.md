@@ -1,6 +1,8 @@
 The BEFdata R-package
 =======================
 
+[![Travis build status](https://travis-ci.org/cpfaff/rbefdata.svg?branch=master)](https://travis-ci.org/cpfaff/rbefdata)[![Coverage status](https://codecov.io/gh/cpfaff/rbefdata/branch/master/graph/badge.svg)](https://codecov.io/github/cpfaff/rbefdata?branch=master)
+
 The companion R package for the collaborative data management platform
 [BEFdata](https://github.com/cpfaff/befdata). The package provides you with
 easy access to your data and the associated meta to help you pull your
