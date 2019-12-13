@@ -3,10 +3,18 @@ The BEFdata R-package
 
 [![Travis build status](https://travis-ci.org/cpfaff/rbefdata.svg?branch=master)](https://travis-ci.org/cpfaff/rbefdata)[![Coverage status](https://codecov.io/gh/cpfaff/rbefdata/branch/master/graph/badge.svg)](https://codecov.io/github/cpfaff/rbefdata?branch=master)
 
-The companion R package for the collaborative data management platform
-[BEFdata](https://github.com/cpfaff/befdata). The package provides you with
-easy access to your data and the associated meta to help you pull your
-collected and curated datasets into your analysis workflow.
+The companion R package for the collaborative web-based data management
+software [BEFdata](https://github.com/cpfaff/befdata). The package provides you
+with easy access to your data and the associated metadata. Besides that it to
+helps you to pull your datasets from the server into your analysis workflow it
+allows to upload derived results including the analysis script itself to help
+you document your work in a reproducible fashion.
+
+Further more the package implements scientometric metrics providing valuable
+information about your data (e.g. usage, networking) and the project itself.
+This allows you to better understand the project, its dynamics and the progress
+over time to help identify potential opportunities for future collaborations
+and much more.
 
 ### Install
 
