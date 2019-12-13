@@ -1,28 +1,27 @@
 The BEFdata R-package
 =======================
 
-The R package we introduce here gives you basicc access to the data and
-metadata stored on a [BEFdata](https://github.com/befdata/befdata) data
-management portal. This allows you to easily pull data for analysis in a single
-and batched fashion for a fast and efficient data analysis.
+The companion R package for the collaborative data management platform
+[BEFdata](https://github.com/cpfaff/befdata). The package provides you with
+easy access to your data and the associated meta to help you pull your
+collected and curated datasets into your analysis workflow.
 
 ### Install
 
-#### From Cran
+#### From CRAN
 
-The package is available in a stable version from CRAN. To instlal it from
-there simply issue the command shown below. Cran will always stay up to date
-with the latest stable version of RBEFdata.
+The package is available from CRAN. To install it from there simply issue the
+command shown below. CRAN will always stay up to date with the latest stable
+version of RBEFdata.
 
 ```
 install.packages("rbefdata")
 ```
 
-#### From Github
+#### From GitHub
 
-With the fine R package called `devtools` you are also able to install the
-latest version from this GitHub repository. For that you have to issue the
-command shown below.
+With the `devtools` package you can install the latest version from the GitHub
+repository. For that you have to issue the commands below.
 
 ```r
 # install devtools package
@@ -33,13 +32,13 @@ install_github("befdata/rbefdata", subdir = "rbefdata")
 ```
 
 You should be aware that this installation gets you a bleeding edge version of
-RBEFdata. It can happen that it fails to install or that certain functions are
-not working as expected. If you prefer a stable package you should use the
+rBEFdata. It might happen that it fails to install or that certain functions
+are not working as expected. If you prefer a stable package you should use the
 versions provided via CRAN.
 
 ### License
 
-RBefdata is released under the MIT License (MIT):
+rBefdata is released under the MIT License (MIT):
 
 Copyright © 2013 Department of Special Botany, University of Leipzig,
 represented by Christian Wirth, The BEF-China Research Unit of the German
