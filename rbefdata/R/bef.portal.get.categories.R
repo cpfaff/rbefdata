@@ -12,23 +12,24 @@
 #' @param ... Additional parameters passed to curl.
 #' @return Returns a data frame with the categories ID, short and long description and
 #          merge ID.
-#' @examples \dontrun{
-#'   bef.portal.get.categories_for(datagroup = 22)
-#'       }
+#' @examples
+#' \dontrun{
+#' bef.portal.get.categories_for(datagroup = 22)
+#' }
 #' @import RCurl
 #' @export bef.portal.get.categories_for bef.get.categories_for
 #' @aliases bef.get.categories_for
 
 bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, curl = getCurlHandle(), ...) {
-  datagroup = datagroup_name_id_conversion(datagroup)
-  datagroup_url = datagroups_url(datagroups_id = datagroup, type = "download")
+  datagroup <- datagroup_name_id_conversion(datagroup)
+  datagroup_url <- datagroups_url(datagroups_id = datagroup, type = "download")
 
-  response_body = getURLContent(datagroup_url, curl = curl, ...)
-  if(getCurlInfo(curl)$response.code != 200) {
-    msg = sprintf("Datagroups (datagroup=%d) not found or not accessible. Please check your credentials!", datagroup)
+  response_body <- getURLContent(datagroup_url, curl = curl, ...)
+  if (getCurlInfo(curl)$response.code != 200) {
+    msg <- sprintf("Datagroups (datagroup=%d) not found or not accessible. Please check your credentials!", datagroup)
     stop(msg)
   }
-  dataframe = read.csv(text = response_body)
+  dataframe <- read.csv(text = response_body)
   return(dataframe)
 }
 
@@ -41,36 +42,36 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
 #' @param reference The id or name of the data groups you are interested in
 #' @param list If this is set to true you get all datagroups as data frame
 #' @return Returns a data frame with the datagroup details
-#' @examples \dontrun{
-#'   bef.portal.get.datagroups(list=T)
-#'   bef.portal.get.datagroups(reference="Scientific plant speices name")
-#'       }
+#' @examples
+#' \dontrun{
+#' bef.portal.get.datagroups(list = T)
+#' bef.portal.get.datagroups(reference = "Scientific plant speices name")
+#' }
 #' @export bef.portal.get.datagroup
 #' @alias bef.portal.datagroup
 
 
-bef.portal.get.datagroup <- bef.portal.datagroup <- function (reference, list=F) {
+bef.portal.get.datagroup <- bef.portal.datagroup <- function(reference, list = F) {
   if (bef.options("user_credentials") == "") stop("Sorry this function requires the user credentials to be set")
 
   if (list) {
     get_all_datagroups()
   } else {
+    checkit <- datagroup_name_id_conversion(input = reference)
 
-    checkit = datagroup_name_id_conversion(input=reference)
-
-    if(is.integer0(checkit)){
+    if (is.integer0(checkit)) {
       stop("Sorry the datagroup you are looking for does not exist! Check the spelling!")
     }
 
-    if(is.character0(checkit)){
+    if (is.character0(checkit)) {
       stop("Sorry the datagroup you are looking for does not exist! Check the id")
     }
 
-    if(is.character(reference)){
-      reference = datagroup_name_id_conversion(input=reference)
+    if (is.character(reference)) {
+      reference <- datagroup_name_id_conversion(input = reference)
     }
 
-    if(is.numeric(reference)){
+    if (is.numeric(reference)) {
       subset(get_all_datagroups(), id == reference)
     }
   }

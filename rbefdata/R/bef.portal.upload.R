@@ -14,10 +14,11 @@
 #' @param open_browser If this is set to true the page of the dataset is opened in the
 #'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message with the ID of the dataset.
-#' @examples \dontrun{
-#'  dataset = data.frame(a = c(1,2,3,4), b = c("a","b","c","d"))
-#'  bef.portal.upload.dataset(dataset = dataset, dataset_title = "Testtitle", open_browser = T)
-#'       }
+#' @examples
+#' \dontrun{
+#' dataset <- data.frame(a = c(1, 2, 3, 4), b = c("a", "b", "c", "d"))
+#' bef.portal.upload.dataset(dataset = dataset, dataset_title = "Testtitle", open_browser = T)
+#' }
 #' @import RCurl
 #' @import XML
 #' @export bef.portal.upload.dataset bef.upload.dataset
@@ -25,18 +26,18 @@
 
 bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_title, curl = getCurlHandle(), open_browser = F) {
   this_function_requires_api_authentication()
-  if(the_title_is_taken(dataset_title = dataset_title)) {
+  if (the_title_is_taken(dataset_title = dataset_title)) {
     stop("The title you have choosen has already been taken. Please choose another one before uploading again!")
   } else {
-    postForm(upload_url(), title = dataset_title,  "datafile[file]" = upload_file(dataset), curl = curl)
-    if(getCurlInfo(curl)$response.code != 200) {
+    postForm(upload_url(), title = dataset_title, "datafile[file]" = upload_file(dataset), curl = curl)
+    if (getCurlInfo(curl)$response.code != 200) {
       stop("Your upload failed. Try again later!")
     } else {
-      id = title_to_dataset_id(dataset_title)
+      id <- title_to_dataset_id(dataset_title)
       message("Your data has been uploaded successfully!")
       message(paste0("You can find your dataset now under the id:", id))
-      if(open_browser) {
-	bef.goto.dataset_page(id = id)
+      if (open_browser) {
+        bef.goto.dataset_page(id = id)
       }
     }
   }
@@ -62,26 +63,28 @@ bef.portal.upload.dataset <- bef.upload.dataset <- function(dataset, dataset_tit
 #' @param open_browser If this is set to true the page of the dataset is opened in the
 #'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message whether the update was successful or not.
-#' @examples \dontrun{
-#'  dataset = data.frame(a = c(1,2,3,4), b = c("a","b","c","d"))
-#'  bef.portal.update.dataset(dataset = dataset, dataset_id = 72)
-#'       }
+#' @examples
+#' \dontrun{
+#' dataset <- data.frame(a = c(1, 2, 3, 4), b = c("a", "b", "c", "d"))
+#' bef.portal.update.dataset(dataset = dataset, dataset_id = 72)
+#' }
 #' @import RCurl
 #' @export bef.portal.update.dataset bef.update.dataset
 #' @aliases bef.update.dataset
 
 bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id, warn = TRUE, open_browser = F, curl = getCurlHandle()) {
-  if(warn) {
+  if (warn) {
     stop("This function overrides the dataset on the portal! If you are sure set the function option warn = FALSE")
   }
   postForm(paste0(bef.options("url"), dataset_id, "/update_workbook"),
-	   user_credentials = bef.options("user_credentials"),
-	   "datafile[file]" = upload_file(dataset),
-	   curl = curl)
-  if(getCurlInfo(curl)$response.code != 302) {
+    user_credentials = bef.options("user_credentials"),
+    "datafile[file]" = upload_file(dataset),
+    curl = curl
+  )
+  if (getCurlInfo(curl)$response.code != 302) {
     stop("Your update failed. Check your access rights!")
   } else {
-    if(open_browser) {
+    if (open_browser) {
       bef.goto.dataset_page(id = dataset_id)
     }
     return(paste("Update of dataset with ID:", dataset_id, "successful!"))
@@ -100,29 +103,32 @@ bef.portal.update.dataset <- bef.update.dataset <- function(dataset, dataset_id,
 #' @param open_browser If this is set to true the page of the dataset is opened in the
 #'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message whether the update was successful or not.
-#' @examples \dontrun{
-#'   bef.portal.attach.to_dataset(id = 72, attachment = dataset, description = "This
-#'                is a pure test description for the new attachment file", open_browser = T)
-#'       }
+#' @examples
+#' \dontrun{
+#' bef.portal.attach.to_dataset(id = 72, attachment = dataset, description = "This
+#' is a pure test description for the new attachment file", open_browser = T)
+#' }
 #' @import RCurl
 #' @export bef.portal.attach.to_dataset bef.attach.to_dataset
 #' @aliases bef.attach.to_dataset
 
-bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment, description = "", open_browser = FALSE, curl = getCurlHandle()){
-  postForm(paste0(bef.options("url"),"/files/freeformats"),
-	   freeformattable_id = id,
-	   freeformattable_type = "Dataset",
-	   user_credentials = bef.options("user_credentials"),
-	   "freeformat[file]" = upload_file(attachment),
-	   "freeformat[description]" = description,
-	   .opts = curlOptions(
-			       referer="http://befdataproduction.biow.uni-leipzig.de",
-			       useragent = "rbefdata"),
-	   curl = curl)
-  if(getCurlInfo(curl)$response.code != 302) {
+bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment, description = "", open_browser = FALSE, curl = getCurlHandle()) {
+  postForm(paste0(bef.options("url"), "/files/freeformats"),
+    freeformattable_id = id,
+    freeformattable_type = "Dataset",
+    user_credentials = bef.options("user_credentials"),
+    "freeformat[file]" = upload_file(attachment),
+    "freeformat[description]" = description,
+    .opts = curlOptions(
+      referer = "http://befdataproduction.biow.uni-leipzig.de",
+      useragent = "rbefdata"
+    ),
+    curl = curl
+  )
+  if (getCurlInfo(curl)$response.code != 302) {
     stop("Your attachment failed. Check your access rights!")
   } else {
-    if(open_browser) {
+    if (open_browser) {
       bef.goto.dataset_page(id = id)
     }
     return(paste("Attachment to dataset with ID:", id, "successful!"))
@@ -144,31 +150,39 @@ bef.portal.attach.to_dataset <- bef.attach.to_dataset <- function(id, attachment
 #' @param open_browser If this is set to true the page of the proposal is opened in the
 #'        browser after successful upload. This defaults to FALSE.
 #' @return Returns a status message whether the update was successful or not.
-#' @examples \dontrun{
-#'   bef.portal.attach.to_proposal(id = 72, attachment = dataset, description = "This
-#'                is a pure test description for the new attachment file", open_browser = T)
-#'       }
+#' @examples
+#' \dontrun{
+#' bef.portal.attach.to_proposal(id = 72, attachment = dataset, description = "This
+#' is a pure test description for the new attachment file", open_browser = T)
+#' }
 #' @import RCurl
 #' @export bef.portal.attach.to_proposal bef.attach.to_proposal
 #' @aliases bef.attach.to_proposal
 
-bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachment, description = "", is_paper = FALSE, doi = "",  open_browser = FALSE, curl = getCurlHandle()){
-  postForm(paste0(bef.options("url"),"/files/freeformats"),
-	   freeformattable_id = id,
-	   freeformattable_type = "Paperproposal",
-	   user_credentials = bef.options("user_credentials"),
-	   "freeformat[uri]" = doi,
-	   if(is_paper) {"freeformat[is_essential]" = 1} else {"freeformat[is_essential]" = 0},
-	   "freeformat[file]" = upload_file(attachment),
-	   "freeformat[description]" = description,
-	   .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",
-												 useragent = "rbefdata"),
-												 curl = curl)
+bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachment, description = "", is_paper = FALSE, doi = "", open_browser = FALSE, curl = getCurlHandle()) {
+  postForm(paste0(bef.options("url"), "/files/freeformats"),
+    freeformattable_id = id,
+    freeformattable_type = "Paperproposal",
+    user_credentials = bef.options("user_credentials"),
+    "freeformat[uri]" = doi,
+    if (is_paper) {
+      "freeformat[is_essential]" <- 1
+    } else {
+      "freeformat[is_essential]" <- 0
+    },
+    "freeformat[file]" = upload_file(attachment),
+    "freeformat[description]" = description,
+    .opts = curlOptions(
+      referer = "http://befdataproduction.biow.uni-leipzig.de",
+      useragent = "rbefdata"
+    ),
+    curl = curl
+  )
 
-  if(getCurlInfo(curl)$response.code != 302) {
+  if (getCurlInfo(curl)$response.code != 302) {
     stop("Your Attachment failed. Check your access rights!")
   } else {
-    if(open_browser) {
+    if (open_browser) {
       bef.goto.proposal_page(id = id)
     }
     return(paste("Attachment to proposal with ID:", id, "successful!"))
@@ -193,23 +207,27 @@ bef.portal.attach.to_proposal <- bef.attach.to_proposal <- function(id, attachme
 #' and merge ID and stuff downloaded from the portal.
 #' @param curl Pass in a curl handle with own options or to reduce memory footprint.
 #' @return Returns a status message whether the upload was successful or not.
-#' @examples \dontrun{
-#'   dataframe = bef.portal.get.categories_for(datagroup_id = 22)
-#'   bef.portal.upload.categories(datagroup_id = 22, categories = dataframe)
-#'       }
+#' @examples
+#' \dontrun{
+#' dataframe <- bef.portal.get.categories_for(datagroup_id = 22)
+#' bef.portal.upload.categories(datagroup_id = 22, categories = dataframe)
+#' }
 #' @import RCurl
 #' @export bef.portal.upload.categories bef.upload.categories
 #' @aliases bef.upload.categories
 #' @seealso \code{bef.portal.get.categories_for}
 
 bef.portal.upload.categories <- bef.upload.categories <- function(datagroup_id, categories, curl = getCurlHandle()) {
-	# TODO: This is not working and might needs user credentials of course
-  postForm(datagroups_url(datagroups_id = datagroup_id , type = "upload"),
-					 "csvfile[file]" = upload_file(categories),
-					 .opts = curlOptions(referer="http://befdataproduction.biow.uni-leipzig.de",
-															 useragent = "rbefdata"),
-															 curl = curl)
-  if(getCurlInfo(curl)$response.code != 302) {
+  # TODO: This is not working and might needs user credentials of course
+  postForm(datagroups_url(datagroups_id = datagroup_id, type = "upload"),
+    "csvfile[file]" = upload_file(categories),
+    .opts = curlOptions(
+      referer = "http://befdataproduction.biow.uni-leipzig.de",
+      useragent = "rbefdata"
+    ),
+    curl = curl
+  )
+  if (getCurlInfo(curl)$response.code != 302) {
     stop("Your category upload failed. Check your access rights!")
   } else {
     return(paste("Your Category upload was successful!"))

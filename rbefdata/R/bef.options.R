@@ -9,39 +9,39 @@
 #'
 #' @examples
 #' # BEFdata URL
-#' bef.options('url')
-#' bef.options(url='http://www.example.com')
-#' #Tematres URL
-#' bef.options('tematres_url')
-#' bef.options(tematres_url="http://www.example.com")
-#'
+#' bef.options("url")
+#' bef.options(url = "http://www.example.com")
+#' # Tematres URL
+#' bef.options("tematres_url")
+#' bef.options(tematres_url = "http://www.example.com")
 #' @export
 
-bef.options = function(...) {
-  lst = list(...)
-  .bef.opts = .bef.env$.bef.opts
+bef.options <- function(...) {
+  lst <- list(...)
+  .bef.opts <- .bef.env$.bef.opts
   if (length(lst)) {
     if (is.null(names(lst)) && !is.list(lst[[1]])) {
-      lst = unlist(lst)
+      lst <- unlist(lst)
       if (length(lst) == 1) .bef.opts[[lst]] else .bef.opts[lst]
     }
     else {
-      omf = .bef.opts
-      if (is.list(lst[[1]]))
-        lst = lst[[1]]
+      omf <- .bef.opts
+      if (is.list(lst[[1]])) {
+        lst <- lst[[1]]
+      }
       if (length(lst) > 0) {
-        .bef.opts[names(lst)] = lapply(lst, gsub, pattern = "\\s", replacement="")
+        .bef.opts[names(lst)] <- lapply(lst, gsub, pattern = "\\s", replacement = "")
         if (!is.null(lst$url)) {
-          .bef.opts["url"] = sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
-          .bef.opts["url"] = sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
+          .bef.opts["url"] <- sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
+          .bef.opts["url"] <- sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
         }
         if (!is.null(lst$tematres_url)) {
-          .bef.opts["tematres_service_url"] = sub(.bef.opts["tematres_url"], pattern = "index.php/?$", replacement = "services.php")
+          .bef.opts["tematres_service_url"] <- sub(.bef.opts["tematres_url"], pattern = "index.php/?$", replacement = "services.php")
         }
         if (!is.null(lst$tematres_service_url)) {
-          .bef.opts["tematres_url"] = sub(.bef.opts["tematres_service_url"], pattern = "services.php/?$", replacement = "index.php")
+          .bef.opts["tematres_url"] <- sub(.bef.opts["tematres_service_url"], pattern = "services.php/?$", replacement = "index.php")
         }
-        .bef.env$.bef.opts = .bef.opts
+        .bef.env$.bef.opts <- .bef.opts
       }
       invisible(omf)
     }
@@ -51,4 +51,4 @@ bef.options = function(...) {
   }
 }
 
-.bef.env = new.env()
+.bef.env <- new.env()

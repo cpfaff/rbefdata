@@ -14,7 +14,7 @@
 #' @export bef.portal.api.dataset_info
 
 bef.portal.api.dataset_info <- function(id) {
-  dataset_xml_to_list = xmlToList(dataset_url(dataset_id = id, type = "xml"))
+  dataset_xml_to_list <- xmlToList(dataset_url(dataset_id = id, type = "xml"))
   return(dataset_xml_to_list)
 }
 
@@ -26,6 +26,6 @@ bef.portal.api.dataset_info <- function(id) {
 #' @export bef.portal.api.proposal_info
 
 bef.portal.api.proposal_info <- function(id) {
-  proposal_xml_to_list = xmlToList(paperproposal_url(proposal_id = id, type = "xml"))
+  proposal_xml_to_list <- xmlToList(paperproposal_url(proposal_id = id, type = "xml"))
   return(proposal_xml_to_list)
 }

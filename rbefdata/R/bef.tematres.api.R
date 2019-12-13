@@ -7,11 +7,11 @@
 #' @param ... Any task or term to be passed to the rtematres function.
 #' 	      An example is rtematres(task = "fetchUp", term = "plant organ")
 #'            to get broader terms for "plant organs". For a full task
-#'	      see the manual of the rtematres package.
+#' 	      see the manual of the rtematres package.
 #'
 #' @import rtematres
 #' @export bef.tematres
 
 bef.tematres <- function(...) {
-      rtematres.api.do(...)
+  rtematres.api.do(...)
 }
