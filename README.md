@@ -20,8 +20,8 @@ install.packages("rbefdata")
 
 #### From GitHub
 
-With the `devtools` package you can install the latest version from the GitHub
-repository. For that you have to issue the commands below.
+With the `devtools` package you the option to install the latest version from
+my GitHub repository. For that you have to issue the commands below.
 
 ```r
 # install devtools package
@@ -31,10 +31,10 @@ library(devtools)
 install_github("befdata/rbefdata", subdir = "rbefdata")
 ```
 
-You should be aware that this installation gets you a bleeding edge version of
-rBEFdata. It might happen that it fails to install or that certain functions
-are not working as expected. If you prefer a stable package you should use the
-versions provided via CRAN.
+However, you should be aware that this gets you a bleeding edge version of
+rBEFdata. It might fail to install or it can happen that certain functions are
+not working as expected. If you prefer a stable and tested package you should
+use the versions provided via CRAN.
 
 ### License
 
