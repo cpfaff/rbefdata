@@ -1,12 +1,12 @@
 Package: rbefdata
-Title: BEFdata R Package
+Title: The BEFdata R Package
 Version: 0.3.6
 Authors@R: c(person("Claas-Thido", "Pfaff",
     email="claas-thido.pfaff@idiv-biodiversity.de", role=c("cre","aut")),
     person("Karin", "Nadrowski", email="nadrowski@uni-leipzig.de", role="aut"),
     person("Xingxing", "Man", email="manxingxing@gmail.com", role="aut"))
-Description: Basic R package to access data structures offered by any
-    BEFdata portal instance.
+Description: An R package which allows you to access data and metadata 
+	     offered by any BEFdata instance.
 Suggests:
     ggplot2,
     plyr
