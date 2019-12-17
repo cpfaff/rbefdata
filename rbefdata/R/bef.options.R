@@ -33,7 +33,7 @@ bef.options <- function(...) {
         .bef.opts[names(lst)] <- lapply(lst, gsub, pattern = "\\s", replacement = "")
         if (!is.null(lst$url)) {
           .bef.opts["url"] <- sub(.bef.opts["url"], pattern = "(/)?$", replacement = "")
-          .bef.opts["url"] <- sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
+          # .bef.opts["url"] <- sub(.bef.opts["url"], pattern = "^(http://)?", replacement = "http://")
         }
         if (!is.null(lst$tematres_url)) {
           .bef.opts["tematres_service_url"] <- sub(.bef.opts["tematres_url"], pattern = "index.php/?$", replacement = "services.php")

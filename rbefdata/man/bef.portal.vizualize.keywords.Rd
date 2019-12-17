@@ -23,9 +23,8 @@ Vizalize the keywords contained in your BEFdata portal vai a nice wordcloud.
 }
 \examples{
 \dontrun{
-	       require(RColorBrewer)
-            my_palette = brewer.pal(8,"Dark2")
-	       bef.portal.vizualize.keywords()
-          }
+require(RColorBrewer)
+my_palette <- brewer.pal(8, "Dark2")
+bef.portal.vizualize.keywords()
 }
-
+}

@@ -27,7 +27,7 @@ bef.mediawiki.api.define <- function(term, language = "en") {
     format = "xml",
     .opts = ""
   )
-  document <- xmlTreeParse(getURL(search_return, useInternalNodes = TRUE))
+  document <- xmlTreeParse(getURL(search_return), useInternalNodes = TRUE)
   document_root <- xmlRoot(document)
   nodeset <- getNodeSet(document_root, "//xmlns:Description", "xmlns")
   descriptions <- xmlSApply(nodeset, xmlValue)

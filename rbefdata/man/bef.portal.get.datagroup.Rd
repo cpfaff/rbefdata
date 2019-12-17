@@ -21,8 +21,7 @@ categories it contains.
 }
 \examples{
 \dontrun{
-  bef.portal.get.datagroups(list=T)
-  bef.portal.get.datagroups(reference="Scientific plant speices name")
-      }
+bef.portal.get.datagroups(list = T)
+bef.portal.get.datagroups(reference = "Scientific plant speices name")
 }
-
+}

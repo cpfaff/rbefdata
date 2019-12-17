@@ -16,4 +16,3 @@ Returns a list of metadata information for the proposal.
 \description{
 This function returns the information available for a paper proposal.
 }
-

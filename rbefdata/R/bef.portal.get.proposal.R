@@ -41,6 +41,6 @@ bef.portal.get.datasets.for_proposal <- bef.get.datasets.for_proposal <- functio
     stop("Proposal not found or not accessible. Please check your credentials and make sure you have access right for it.")
   }
   proposal_data <- read.csv(text = proposal_raw_csv)
-  datasets <- sapply(proposal_data$ID, function(x) bef.portal.get.dataset(id = x, split_category = split_category))
+  datasets <- lapply(proposal_data$ID, function(x) bef.portal.get.dataset(id = x, split_category = split_category))
   return(datasets)
 }

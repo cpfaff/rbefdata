@@ -38,8 +38,7 @@ completely.
 }
 \examples{
 \dontrun{
- dataset = data.frame(a = c(1,2,3,4), b = c("a","b","c","d"))
- bef.portal.update.dataset(dataset = dataset, dataset_id = 72)
-      }
+dataset <- data.frame(a = c(1, 2, 3, 4), b = c("a", "b", "c", "d"))
+bef.portal.update.dataset(dataset = dataset, dataset_id = 72)
 }
-
+}

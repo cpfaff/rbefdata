@@ -5,7 +5,8 @@
 \alias{bef.upload.categories}
 \title{Upload a category set}
 \usage{
-bef.portal.upload.categories(datagroup_id, categories, curl = getCurlHandle())
+bef.portal.upload.categories(datagroup_id, categories,
+  curl = getCurlHandle())
 }
 \arguments{
 \item{datagroup_id}{Categories ID you like to harmonize. You can find this in the URL of
@@ -32,11 +33,10 @@ column will stay on the portal.
 }
 \examples{
 \dontrun{
-  dataframe = bef.portal.get.categories_for(datagroup_id = 22)
-  bef.portal.upload.categories(datagroup_id = 22, categories = dataframe)
-      }
+dataframe <- bef.portal.get.categories_for(datagroup_id = 22)
+bef.portal.upload.categories(datagroup_id = 22, categories = dataframe)
+}
 }
 \seealso{
 \code{bef.portal.get.categories_for}
 }
-

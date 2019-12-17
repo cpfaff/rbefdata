@@ -17,11 +17,15 @@
 #' bef.portal.get.categories_for(datagroup = 22)
 #' }
 #' @import RCurl
+#' @importFrom tibble as_tibble
 #' @export bef.portal.get.categories_for bef.get.categories_for
 #' @aliases bef.get.categories_for
 
 bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, curl = getCurlHandle(), ...) {
-  datagroup <- datagroup_name_id_conversion(datagroup)
+  if (is.character(datagroup)){
+    datagroup <- datagroup_name_id_conversion(datagroup)
+  }
+
   datagroup_url <- datagroups_url(datagroups_id = datagroup, type = "download")
 
   response_body <- getURLContent(datagroup_url, curl = curl, ...)
@@ -30,7 +34,7 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
     stop(msg)
   }
   dataframe <- read.csv(text = response_body)
-  return(dataframe)
+  return(as_tibble(dataframe))
 }
 
 #' Get all or one specifc data group of interest
@@ -48,8 +52,7 @@ bef.portal.get.categories_for <- bef.get.categories_for <- function(datagroup, c
 #' bef.portal.get.datagroups(reference = "Scientific plant speices name")
 #' }
 #' @export bef.portal.get.datagroup
-#' @alias bef.portal.datagroup
-
+#' @importFrom tibble as_tibble
 
 bef.portal.get.datagroup <- bef.portal.datagroup <- function(reference, list = F) {
   if (bef.options("user_credentials") == "") stop("Sorry this function requires the user credentials to be set")
@@ -72,7 +75,7 @@ bef.portal.get.datagroup <- bef.portal.datagroup <- function(reference, list = F
     }
 
     if (is.numeric(reference)) {
-      subset(get_all_datagroups(), id == reference)
+      as_tibble(subset(get_all_datagroups(), id == reference))
     }
   }
 }

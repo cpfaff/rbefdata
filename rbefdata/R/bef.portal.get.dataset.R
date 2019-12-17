@@ -34,7 +34,8 @@
 #' dataset_list <- lapply(ids, function(x) bef.portal.get.dataset_by(id = x, curl = curl))
 #' metadata <- attributes(dataset_list[[1]])
 #' }
-#' @import RCurl
+#' @import RCurl 
+#' @importFrom tibble as_tibble
 #' @export bef.portal.get.dataset bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 #' @aliases bef.get.dataset bef.get.dataset_by bef.portal.get.dataset_by
 
@@ -72,7 +73,7 @@ bef.portal.get.dataset <- bef.get.dataset <- bef.get.dataset_by <- bef.portal.ge
     dataset[, factor_treatment] <- as.numeric(dataset[, factor_treatment])
   }
 
-  return(dataset)
+  return(as_tibble(dataset))
 }
 
 #' Fetch a list of datasets for a keyword
@@ -87,6 +88,7 @@ bef.portal.get.dataset <- bef.get.dataset <- bef.get.dataset_by <- bef.portal.ge
 #' }
 #' @import RCurl
 #' @import rjson
+#' @importFrom tibble as_tibble
 #' @export bef.portal.get.datasets.for_keyword bef.get.datasets.for_keyword
 #' @aliases bef.get.datasets.for_keyword
 
@@ -110,7 +112,7 @@ bef.portal.get.datasets.for_keyword <- bef.get.datasets.for_keyword <- function(
     if (dim(id_title_df)[1] == 0) {
       print("Sorry no datasets are tagged with this keyword!")
     } else {
-      return(id_title_df)
+      return(as_tibble(id_title_df))
     }
   }
 }

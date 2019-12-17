@@ -9,10 +9,12 @@ Description: An R package which allows you to access data and metadata
 	     offered by any BEFdata instance.
 Suggests:
     ggplot2,
-    plyr
+    plyr,
+    covr
 Imports:
     XML,
     RCurl,
+    tibble,
     rjson,
     wordcloud,
     rtematres,
@@ -20,4 +22,7 @@ Imports:
 Date: 2016-12-14
 License: MIT + file LICENSE
 URL: https://github.com/befdata/rbefdata
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
+Depends: 
+    R (>= 3.1)

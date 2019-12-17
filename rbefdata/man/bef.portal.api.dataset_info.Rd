@@ -21,4 +21,3 @@ This function takes a dataset id and returns the metadata of the dataset as list
 This is not the eml metadata. It is the metadata read from the XML API of the
 data portal.
 }
-

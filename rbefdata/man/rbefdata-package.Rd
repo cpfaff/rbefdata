@@ -13,4 +13,3 @@ experiment:
 If you use the package with your own instance of a BEFdata portal you need
 to change the default URLs to your needs via bef.options().
 }
-

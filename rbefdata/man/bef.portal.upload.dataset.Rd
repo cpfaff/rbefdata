@@ -32,8 +32,7 @@ for upload or a dataset object. The dataset must have unique column names.
 }
 \examples{
 \dontrun{
- dataset = data.frame(a = c(1,2,3,4), b = c("a","b","c","d"))
- bef.portal.upload.dataset(dataset = dataset, dataset_title = "Testtitle", open_browser = T)
-      }
+dataset <- data.frame(a = c(1, 2, 3, 4), b = c("a", "b", "c", "d"))
+bef.portal.upload.dataset(dataset = dataset, dataset_title = "Testtitle", open_browser = T)
 }
-
+}

@@ -17,11 +17,9 @@ the URL to the BEFdata portal and the URL to the tematres thesaurus.
 }
 \examples{
 # BEFdata URL
-bef.options('url')
-bef.options(url='http://www.example.com')
-#Tematres URL
-bef.options('tematres_url')
-bef.options(tematres_url="http://www.example.com")
-
+bef.options("url")
+bef.options(url = "http://www.example.com")
+# Tematres URL
+bef.options("tematres_url")
+bef.options(tematres_url = "http://www.example.com")
 }
-

@@ -135,7 +135,7 @@ clean_html_string <- function(string) {
 
 # get a full list of dataset from portal
 all_dataset_of_portal <- function() {
-  datasets_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datasets.xml"), useInternalNodes = T))
+  datasets_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datasets.xml")), useInternalNodes = T)
   datasets <- xmlToDataFrame(datasets_info_xml, colClasses = c("numeric", "character"), stringsAsFactors = FALSE)
   return(datasets)
 }
@@ -143,7 +143,7 @@ all_dataset_of_portal <- function() {
 # returns all datagroups of the portal
 all_datagroups_of_portal <- function() {
   this_function_requires_api_authentication()
-  datagroup_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml", "?", "user_credentials=", bef.options("user_credentials")), useInternalNodes = T))
+  datagroup_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml", "?", "user_credentials=", bef.options("user_credentials"))), useInternalNodes = T)
   datagroups <- xmlToDataFrame(datagroup_info_xml, colClasses = c("numeric", "character", "character", "numeric", "numeric"), stringsAsFactors = FALSE)
   return(datagroups)
 }
@@ -209,7 +209,7 @@ suggest_filename <- function(filename, dir = getwd()) {
 
 # a helper that fetches all datagroups details
 get_all_datagroups <- function() {
-  parsed_tree <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml?user_credentials=", bef.options("user_credentials")), useInternalNodes = T))
+  parsed_tree <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml?user_credentials=", bef.options("user_credentials"))), useInternalNodes = T)
   interesting_nodeset <- getNodeSet(parsed_tree, path = "//*/datagroup")
   xmlToDataFrame(interesting_nodeset)
 }
