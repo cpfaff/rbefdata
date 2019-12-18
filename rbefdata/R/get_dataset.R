@@ -14,8 +14,11 @@
 #' which is also shown in the examples below. 
 #'
 #' @param id Contains the ids of the datasets you want to import.
-#' @param split_category Determines whether columns with mixed data types are split
-#'        into two separate columns (numeric and factorial).
+#'
+#' @param split_category Determines whether columns with mixed data types are split 
+#'        into separate columns. This is handeled from the BEF-Data portal side and
+#'        is set to true by default.
+#'
 #' @return The function returns a data frame or a list of data frames
 #'         containing the data. An error is thrown when the dataset is not found or if
 #'         you don't have the rights to access it.
@@ -29,13 +32,17 @@
 #' # get multiple datasets
 #' data <- rbefdata::get_dataset(id = c(7,8))
 #' }
+#'
 #' @import RCurl 
 #' @importFrom tibble as_tibble
 #' @export get_dataset
 
 # public ui
 
-get_dataset <- function(id, curl = getCurlHandle(), split_category = T){
+get_dataset <- function(id, split_category = T){
+  # get a curl handle. useful for loop processing as it reduces memory usage
+  curl = getCurlHandle()
+
   if(length(id) > 1){
     lapply(id, function(index){private_get_dataset(id = index, curl = curl, split_category = split_category)})
   } else {
