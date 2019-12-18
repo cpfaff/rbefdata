@@ -4,13 +4,14 @@
 \alias{get_dataset}
 \title{Fetch datasets from a BEFdata portal}
 \usage{
-get_dataset(id, curl = getCurlHandle(), split_category = T)
+get_dataset(id, split_category = T)
 }
 \arguments{
 \item{id}{Contains the ids of the datasets you want to import.}
 
-\item{split_category}{Determines whether columns with mixed data types are split
-into two separate columns (numeric and factorial).}
+\item{split_category}{Determines whether columns with mixed data types are split 
+into separate columns. This is handeled from the BEF-Data portal side and
+is set to true by default.}
 }
 \value{
 The function returns a data frame or a list of data frames
@@ -41,4 +42,5 @@ meta_data <- attributes(data)
 # get multiple datasets
 data <- rbefdata::get_dataset(id = c(7,8))
 }
+
 }

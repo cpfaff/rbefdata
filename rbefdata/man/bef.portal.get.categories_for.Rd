@@ -2,7 +2,6 @@
 % Please edit documentation in R/bef.portal.get.categories.R
 \name{bef.portal.get.categories_for}
 \alias{bef.portal.get.categories_for}
-\alias{bef.get.categories_for}
 \title{Get a data groups categories as data frame (data admin interface)}
 \usage{
 bef.portal.get.categories_for(datagroup, curl = getCurlHandle(), ...)
