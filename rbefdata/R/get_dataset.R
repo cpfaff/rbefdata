@@ -5,7 +5,7 @@
 #' download. You can find the ID in the URL of the dataset on the BEFdata
 #' portal. As the import of data requires checking your permissions to access
 #' the data you need to set your user_credentials in the rbefdata options with
-#' bef.options("user_credentials" = "<yourcredentials>". You can find your
+#' bef_options("user_credentials" = "<yourcredentials>". You can find your
 #' credentials in the profile page on the BEFdata portal. 
 #'
 #' The function returns a data frame or a list of dataframes in case you
@@ -54,7 +54,7 @@ get_dataset <- function(id, split_category = T){
 
 private_get_dataset <- function(id, curl = getCurlHandle(), split_category = T) {
   # create dataset url
-  dataset_url <- dataset_url(id, user_credentials = bef.options("user_credentials"), type = "csv2", split_category = split_category)
+  dataset_url <- dataset_url(id, user_credentials = bef_options("user_credentials"), type = "csv2", split_category = split_category)
 
   # get the content provided on that url
   response_body <- getURL(dataset_url, curl = curl)

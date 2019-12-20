@@ -21,7 +21,7 @@
 
 get_datagroup <- function(id = NULL) {
   # check if the credentials are set
-  if (bef.options("user_credentials") == "") stop("This function requires the user credentials to be set")
+  if (bef_options("user_credentials") == "") stop("This function requires the user credentials to be set")
 
   # set id to datagroups id
   datagroup_id = id

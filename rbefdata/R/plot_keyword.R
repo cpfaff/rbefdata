@@ -14,10 +14,9 @@
 #' }
 #' @import wordcloud
 #' @import RColorBrewer
-#' @export bef.portal.vizualize.keywords bef.vizualize.keywords
-#' @aliases bef.vizualize.keywords
+#' @export plot_keyword
 
-bef.portal.vizualize.keywords <- bef.vizualize.keywords <- function(color_pal = brewer.pal(8, "Dark2"), min_freq = 1) {
-  keyword_table <- data.frame(bef.portal.get.keywords(), stringsAsFactors = FALSE)
-  wordcloud(keyword_table$name, keyword_table$count, scale = c(8, .2), min.freq = min_freq, max.words = Inf, random.order = FALSE, rot.per = .15, colors = color_pal)
+plot_keyword <- function(color_pal = brewer.pal(8, "Dark2"), min_freq = 1) {
+  keyword_table <- data.frame(get_keyword_stats(), stringsAsFactors = FALSE)
+  wordcloud(keyword_table$keyword, keyword_table$dataset_count, scale = c(8, .2), min.freq = min_freq, max.words = Inf, random.order = FALSE, rot.per = .15, colors = color_pal)
 }

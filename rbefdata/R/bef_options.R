@@ -9,14 +9,14 @@
 #'
 #' @examples
 #' # BEFdata URL
-#' bef.options("url")
-#' bef.options(url = "http://www.example.com")
+#' bef_options("url")
+#' bef_options(url = "http://www.example.com")
 #' # Tematres URL
-#' bef.options("tematres_url")
-#' bef.options(tematres_url = "http://www.example.com")
+#' bef_options("tematres_url")
+#' bef_options(tematres_url = "http://www.example.com")
 #' @export
 
-bef.options <- function(...) {
+bef_options <- function(...) {
   lst <- list(...)
   .bef.opts <- .bef.env$.bef.opts
   if (length(lst)) {

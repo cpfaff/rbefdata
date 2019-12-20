@@ -5,11 +5,10 @@
 #'      \url{http://china.befdata.biow.uni-leipzig.de}.
 #'
 #' If you use the package with your own instance of a BEFdata portal you need
-#' to change the default URLs to your needs via bef.options().
+#' to change the default URLs to your needs via bef_options().
 #'
-#' @name rbefdata-package
+#' @name rbefdata_package
 #' @aliases rbefdata-package
 #' @aliases rbefdata
-#' @import rtematres
 #' @docType package
 NULL

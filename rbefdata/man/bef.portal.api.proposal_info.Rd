@@ -4,7 +4,7 @@
 \alias{bef.portal.api.proposal_info}
 \title{This function returns the information available for a paper proposal.}
 \usage{
-bef.portal.api.proposal_info(id)
+bef.portal.api.proposal_info(...)
 }
 \arguments{
 \item{id}{Is the ID of the paperproposal you like to get information for. You can

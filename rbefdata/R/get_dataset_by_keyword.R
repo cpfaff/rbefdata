@@ -13,10 +13,6 @@
 #' @importFrom tibble as_tibble
 #' @export get_dataset_by_keyword 
 
-# TODO: deprecate these
-# * bef.portal.get.datasets.for_keyword 
-# * bef.get.datasets.for_keyword
-
 # public ui
 
 get_dataset_by_keyword <- function(input){
@@ -30,7 +26,7 @@ get_dataset_by_keyword <- function(input){
 # private 
 
 private_get_dataset_by_keyword <- function(keyword) {
-  keyword_json <- fromJSON(getURL(paste0(bef.options("url"), "/keywords.json")))
+  keyword_json <- fromJSON(getURL(paste0(bef_options("url"), "/keywords.json")))
   names <- unlist(lapply(keyword_json, function(x) (x$name)))
   ids <- unlist(lapply(keyword_json, function(x) (x$id)))
   keyword_summary <- data.frame(key = names, id = ids)

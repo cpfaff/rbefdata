@@ -4,13 +4,13 @@
 \alias{get_dataset_attachment}
 \title{Download files attached to datasets on a BEFdata portal}
 \usage{
-get_dataset_attachment(id, directory = bef.options("download_dir"),
+get_dataset_attachment(id, directory = bef_options("download_dir"),
   curl = getCurlHandle())
 }
 \arguments{
 \item{directory}{The directory to store attachment files to. By default it
 creates a folder called "downloads" under the current working directory. The
-default can be changed by bef.options.}
+default can be changed by bef_options.}
 
 \item{dataset}{The ID of dataset you like to fetch the attachments from. You
 find the ID on the dataset page on the BEFdata portal.}

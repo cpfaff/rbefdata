@@ -24,7 +24,7 @@ need to provide the function with the database ID of the dataset you want do
 download. You can find the ID in the URL of the dataset on the BEFdata
 portal. As the import of data requires checking your permissions to access
 the data you need to set your user_credentials in the rbefdata options with
-bef.options("user_credentials" = "<yourcredentials>". You can find your
+bef_options("user_credentials" = "<yourcredentials>". You can find your
 credentials in the profile page on the BEFdata portal.
 }
 \details{

@@ -10,7 +10,7 @@ dataset_url <- function(dataset_id, type = c("csv2", "csv", "xml", "xls", "eml",
   }
   query_string <- ""
   if (length(params)) query_string <- paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
-  url <- sprintf("%s/datasets/%d%s%s", bef.options("url"), dataset_id, seg, query_string)
+  url <- sprintf("%s/datasets/%d%s%s", bef_options("url"), dataset_id, seg, query_string)
   url <- gsub("\\s", "", url)
   return(url)
 }
@@ -20,58 +20,58 @@ paperproposal_url <- function(proposal_id, type = c("csv", "xml"), ...) {
   type <- match.arg(type, c("csv", "xml"))
   seg <- switch(type, csv = ".csv", xml = ".xml")
   params <- Filter(Negate(is.null), list(...))
-  params$user_credentials <- bef.options("user_credentials")
+  params$user_credentials <- bef_options("user_credentials")
   query_string <- ""
   if (length(params)) query_string <- paste("?", paste(names(params), params, sep = "=", collapse = "&"), sep = "")
-  url <- sprintf("%s/paperproposals/%d%s%s", bef.options("url"), proposal_id, seg, query_string)
+  url <- sprintf("%s/paperproposals/%d%s%s", bef_options("url"), proposal_id, seg, query_string)
   url <- gsub("\\s", "", url)
   return(url)
 }
 
 # returns the upload url with user credentials
 upload_url <- function() {
-  base_url <- bef.options("url")
+  base_url <- bef_options("url")
   segment <- "/datasets/create_with_datafile"
   parameter_sep <- "?"
-  url <- paste0(base_url, segment, parameter_sep, "user_credentials=", bef.options("user_credentials"))
+  url <- paste0(base_url, segment, parameter_sep, "user_credentials=", bef_options("user_credentials"))
   return(url)
 }
 
 # returns an update url for a dataset
 update_url <- function(dataset_id) {
-  base_url <- bef.options("url")
+  base_url <- bef_options("url")
   segment <- paste0("/datasets/", dataset_id)
   parameter_sep <- "?"
-  url <- paste0(base_url, segment, parameter_sep, "user_credentials=", bef.options("user_credentials"))
+  url <- paste0(base_url, segment, parameter_sep, "user_credentials=", bef_options("user_credentials"))
   return(url)
 }
 
 # handle datagroups related urls
-datagroups_url <- function(datagroups_id, type = c("upload", "download")) {
-  type <- match.arg(type, c("upload", "download"))
-  ending <- switch(type, download = "/categories.csv", upload = "/update_categories")
-  base_url <- bef.options("url")
+datagroups_url <- function(datagroups_id, type = c("upload", "download", "show")) {
+  type <- match.arg(type, c("upload", "download", "show"))
+  ending <- switch(type, download = "/categories.csv", upload = "/update_categories", index = "")
+  base_url <- bef_options("url")
   segment <- paste0("/datagroups/", datagroups_id)
   parameter_sep <- "?"
   if (type == "upload") {
-    url <- paste0(base_url, segment, ending, parameter_sep, "user_credentials=", bef.options("user_credentials"))
+    url <- paste0(base_url, segment, ending, parameter_sep, "user_credentials=", bef_options("user_credentials"))
   } else {
-    url <- paste0(base_url, segment, ending, parameter_sep, "user_credentials=", bef.options("user_credentials"))
+    url <- paste0(base_url, segment, ending, parameter_sep, "user_credentials=", bef_options("user_credentials"))
   }
   return(url)
 }
 
 # a helper that returns the keyword url provided the id
 keyword_url <- function(keyword_id) {
-  url <- sprintf("%s/keywords/%d", bef.options("url"), keyword_id)
+  url <- sprintf("%s/keywords/%d", bef_options("url"), keyword_id)
   return(url)
 }
 
 # function that checks if authentication is given
-this_function_requires_api_authentication <- function() {
-  user_credentials <- bef.options("user_credentials")
+require_authentication <- function() {
+  user_credentials <- bef_options("user_credentials")
   if (is.null(user_credentials) || is.na(user_credentials) || user_credentials == "") {
-    stop("This function requires an API key for authentication against the portal. Please set your key via bef.options('user_credentials' = yourkey)!")
+    stop("This function requires an API key for authentication against the portal. Please set your key via bef_options('user_credentials' = yourkey)!")
   }
 }
 
@@ -91,7 +91,7 @@ upload_file <- function(dataset) {
 
 # go to the dataset page of the file you just uploaded
 bef.goto.dataset_page <- function(id) {
-  base_url <- bef.options("url")
+  base_url <- bef_options("url")
   segment <- "/datasets/"
   id <- id
   browseURL(paste0(base_url, segment, id))
@@ -99,7 +99,7 @@ bef.goto.dataset_page <- function(id) {
 
 # go to proposal page
 bef.goto.proposal_page <- function(id) {
-  base_url <- bef.options("url")
+  base_url <- bef_options("url")
   segment <- "/paperproposals/"
   id <- id
   browseURL(paste0(base_url, segment, id))
@@ -135,15 +135,15 @@ clean_html_string <- function(string) {
 
 # get a full list of dataset from portal
 all_dataset_of_portal <- function() {
-  datasets_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datasets.xml")), useInternalNodes = T)
+  datasets_info_xml <- xmlTreeParse(getURL(paste0(bef_options("url"), "/datasets.xml")), useInternalNodes = T)
   datasets <- xmlToDataFrame(datasets_info_xml, colClasses = c("numeric", "character"), stringsAsFactors = FALSE)
   return(datasets)
 }
 
 # returns all datagroups of the portal
 all_datagroups_of_portal <- function() {
-  this_function_requires_api_authentication()
-  datagroup_info_xml <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml", "?", "user_credentials=", bef.options("user_credentials"))), useInternalNodes = T)
+  require_authentication()
+  datagroup_info_xml <- xmlTreeParse(getURL(paste0(bef_options("url"), "/datagroups.xml", "?", "user_credentials=", bef_options("user_credentials"))), useInternalNodes = T)
   datagroups <- xmlToDataFrame(datagroup_info_xml, colClasses = c("numeric", "character", "character", "numeric", "numeric"), stringsAsFactors = FALSE)
   return(datagroups)
 }
@@ -209,9 +209,10 @@ suggest_filename <- function(filename, dir = getwd()) {
 
 # a helper that fetches all datagroups details
 get_all_datagroups <- function() {
-  parsed_tree <- xmlTreeParse(getURL(paste0(bef.options("url"), "/datagroups.xml?user_credentials=", bef.options("user_credentials"))), useInternalNodes = T)
+  parsed_tree <- xmlTreeParse(getURL(paste0(bef_options("url"), "/datagroups.xml?user_credentials=", bef_options("user_credentials"))), useInternalNodes = T)
   interesting_nodeset <- getNodeSet(parsed_tree, path = "//*/datagroup")
-  xmlToDataFrame(interesting_nodeset)
+  all_datagroups = xmlToDataFrame(interesting_nodeset)
+  transform(all_datagroups, id = as.numeric(id), columns_count = as.numeric(columns_count), categories_count = as.numeric(categories_count))
 }
 
 # a function to convert data group names into id's and vice versa

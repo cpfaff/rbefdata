@@ -4,7 +4,7 @@
 \alias{bef.portal.api.dataset_info}
 \title{Basic access to the BEFdata portal XML API.}
 \usage{
-bef.portal.api.dataset_info(id)
+bef.portal.api.dataset_info(...)
 }
 \arguments{
 \item{id}{Is the ID of the dataset you like to get the information for. You find

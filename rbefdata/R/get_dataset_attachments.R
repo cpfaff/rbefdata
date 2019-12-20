@@ -10,13 +10,13 @@
 #'        find the ID on the dataset page on the BEFdata portal.
 #' @param directory The directory to store attachment files to. By default it
 #'        creates a folder called "downloads" under the current working directory. The
-#'        default can be changed by bef.options.
+#'        default can be changed by bef_options.
 #' @return A data frame of file information is returned invisibly. NULL is returned when
 #'         the dataset has no attachement files.
 #' @export get_dataset_attachment
 
 # public ui
-get_dataset_attachment <- function(id, directory = bef.options("download_dir"), curl = getCurlHandle()){
+get_dataset_attachment <- function(id, directory = bef_options("download_dir"), curl = getCurlHandle()){
   if(length(id) > 1){
     invisible(lapply(id, function(index){private_get_dataset_attachment(id = index, directory = directory, curl = curl)}))
   } else {
@@ -26,8 +26,8 @@ get_dataset_attachment <- function(id, directory = bef.options("download_dir"), 
 
 # private
 
-private_get_dataset_attachment <- function(id, directory = bef.options("download_dir"), curl = getCurlHandle()) {
-  dataset_url <- dataset_url(id, "freeformat", user_credentials = bef.options("user_credentials"))
+private_get_dataset_attachment <- function(id, directory = bef_options("download_dir"), curl = getCurlHandle()) {
+  dataset_url <- dataset_url(id, "freeformat", user_credentials = bef_options("user_credentials"))
   freeformats_csv <- getURLContent(dataset_url, curl = curl)
   if (getCurlInfo(curl)$response.code != 200) {
     stop("Dataset not found or not accessible. Please check your credentials and make sure you have access to it")
