@@ -1,5 +1,5 @@
 
-# The BEFdata R-package
+# The BEFdata R-package <img src="assets/images/rbefdata_logo_small.png" align="right" />
 
 The companion R package for the collaborative web-based data management
 software [BEFdata](https://github.com/cpfaff/befdata). The package
