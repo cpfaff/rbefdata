@@ -1,5 +1,7 @@
 
-# The BEFdata R-package <img src="assets/images/rbefdata_logo_small.png" align="right" />
+# The BEFdata R-package
+
+<img src="assets/images/rbefdata_logo_small.png" align="right" />
 
 The companion R package for the collaborative web-based data management
 software [BEFdata](https://github.com/cpfaff/befdata). The package
@@ -73,10 +75,10 @@ require(rbefdata)
 bef_options()
 #> $url
 #> [1] "https://china.befdata.biow.uni-leipzig.de"
-#> 
+#>
 #> $download_dir
 #> [1] "downloads"
-#> 
+#>
 #> $user_credentials
 #> [1] "<yourcredentials>"
 ```
@@ -100,10 +102,10 @@ bef_options(user_credentials = "<yourcredentials>")
 bef_options()
 #> $url
 #> [1] "https://china.befdata.biow.uni-leipzig.de"
-#> 
+#>
 #> $download_dir
 #> [1] "downloads"
-#> 
+#>
 #> $user_credentials
 #> [1] "<yourcredentials>"
 ```
