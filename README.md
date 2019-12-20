@@ -44,6 +44,50 @@ rBEFdata. It might fail to install or it can happen that certain functions are
 not working as expected. If you prefer a stable and tested package you should
 use the versions provided via CRAN.
 
+### Usage
+
+First load the package. It provides you with a set of options. You can querry
+and set these with the `bef_options()` command. You should set the URL to the
+server and your user credentials which are rquired to fetch private data.
+
+#### Setup
+
+```
+# require
+require(rbefdata)
+
+# show all options
+bef_options()
+
+# set URL
+bef_options(url = "https://china.befdata.biow.uni-leipzig.de")
+
+# set the credentials
+bef_options(user_credentials = <yourcredentials>)
+```
+
+#### Get data
+
+The commands below highlight basic download of datasets from the portal and
+attached freeformat files.
+
+```R
+# get one or multiple datasets
+get_dataset(id = 16)
+get_dataset(id = c(16, 17))
+
+# get freeformat attachments from one or multiple datasets
+get_dataset_attachment(id = 16)
+get_dataset_attachment(id = c(16, 17))
+```
+
+If you made use of the paper proposal mechanism of the BEFdata portal you can
+download all associated datasets in one go.
+
+```R
+get_proposal_dataset(id = 122)
+```
+
 ### License
 
 rBefdata is released under the MIT License (MIT):
