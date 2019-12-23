@@ -1,19 +1,13 @@
 
-# The BEFdata R-package <img src="assets/images/rbefdata_logo_small.png" align="right" />
+# The rBEFdata package <img src="assets/images/rbefdata_logo_small.png" align="right" />
 
-The companion R package for the collaborative web-based data management
-software [BEFdata](https://github.com/cpfaff/befdata). The package
-provides you with easy access to your data and the associated metadata.
-Besides that it to helps you to pull your datasets from the server into
-your analysis workflow it allows to upload derived results including the
-analysis script itself to help you document your work in a reproducible
-fashion.
-
-Further more the package implements scientometric metrics providing
-valuable information about your data (e.g. usage, networking) and the
-project itself. This allows you to better understand the project, its
-dynamics and the progress over time to help identify potential
-opportunities for future collaborations and much more.
+rBEFdata is the companion R package to the collaborative web-based data
+management software [BEFdata](https://github.com/cpfaff/befdata). The
+package provides you with access to data and the metadata on a BEFdata
+instance. It helps you to pull your datasets from the server into your
+analysis workflow and allows to upload derived results (e.g. datasets,
+pictures) to help you document your work in a more transparent and
+reproducable fashion.
 
 ### Install
 
@@ -29,20 +23,30 @@ install.packages("rbefdata")
 
 #### From GitHub
 
-With the `devtools` package you the option to install the latest version
-from my GitHub repository. For that you have to issue the commands
-below.
+Using the `devtools` package you can install the latest version from
+this repository.
+
+  - Install devtools
+
+<!-- end list -->
 
 ``` r
-# install devtools package
 install.packages("devtools")
-# install rbefdata from github
+```
+
+  - Install rBEFdata
+
+<!-- end list -->
+
+``` r
 library(devtools)
 install_github("befdata/rbefdata", subdir = "rbefdata")
 ```
 
-However, you should be aware that this gets you a bleeding edge version
-of rBEFdata. It might fail to install or it can happen that certain
+NOTE:
+
+You should be aware that this gets you a bleeding edge version of
+rBEFdata. It might fail to install or it can happen that certain
 functions are not working as expected. If you prefer a stable and tested
 package you should use the versions provided via CRAN.
 
@@ -50,8 +54,7 @@ package you should use the versions provided via CRAN.
 
 First load the package. It provides you with a set of options. You can
 querry and set these with the `bef_options()` command. You should set
-the URL to the server and your user credentials which are rquired to
-fetch private data.
+the URL to the server that you want to use.
 
 #### Setup
 
@@ -60,50 +63,55 @@ fetch private data.
 <!-- end list -->
 
 ``` r
-# require package
 require(rbefdata)
 ```
 
-  - Set correct options
+  - Show all options
 
 <!-- end list -->
 
 ``` r
-# show options
 bef_options()
 #> $url
-#> [1] "https://china.befdata.biow.uni-leipzig.de"
-#>
+#> [1] ""
+#> 
 #> $download_dir
 #> [1] "downloads"
-#>
+#> 
 #> $user_credentials
-#> [1] "<yourcredentials>"
+#> [1] ""
 ```
 
+  - Set a URL
+
+<!-- end list -->
+
 ``` r
-# set server URL
 bef_options(url = "https://china.befdata.biow.uni-leipzig.de")
 ```
 
+  - Set your credentials
+
+NOTE:
+
+You can find these in your profile page on the BEFdata portal.
+
 ``` r
-# set user credentials
 bef_options(user_credentials = "<yourcredentials>")
 ```
 
-  - Ready
+  - You are ready
 
 <!-- end list -->
 
 ``` r
-# show options
 bef_options()
 #> $url
 #> [1] "https://china.befdata.biow.uni-leipzig.de"
-#>
+#> 
 #> $download_dir
 #> [1] "downloads"
-#>
+#> 
 #> $user_credentials
 #> [1] "<yourcredentials>"
 ```
@@ -115,17 +123,15 @@ bef_options()
 <!-- end list -->
 
 ``` r
-# get one or multiple datasets
 get_dataset(id = 16)
 get_dataset(id = c(16, 17))
 ```
 
-  - Get freeformat attachments from datasets
+  - Get attachments from datasets
 
 <!-- end list -->
 
 ``` r
-# get freeformat attachments from one or multiple datasets
 get_dataset_attachment(id = 16)
 get_dataset_attachment(id = c(16, 17))
 ```
@@ -141,10 +147,11 @@ get_proposal_dataset(id = 122)
 
   - Update a datasets with local data
 
-<!-- end list -->
+NOTE:
+
+This overwrites a dataset on the portal using a local dataset
 
 ``` r
-# update a dataset
 update_dataset(id = 16)
 ```
 
