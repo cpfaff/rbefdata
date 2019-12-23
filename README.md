@@ -136,8 +136,9 @@ get_dataset_attachment(id = 16)
 get_dataset_attachment(id = c(16, 17))
 ```
 
-When you usedthe paper proposal mechanism of the BEFdata portal you can
-download all associated datasets in one go.
+  - Get datasets from proposal
+
+<!-- end list -->
 
 ``` r
 get_proposal_dataset(id = 122)
